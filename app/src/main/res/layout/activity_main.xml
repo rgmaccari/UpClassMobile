@@ -59,7 +59,7 @@
             android:scaleType="fitCenter"/>
 
         <ImageButton
-            android:id="@+id/btnMedia"
+            android:id="@+id/btnMedias"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
@@ -72,6 +72,7 @@
     </GridLayout>
 
     <Button
+        android:id="@+id/btnSair"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sair"
