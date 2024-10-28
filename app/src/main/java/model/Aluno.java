@@ -11,7 +11,10 @@ public class Aluno {
     private boolean presenca;
     private turmaEnum turma;
 
-    public Aluno(int RA, String nome, int notaTrabalho, int notaProva, double media, boolean presenca, turmaEnum turma) {
+    public Aluno() {
+    }
+
+    public Aluno(int RA, String nome, turmaEnum turma, int notaTrabalho, int notaProva, double media, boolean presenca) {
         this.RA = RA;
         this.nome = nome;
         this.notaTrabalho = notaTrabalho;
