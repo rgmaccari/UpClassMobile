@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Aluno;
 
 public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder>{
-    private List<Aluno> listaAlunos;
+    private ArrayList<Aluno> listaAlunos;
     private Context context;
 
     // Construtor: recebe uma lista de alunos e pega um objeto Aluno para adicionar ao Adaptador
-    public ChamadaAdapter(List<Aluno>listaAlunos, Context context){
+    public ChamadaAdapter(ArrayList<Aluno>listaAlunos, Context context){
         this.listaAlunos = listaAlunos;
         this.context = context;
     }
@@ -36,7 +37,10 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
     // Aciona os dados do aluno em tela:
     @Override
     public void onBindViewHolder(@NonNull ChamadaAdapter.ViewHolder holder, int position) {
-
+        Aluno aluno = this.listaAlunos.get(position);
+        holder.alunoRa.setText(String.valueOf(aluno.getRA()));
+        holder.tvNome.setText(aluno.getNome());
+        holder.checkboxPresenca.setChecked(aluno.isPresenca());
     }
 
     // Quantidade de elementos da lista.

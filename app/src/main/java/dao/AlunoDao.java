@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import enums.turmaEnum;
 import helper.SQLiteDataHelper;
 import model.Aluno;
 
@@ -135,14 +136,15 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 do{
                     Aluno aluno = new Aluno();
                     String turmaString = cursor.getString(2);
-                    enums.turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString);
+                    //enums.turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString);
 
                     aluno.setRA(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
-                    aluno.setTurma(turmaEnum);
+                    aluno.setTurma(turmaEnum.PRIMEIRO_ANO_A);
                     aluno.setNotaTrabalho(cursor.getInt(3));
                     aluno.setNotaProva(cursor.getInt(4));
                     aluno.setMedia(cursor.getDouble(5));
+                    aluno.setPresenca(cursor.getInt(6) == 1);
 
                     listaAlunos.add(aluno);
                 }while(cursor.moveToNext());

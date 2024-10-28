@@ -2,8 +2,10 @@ package controller;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import dao.AlunoDao;
 import model.Aluno;
 
 public class AlunoController {
@@ -18,7 +20,7 @@ public class AlunoController {
         return null;
     }
 
-    public List<Aluno> retornarTodosAlunos(){
-        return null;
+    public ArrayList<Aluno> retornarTodosAlunos(){
+        return AlunoDao.getInstancia(context).getAll();
     }
 }

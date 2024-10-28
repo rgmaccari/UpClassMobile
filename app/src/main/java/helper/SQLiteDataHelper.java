@@ -6,6 +6,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import enums.turmaEnum;
+
 public class SQLiteDataHelper extends SQLiteOpenHelper {
     public SQLiteDataHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
@@ -17,6 +19,9 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
         sqLiteDatabase.
                 execSQL("CREATE TABLE ALUNO (RA INTEGER PRIMARY KEY, Nome TEXT, NotaTrabalho INTEGER," +
                         " NotaProva INTEGER, Media REAL, Presenca BOOLEAN, Turma TEXT)");
+
+        //
+        //sqLiteDatabase.execSQL("INSERT INTO ALUNO (RA, NOME, TURMA) VALUE ()" + turmaEnum.PRIMEIRO_ANO_A.toString());
     }
 
     @Override
