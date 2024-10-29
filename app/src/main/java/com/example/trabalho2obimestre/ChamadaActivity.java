@@ -23,7 +23,6 @@ public class ChamadaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AlunoController controller;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
