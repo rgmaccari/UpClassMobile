@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/whitesmoke">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,8 +16,7 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_marginTop="60dp"
-        android:gravity="center"
-        android:fontFamily=""/>
+        android:gravity="center"/>
 
     <GridLayout
         android:layout_width="match_parent"
