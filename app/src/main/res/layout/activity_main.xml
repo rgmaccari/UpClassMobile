@@ -89,7 +89,7 @@
                     android:id="@+id/btnCriar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/criar_avaliacao"
+
                     android:contentDescription="Criar"
                     android:scaleType="centerCrop"/>
 
@@ -126,7 +126,7 @@
                     android:id="@+id/btnCorrigir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/corrigir"
+
                     android:contentDescription="Corrigir"
                     android:scaleType="centerCrop"
                     android:layout_marginBottom="5dp"/>
@@ -162,7 +162,7 @@
                     android:id="@+id/btnMedias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/notas"
+
                     android:contentDescription="Notas"
                     android:scaleType="centerCrop"/>
 
