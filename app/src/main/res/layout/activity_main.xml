@@ -15,7 +15,8 @@
         android:layout_gravity="center"
         android:textAlignment="center"
         android:layout_marginTop="60dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:fontFamily=""/>
 
     <GridLayout
         android:layout_width="match_parent"
