@@ -31,13 +31,14 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
     }
 
     public void filtrarPorSerie(String serie) {
-        listaAlunos.clear();
+        listaAlunos.clear(); // Limpa a lista atual de alunos
+        Log.d("ChamadaAdapter", "Filtrando por série: " + serie);
         for (Aluno aluno : listaAlunosOriginal) {
             if (aluno.getTurma().name().equalsIgnoreCase(serie)) {
-                listaAlunos.add(aluno);
+                listaAlunos.add(aluno); // Adiciona alunos que correspondem à série
             }
         }
-        notifyDataSetChanged();
+        notifyDataSetChanged(); // Notifica o adapter sobre a mudança
     }
 
     @NonNull
@@ -73,6 +74,4 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }
-
-
 }

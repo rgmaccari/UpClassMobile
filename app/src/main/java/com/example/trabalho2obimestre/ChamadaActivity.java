@@ -39,10 +39,12 @@ public class ChamadaActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Inicializar o adapter com uma lista vazia
-        ArrayList<Aluno> listaVazia = new ArrayList<>();
-        adapter = new ChamadaAdapter(listaVazia, this);
+        // Inicializar o controller e obter a lista de alunos
+        controller = new AlunoController(this);
+        ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
+        adapter = new ChamadaAdapter(chamada, this);
         recyclerView.setAdapter(adapter);
+        adapter.setListaAlunosOriginal(chamada);
 
         // Configurar botão de seleção de série e filtro
         menuSerie = findViewById(R.id.menuSerie);
@@ -56,7 +58,10 @@ public class ChamadaActivity extends AppCompatActivity {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         String serie = menuItem.getTitle().toString();
-                        adapter.notifyDataSetChanged();// Filtra ao selecionar a série
+                        // Filtra ao selecionar a série
+                        Log.d("ChamadaActivity", "Série selecionada: " + serie);
+                        adapter.filtrarPorSerie(serie);
+                        adapter.notifyDataSetChanged(); // Notifica o adapter sobre a mudança
                         return true;
                     }
                 });
@@ -64,10 +69,13 @@ public class ChamadaActivity extends AppCompatActivity {
             }
         });
 
-        // Carregar lista completa de alunos do controller e configurar no adapter
-        controller = new AlunoController(this);
-        ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
-        Log.d("ChamadaActivity", "Alunos carregados do controller: " + chamada.size()); // Log para confirmar carregamento do controller
-        adapter.setListaAlunosOriginal(chamada); // Define a lista completa de alunos para uso no filtro
+        // Define a lista completa de alunos para uso no filtro e inicializa com a primeira turma
+        Log.d("ChamadaActivity", "Alunos carregados do controller: " + chamada.size());
+        adapter.setListaAlunosOriginal(chamada);
+        if (chamada != null && !chamada.isEmpty()) {
+            String primeiraSerie = chamada.get(0).getTurma().name();
+            Log.d("ChamadaActivity", "Filtrando por série: " + primeiraSerie);
+            adapter.filtrarPorSerie(primeiraSerie);
+        }
     }
 }

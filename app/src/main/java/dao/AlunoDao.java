@@ -149,11 +149,13 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
             }
+            Log.d("AlunoDao", "Total de alunos recuperados: " + listaAlunos.size());
             return listaAlunos;
         } catch (SQLException ex) {
             Log.e("AlunoDao", "ERRO: AlunoDao.getAll()" + ex.getMessage());
         }
-        return null;
+        return listaAlunos; // Retorna lista vazia se falhar
     }
+
 
 }
