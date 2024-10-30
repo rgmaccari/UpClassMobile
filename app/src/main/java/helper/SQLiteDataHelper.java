@@ -26,6 +26,18 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
+
+/*
+* Query para inserir alunos:
+INSERT INTO Aluno (RA, Nome, Turma) VALUES
+(101, 'Ana', 'PRIMEIRO_ANO_A'),
+(102, 'Bruno', 'PRIMEIRO_ANO_A'),
+(111, 'Iara', 'PRIMEIRO_ANO_B'),
+(112, 'João', 'PRIMEIRO_ANO_B'),
+(201, 'Raquel', 'SEGUNDO_ANO_A'),
+(202, 'Samuel', 'SEGUNDO_ANO_A'),
+(211, 'Zilda', 'SEGUNDO_ANO_B'),
+(212, 'Artur', 'SEGUNDO_ANO_B');*/
 /*
     public void inserirDados(int ra, String nome, turmaEnum turma){
         //Cria um banco chamado db, método que permite inserção de informações na db

@@ -129,31 +129,31 @@ public class AlunoDao implements IGenericDao<Aluno>{
     @Override
     public ArrayList<Aluno> getAll() {
         ArrayList<Aluno> listaAlunos = new ArrayList<>();
-        try{
+        try {
             Cursor cursor = dataBase.query(tabela, colunas, null, null, null, null, null);
 
-            if(cursor.moveToFirst()){
-                do{
+            if (cursor.moveToFirst()) {
+                do {
                     Aluno aluno = new Aluno();
-                    String turmaString = cursor.getString(2);
-                    //enums.turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString);
+                    String turmaString = cursor.getString(2); // Obtém a turma como String
+                    turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString); // Converte para turmaEnum
 
                     aluno.setRA(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
-                    aluno.setTurma(turmaEnum.PRIMEIRO_ANO_A);
+                    aluno.setTurma(turmaEnum); // Define a turma do aluno
                     aluno.setNotaTrabalho(cursor.getInt(3));
                     aluno.setNotaProva(cursor.getInt(4));
                     aluno.setMedia(cursor.getDouble(5));
                     aluno.setPresenca(cursor.getInt(6) == 1);
 
                     listaAlunos.add(aluno);
-                }while(cursor.moveToNext());
+                } while (cursor.moveToNext());
             }
             return listaAlunos;
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
             Log.e("AlunoDao", "ERRO: AlunoDao.getAll()" + ex.getMessage());
         }
         return null;
-        }
+    }
 
 }

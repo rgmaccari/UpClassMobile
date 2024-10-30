@@ -1,10 +1,11 @@
 package com.example.trabalho2obimestre;
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-
+import android.widget.Button;
+import android.widget.PopupMenu;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -25,7 +26,8 @@ public class ChamadaActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private AlunoController controller;
-
+    private Button menuSerie;
+    private ChamadaAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,56 +35,39 @@ public class ChamadaActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
 
-
-        //Determina a View para exibir o menu de contexto.
-        View menuSerie = findViewById(R.id.menuSerie);
-        registerForContextMenu(menuSerie);
-
-
-        controller = new AlunoController(this);
-        RecyclerView recyclerView = findViewById(R.id.recycleView);
-
-        ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
-        ArrayList<Aluno> listaDeChamada = new ArrayList<>();
-
-        ChamadaAdapter adapter = new ChamadaAdapter(chamada, this);
+        // Configurar RecyclerView
+        recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Inicializar o adapter com uma lista vazia
+        ArrayList<Aluno> listaVazia = new ArrayList<>();
+        adapter = new ChamadaAdapter(listaVazia, this);
         recyclerView.setAdapter(adapter);
+
+        // Configurar botão de seleção de série e filtro
+        menuSerie = findViewById(R.id.menuSerie);
+        menuSerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenu = new PopupMenu(ChamadaActivity.this, menuSerie);
+                popupMenu.inflate(R.menu.serie);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        String serie = menuItem.getTitle().toString();
+                        adapter.notifyDataSetChanged();// Filtra ao selecionar a série
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+
+        // Carregar lista completa de alunos do controller e configurar no adapter
+        controller = new AlunoController(this);
+        ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
+        Log.d("ChamadaActivity", "Alunos carregados do controller: " + chamada.size()); // Log para confirmar carregamento do controller
+        adapter.setListaAlunosOriginal(chamada); // Define a lista completa de alunos para uso no filtro
     }
-
-    //Cria o menu de contexto efetivamente.
-    @Override
-    public void onCreateContextMenu(ContextMenu menuSerie, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menuSerie, v, menuInfo);
-        getMenuInflater().inflate(R.menu.serie, menuSerie);
-    }
-
-    //Atribui o comportamento do menu de contexto.
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-
-        if (itemId == R.id.btnPrimeiroAnoA) {
-            controller.retornarTodosAlunos();
-            return true;
-        } else if (itemId == R.id.btnPrimeiroAnoB) {
-            controller.retornarTodosAlunos();
-            return true;
-        } else if (itemId == R.id.btnSegundoAnoA) {
-            controller.retornarTodosAlunos();
-            return true;
-        } else if (itemId == R.id.btnSegundoAnoB) {
-            controller.retornarTodosAlunos();
-            return true;
-        } else {
-            return super.onContextItemSelected(item);
-        }
-    }
-
-    public void onClickVoltar(View view) {
-        finish();
-    }
-
-
-
 }

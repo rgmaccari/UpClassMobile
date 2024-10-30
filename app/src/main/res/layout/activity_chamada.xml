@@ -10,7 +10,7 @@
     android:background="@color/whitesmoke">
 
    <LinearLayout
-       android:layout_width="wrap_content"
+       android:layout_width="match_parent"
        android:layout_height="wrap_content"
       android:orientation="horizontal"
        android:layout_marginTop="35dp"
@@ -23,7 +23,7 @@
           android:text="Voltar"
           android:backgroundTint="@color/azulforte"/>
 
-      <View
+      <Button
           android:id="@+id/menuSerie"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"/>
