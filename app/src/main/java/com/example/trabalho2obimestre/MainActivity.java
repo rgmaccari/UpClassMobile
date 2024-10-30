@@ -1,23 +1,28 @@
 package com.example.trabalho2obimestre;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import helper.SQLiteDataHelper;
+
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton btnChamada;
-    private ImageButton btnCriar;
-    private ImageButton btnCorrigir;
-    private ImageButton btnMedias;
+    private ImageView btnChamada;
+    private ImageView btnCriar;
+    private ImageView btnCorrigir;
+    private ImageView btnMedias;
     private Button btnSair;
 
     @Override

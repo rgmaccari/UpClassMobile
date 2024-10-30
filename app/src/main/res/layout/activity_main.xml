@@ -13,11 +13,13 @@
         android:layout_height="wrap_content"
         android:text="Seja bem vinda,\n Clara!"
         android:gravity="center"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:textColor="@color/black"
         android:layout_marginTop="32dp"
         android:layout_gravity="center"
         android:fontFamily="@font/raleway_medium"/>
+    <!--Bold no clara-->
+    <!--Em todos os cards - font regular 20sp - cor richblack-->
 
     <!-- Grade -->
     <GridLayout
@@ -38,7 +40,7 @@
             app:cardElevation="8dp"
             app:cardCornerRadius="12dp"
             android:onClick="onCard1Click"
-            app:cardBackgroundColor="@color/platinum"
+
             >
 
             <LinearLayout
@@ -89,7 +91,7 @@
                     android:id="@+id/btnCriar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:src="@drawable/criar_avaliacao"
                     android:contentDescription="Criar"
                     android:scaleType="centerCrop"/>
 
@@ -126,7 +128,7 @@
                     android:id="@+id/btnCorrigir"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:src="@drawable/corrigir"
                     android:contentDescription="Corrigir"
                     android:scaleType="centerCrop"
                     android:layout_marginBottom="5dp"/>
@@ -162,7 +164,7 @@
                     android:id="@+id/btnMedias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:src="@drawable/notas"
                     android:contentDescription="Notas"
                     android:scaleType="centerCrop"/>
 
@@ -183,7 +185,10 @@
         android:layout_height="wrap_content"
         android:text="Sair"
         android:layout_marginTop="60dp"
+        android:textSize="22sp"
+        android:fontFamily="@font/raleway_bold"
         android:backgroundTint="@color/azulforte"
-        android:layout_margin="15dp"/>
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"/>
 
 </LinearLayout>

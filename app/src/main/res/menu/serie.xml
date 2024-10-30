@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/btnPrimeiroAnoA"
+        android:title="Primeiro Ano A"/>
+    <item
+        android:id="@+id/btnPrimeiroAnoB"
+        android:title="Primeiro Ano B"/>
+    <item
+        android:id="@+id/btnSegundoAnoA"
+        android:title="Segundo Ano A"/>
+    <item
+        android:id="@+id/btnSegundoAnoB"
+        android:title="Segundo Ano B"/>
+
+</menu>
