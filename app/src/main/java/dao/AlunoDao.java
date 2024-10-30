@@ -38,7 +38,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
         }
     }
 
-    //ALO
+    //ALOdvjnadijvndfijnsdflvjnsadfvjna
     private AlunoDao(Context context){
         this.context = context;
         openHelper = new SQLiteDataHelper(this.context, "Aluno.db", null, 1);

@@ -21,12 +21,27 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Voltar"
-          android:backgroundTint="@color/azulforte"/>
+          android:backgroundTint="@color/oxfordblue"
+          android:layout_weight="1"/>
 
       <Button
           android:id="@+id/menuSerie"
           android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:backgroundTint="@color/azulforte"
+          android:text="Período"/>
+
+      <Button
+          android:id="@+id/menuData"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:layout_marginRight="10dp"
+          android:backgroundTint="@color/azulforte"
+          android:text="Data"/>
 
    </LinearLayout>
 
@@ -38,16 +53,16 @@
        android:layout_marginLeft="10dp">
 
       <TextView
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="RA"
           android:layout_weight="1"/>
 
       <TextView
-          android:layout_width="match_parent"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Nome"
-          android:layout_weight="1"/>
+          android:layout_weight="2"/>
 
       <TextView
           android:layout_width="match_parent"

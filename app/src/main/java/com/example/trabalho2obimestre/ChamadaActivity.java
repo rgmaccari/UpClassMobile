@@ -27,6 +27,7 @@ public class ChamadaActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private AlunoController controller;
     private Button menuSerie;
+    private Button btnVoltar;
     private ChamadaAdapter adapter;
 
     @Override
@@ -35,11 +36,19 @@ public class ChamadaActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
 
+        Button btnVoltar = findViewById(R.id.btnVoltar);
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         // Configurar RecyclerView
         recyclerView = findViewById(R.id.recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Inicializar o controller e obter a lista de alunos
+        // Inicializar o controller p obter a lista de alunos
         controller = new AlunoController(this);
         ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
         adapter = new ChamadaAdapter(chamada, this);
