@@ -2,6 +2,7 @@ package com.example.trabalho2obimestre;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,18 @@ public class ChamadaActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
 
+        //RecycleView e LayoutManager
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        //Adapter com a lista sendo inseridos no RecycleView
+        ArrayList<ItemChamada> alunos = new ArrayList<>();
+        adapter = new ChamadaAdapter(alunos);
+        recyclerView.setAdapter(adapter);
+
+
+        //Botão Voltar
         Button btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,47 +57,48 @@ public class ChamadaActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar RecyclerView
-        recyclerView = findViewById(R.id.recycleView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        // Inicializar o controller p obter a lista de alunos
-        controller = new AlunoController(this);
-        ArrayList<Aluno> chamada = controller.retornarTodosAlunos();
-        adapter = new ChamadaAdapter(chamada, this);
-        recyclerView.setAdapter(adapter);
-        adapter.setListaAlunosOriginal(chamada);
-
-        // Configurar botão de seleção de série e filtro
-        menuSerie = findViewById(R.id.menuSerie);
+        //Botão Menu e seu comportamento ao ser clicado:
+        Button menuSerie = findViewById(R.id.menuSerie);
         menuSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(ChamadaActivity.this, menuSerie);
-                popupMenu.inflate(R.menu.serie);
-
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        String serie = menuItem.getTitle().toString();
-                        // Filtra ao selecionar a série
-                        Log.d("ChamadaActivity", "Série selecionada: " + serie);
-                        adapter.filtrarPorSerie(serie);
-                        adapter.notifyDataSetChanged(); // Notifica o adapter sobre a mudança
-                        return true;
-                    }
-                });
-                popupMenu.show();
+                showPopupMenu(view);
             }
         });
+    }
 
-        // Define a lista completa de alunos para uso no filtro e inicializa com a primeira turma
-        Log.d("ChamadaActivity", "Alunos carregados do controller: " + chamada.size());
-        adapter.setListaAlunosOriginal(chamada);
-        if (chamada != null && !chamada.isEmpty()) {
-            String primeiraSerie = chamada.get(0).getTurma().name();
-            Log.d("ChamadaActivity", "Filtrando por série: " + primeiraSerie);
-            adapter.filtrarPorSerie(primeiraSerie);
-        }
+    //Estrutura de seleção do menu PopUp:
+    private void showPopupMenu(View view){
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.serie, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int itemId = item.getItemId();
+
+                String turma = null;
+                if (itemId == R.id.btnPrimeiroAnoA) {
+                    turma = "PRIMEIRO_ANO_A";
+                    return true;
+                } else if (itemId == R.id.btnPrimeiroAnoB) {
+                    turma = "PRIMEIRO_ANO_B";
+                } else if (itemId == R.id.btnSegundoAnoA) {
+                    turma = "SEGUNDO_ANO_B";
+                } else if (itemId == R.id.btnSegundoAnoB) {
+                    turma = "SEGUNDO_ANO_B";
+                } else {
+                    return false;
+                }
+
+                if(turma != null){
+                    controller = new AlunoController(ChamadaActivity.this);
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        });
+        popupMenu.show();
     }
 }

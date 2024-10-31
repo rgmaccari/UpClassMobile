@@ -2,12 +2,20 @@ package helper;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import enums.turmaEnum;
+import model.Aluno;
+import model.ItemChamada;
 
 public class SQLiteDataHelper extends SQLiteOpenHelper {
     public SQLiteDataHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
@@ -25,6 +33,25 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    }
+
+
+    //Método para busca de alunos por turma:
+    //É usado o item chamada para puxar apenas as colunas pertinentes.
+    public ArrayList<ItemChamada> buscarAlunosPorTurma(String turma){
+        ArrayList<ItemChamada> alunos = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ALUNO WHERE Turma = ?", new String[]{turma});
+
+        if (cursor.moveToFirst()){
+            do{
+                String ra = String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("RA")));
+                String nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"));
+                ItemChamada itemChamada = new ItemChamada(ra, nome, false); // Inicializando com checkbox como false
+                alunos.add(itemChamada);
+            }while(cursor.moveToNext());
+        }cursor.close();
+        return alunos;
     }
 
 /*

@@ -1,76 +1,55 @@
 package adapter;
-import android.content.Context;
-import android.util.Log;
+import com.example.trabalho2obimestre.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import model.Aluno;
+import model.ItemChamada;
+
 public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder> {
-    private ArrayList<Aluno> listaAlunos;
-    private ArrayList<Aluno> listaAlunosOriginal;
-    private Context context;
+    private List<ItemChamada> alunos;
 
-    public ChamadaAdapter(ArrayList<Aluno> listaAlunos, Context context) {
-        this.listaAlunos = listaAlunos;
-        this.listaAlunosOriginal = new ArrayList<>();
-        this.context = context;
-    }
-
-    public void setListaAlunosOriginal(ArrayList<Aluno> listaAlunosOriginal) {
-        this.listaAlunosOriginal = listaAlunosOriginal;
-    }
-
-    public void filtrarPorSerie(String serie) {
-        listaAlunos.clear(); // Limpa a lista atual de alunos
-        Log.d("ChamadaAdapter", "Filtrando por série: " + serie);
-        for (Aluno aluno : listaAlunosOriginal) {
-            if (aluno.getTurma().name().equalsIgnoreCase(serie)) {
-                listaAlunos.add(aluno); // Adiciona alunos que correspondem à série
-            }
-        }
-        notifyDataSetChanged(); // Notifica o adapter sobre a mudança
+    public ChamadaAdapter(List<ItemChamada> alunos) {
+        this.alunos = alunos;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View itemList = inflater.inflate(R.layout.item_chamada, parent, false);
-        return new ViewHolder(itemList);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_chamada, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Aluno aluno = listaAlunos.get(position);
-        holder.alunoRa.setText(String.valueOf(aluno.getRA()));
-        holder.tvNome.setText(aluno.getNome());
-        holder.checkboxPresenca.setChecked(aluno.isPresenca());
+        ItemChamada item = alunos.get(position);
+        holder.tvNome.setText(item.getTvNome());
+        holder.tvRa.setText(item.getAlunoRa());
+        holder.checkboxPresenca.setChecked(item.isCheckboxPresenca());
     }
 
     @Override
     public int getItemCount() {
-        return listaAlunos.size();
+        return alunos.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView alunoRa;
-        public TextView tvNome;
-        public CheckBox checkboxPresenca;
+        TextView tvNome;
+        TextView tvRa;
+        CheckBox checkboxPresenca;
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
-            alunoRa = itemView.findViewById(R.id.alunoRa);
             tvNome = itemView.findViewById(R.id.tvNome);
+            tvRa = itemView.findViewById(R.id.alunoRa);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }

@@ -23,4 +23,5 @@ public class AlunoController {
     public ArrayList<Aluno> retornarTodosAlunos(){
         return AlunoDao.getInstancia(context).getAll();
     }
+
 }

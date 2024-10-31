@@ -8,13 +8,40 @@
     tools:context=".MediasActivity"
     android:background="@color/whitesmoke">
 
-    <Button
-        android:id="@+id/btnVoltar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Voltar"
+        android:orientation="horizontal"
         android:layout_marginTop="35dp"
-        android:layout_marginLeft="10dp"
-        android:backgroundTint="@color/azulforte"/>
+        android:layout_marginLeft="10dp">
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:backgroundTint="@color/oxfordblue"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/menuSerie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/azulforte"
+            android:text="Período"/>
+
+        <Button
+            android:id="@+id/menuData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@color/azulforte"
+            android:text="Data"/>
+
+    </LinearLayout>
 
 </LinearLayout>

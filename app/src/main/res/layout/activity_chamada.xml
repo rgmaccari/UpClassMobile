@@ -21,6 +21,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Voltar"
+
           android:backgroundTint="@color/oxfordblue"
           android:layout_weight="1"/>
 
@@ -53,16 +54,16 @@
        android:layout_marginLeft="10dp">
 
       <TextView
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="RA"
           android:layout_weight="1"/>
 
       <TextView
-          android:layout_width="wrap_content"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Nome"
-          android:layout_weight="2"/>
+          android:layout_weight="1"/>
 
       <TextView
           android:layout_width="match_parent"
@@ -73,7 +74,7 @@
    </LinearLayout>
 
    <androidx.recyclerview.widget.RecyclerView
-       android:id="@+id/recycleView"
+       android:id="@+id/recyclerView"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_margin="10dp">
