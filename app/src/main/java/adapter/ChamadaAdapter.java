@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.ItemChamada;
 
@@ -53,4 +54,11 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }
+
+    public void updateData(ArrayList<ItemChamada> novosAlunos) {
+        this.alunos.clear();
+        this.alunos.addAll(novosAlunos);
+        notifyDataSetChanged();
+    }
+
 }

@@ -91,8 +91,10 @@ public class ChamadaActivity extends AppCompatActivity {
                     return false;
                 }
 
-                if(turma != null){
+                if (turma != null) {
                     controller = new AlunoController(ChamadaActivity.this);
+                    ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(turma); // A chamada correta
+                    updateRecyclerView(alunos);
                     return true;
                 }else{
                     return false;
@@ -101,4 +103,16 @@ public class ChamadaActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
+
+    //Método que atualiza o RecyclerView com a nova lista:
+    // ChamadaActivity.java
+    private void updateRecyclerView(ArrayList<Aluno> alunos) {
+        ArrayList<ItemChamada> listaAlunos = new ArrayList<>();
+        for (Aluno aluno : alunos) {
+            ItemChamada item = new ItemChamada(String.valueOf(aluno.getRA()), aluno.getNome(), false);
+            listaAlunos.add(item);
+        }
+    }
+
+
 }

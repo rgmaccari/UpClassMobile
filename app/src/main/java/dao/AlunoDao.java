@@ -15,6 +15,8 @@ import java.util.List;
 import enums.turmaEnum;
 import helper.SQLiteDataHelper;
 import model.Aluno;
+import model.ItemChamada;
+import helper.SQLiteDataHelper;
 
 public class AlunoDao implements IGenericDao<Aluno>{
     private SQLiteOpenHelper openHelper;
@@ -157,6 +159,34 @@ public class AlunoDao implements IGenericDao<Aluno>{
         }
         return listaAlunos; // Retorna lista vazia se falhar
     }
+
+    //Método para busca de alunos por turma:
+    //Ele é criado no Helper e para chegar até o Controller, precisa do intermedio da Dao
+    public ArrayList<Aluno> buscarAlunosPorTurma(String turma) {
+        ArrayList<Aluno> listaAlunos = new ArrayList<>();
+        // Implementar a lógica para buscar alunos da turma no banco
+        // Exemplo (ajuste conforme sua lógica):
+        String query = "SELECT * FROM Aluno WHERE Turma = ?";
+        Cursor cursor = dataBase.rawQuery(query, new String[]{turma});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Aluno aluno = new Aluno();
+                aluno.setRA(cursor.getInt(0));
+                aluno.setNome(cursor.getString(1));
+                aluno.setTurma(enums.turmaEnum.valueOf(cursor.getString(2)));
+                aluno.setNotaTrabalho(cursor.getInt(3));
+                aluno.setNotaProva(cursor.getInt(4));
+                aluno.setMedia(cursor.getDouble(5));
+                aluno.setPresenca(cursor.getInt(6) == 1);
+                listaAlunos.add(aluno);
+            } while (cursor.moveToNext());
+        }
+        cursor.close(); // Feche o cursor após o uso
+        return listaAlunos;
+    }
+
+
 
 
 }
