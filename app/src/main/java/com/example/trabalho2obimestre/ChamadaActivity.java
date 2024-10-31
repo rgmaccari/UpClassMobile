@@ -114,5 +114,9 @@ public class ChamadaActivity extends AppCompatActivity {
         }
     }
 
+    //Alunos não estão sendo puxados para a tela de chamada ao selecionar a turma.
+    //Como implementar um menu para data.
+    //Como fazer com que o Boolean da checkbox atribua 1 à presença do aluno.
+    //
 
 }
