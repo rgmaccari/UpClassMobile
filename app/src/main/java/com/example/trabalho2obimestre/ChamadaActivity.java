@@ -7,11 +7,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,13 +25,15 @@ import adapter.ChamadaAdapter;
 import controller.AlunoController;
 import model.Aluno;
 import model.ItemChamada;
+import utils.DatePickerFragment;
 
-public class ChamadaActivity extends AppCompatActivity {
+public class ChamadaActivity extends AppCompatActivity implements DatePickerFragment.DatePickerListener{
 
     private RecyclerView recyclerView;
     private AlunoController controller;
     private Button menuSerie;
     private Button btnVoltar;
+    private Button selecionarData;
     private ChamadaAdapter adapter;
 
     @Override
@@ -36,6 +41,19 @@ public class ChamadaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
+
+        //DataPicker
+        selecionarData = findViewById(R.id.selecionarData);
+
+        selecionarData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogFragment dataPicker = new DatePickerFragment(ChamadaActivity.this); // Corrige para passar "this"
+                dataPicker.show(getSupportFragmentManager(), "DatePicker");
+            }
+        });
+
+
 
         //RecycleView e LayoutManager
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -114,9 +132,19 @@ public class ChamadaActivity extends AppCompatActivity {
         }
     }
 
-    //Alunos não estão sendo puxados para a tela de chamada ao selecionar a turma.
-    //Como implementar um menu para data.
-    //Como fazer com que o Boolean da checkbox atribua 1 à presença do aluno.
-    //
 
+    //Método para passar os parâmetros de data:
+    @Override
+    public void onDateSelected(int year, int month, int day) {
+        // Ação ao selecionar uma data
+        String dataSelecionada = day + "/" + (month + 1) + "/" + year;
+        Log.d("Data Selecionada", dataSelecionada);
+        selecionarData.setText(dataSelecionada); // Exibir a data no botão ou TextView
+    }
 }
+//O banco de dados não abre ao executar o App.
+//Como implementar um menu para data (como a data influencia o funcionamento?)
+//Alunos não estão sendo puxados para a tela de chamada ao selecionar a turma.
+//Como fazer com que o Boolean da checkbox atribua 1 à presença do aluno dentro do banco.
+//Como reorganizar os codigos para utilização em mais de um contexto.
+
