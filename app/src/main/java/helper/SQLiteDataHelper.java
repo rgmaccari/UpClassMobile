@@ -47,7 +47,7 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
             do{
                 String ra = String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("RA")));
                 String nome = cursor.getString(cursor.getColumnIndexOrThrow("Nome"));
-                ItemChamada itemChamada = new ItemChamada(ra, nome, false); // Inicializando com checkbox como false
+                ItemChamada itemChamada = new ItemChamada(ra, nome, false);//Inicializando com checkbox como false
                 alunos.add(itemChamada);
             }while(cursor.moveToNext());
         }cursor.close();

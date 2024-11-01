@@ -176,7 +176,6 @@
                     android:layout_marginBottom="5dp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </GridLayout>
 
     <Button

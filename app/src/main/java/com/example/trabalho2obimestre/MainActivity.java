@@ -24,12 +24,16 @@ public class MainActivity extends AppCompatActivity {
     private ImageView btnCorrigir;
     private ImageView btnMedias;
     private Button btnSair;
+    private SQLiteDataHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        //Abrir a DataBase:
+        dbHelper = new SQLiteDataHelper(this, "ALUNO.db", null, 1);
 
         btnChamada = findViewById(R.id.btnChamada);
         btnCriar = findViewById(R.id.btnCriar);

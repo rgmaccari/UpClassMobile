@@ -1,5 +1,7 @@
 package adapter;
 import com.example.trabalho2obimestre.R;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +14,16 @@ import com.example.trabalho2obimestre.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import controller.AlunoController;
+import model.Aluno;
 import model.ItemChamada;
 
 public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder> {
-    private List<ItemChamada> alunos;
+    private ArrayList<ItemChamada> alunos;
+    private AlunoController controller;
 
-    public ChamadaAdapter(List<ItemChamada> alunos) {
+    public ChamadaAdapter(ArrayList<ItemChamada> alunos) {
         this.alunos = alunos;
     }
 
@@ -54,6 +60,11 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }
+
+
+
+
+
 
     public void updateData(ArrayList<ItemChamada> novosAlunos) {
         this.alunos.clear();

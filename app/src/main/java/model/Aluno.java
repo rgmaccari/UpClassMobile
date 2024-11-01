@@ -9,12 +9,12 @@ public class Aluno {
     private int notaProva;
     private double media;
     private boolean presenca;
-    private turmaEnum turma;
+    private String turma;
 
     public Aluno() {
     }
 
-    public Aluno(int RA, String nome, turmaEnum turma, int notaTrabalho, int notaProva, double media, boolean presenca) {
+    public Aluno(int RA, String nome, int notaTrabalho, int notaProva, double media, boolean presenca, String turma) {
         this.RA = RA;
         this.nome = nome;
         this.notaTrabalho = notaTrabalho;
@@ -72,11 +72,11 @@ public class Aluno {
         this.presenca = presenca;
     }
 
-    public turmaEnum getTurma() {
+    public String getTurma() {
         return turma;
     }
 
-    public void setTurma(turmaEnum turma) {
+    public void setTurma(String turma) {
         this.turma = turma;
     }
 }

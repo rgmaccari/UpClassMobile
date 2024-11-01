@@ -1,28 +1,23 @@
 package com.example.trabalho2obimestre;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import adapter.ChamadaAdapter;
 import controller.AlunoController;
+import enums.turmaEnum;
 import model.Aluno;
 import model.ItemChamada;
 import utils.DatePickerFragment;
@@ -34,17 +29,17 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private Button menuSerie;
     private Button btnVoltar;
     private Button selecionarData;
-    private ChamadaAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
-
+        controller = new AlunoController(this);
+        recyclerView = findViewById(R.id.recyclerView);
         //DataPicker
         selecionarData = findViewById(R.id.selecionarData);
-
         selecionarData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,17 +48,8 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
             }
         });
 
-
-
         //RecycleView e LayoutManager
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        //Adapter com a lista sendo inseridos no RecycleView
-        ArrayList<ItemChamada> alunos = new ArrayList<>();
-        adapter = new ChamadaAdapter(alunos);
-        recyclerView.setAdapter(adapter);
 
 
         //Botão Voltar
@@ -85,6 +71,17 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         });
     }
 
+    private void atualizaLista(ArrayList<Aluno> alunos){
+
+
+        //Adapter com a lista sendo inseridos no RecycleView
+        ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos);
+        ChamadaAdapter adapter = new ChamadaAdapter(itemChamadas);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+    }
+
     //Estrutura de seleção do menu PopUp:
     private void showPopupMenu(View view){
         PopupMenu popupMenu = new PopupMenu(this, view);
@@ -94,17 +91,19 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int itemId = item.getItemId();
-
                 String turma = null;
                 if (itemId == R.id.btnPrimeiroAnoA) {
-                    turma = "PRIMEIRO_ANO_A";
-                    return true;
+                    turma = "1A";
+                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_A.descricao);
                 } else if (itemId == R.id.btnPrimeiroAnoB) {
-                    turma = "PRIMEIRO_ANO_B";
+                    turma = "1B";
+                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_B.descricao);
                 } else if (itemId == R.id.btnSegundoAnoA) {
-                    turma = "SEGUNDO_ANO_B";
+                    turma = "2A";
+                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_A.descricao);
                 } else if (itemId == R.id.btnSegundoAnoB) {
-                    turma = "SEGUNDO_ANO_B";
+                    turma = "2B";
+                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_B.descricao);
                 } else {
                     return false;
                 }
@@ -113,6 +112,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                     controller = new AlunoController(ChamadaActivity.this);
                     ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(turma); // A chamada correta
                     updateRecyclerView(alunos);
+
                     return true;
                 }else{
                     return false;
@@ -121,6 +121,15 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         });
         popupMenu.show();
     }
+
+    //Update de alunos:
+    private void exibirAlunosPorTurma(String turma){
+        ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(turma);
+        atualizaLista(alunos);
+    }
+
+
+
 
     //Método que atualiza o RecyclerView com a nova lista:
     // ChamadaActivity.java
@@ -142,6 +151,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         selecionarData.setText(dataSelecionada); // Exibir a data no botão ou TextView
     }
 }
+
 //O banco de dados não abre ao executar o App.
 //Como implementar um menu para data (como a data influencia o funcionamento?)
 //Alunos não estão sendo puxados para a tela de chamada ao selecionar a turma.

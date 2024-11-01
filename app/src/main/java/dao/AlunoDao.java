@@ -40,7 +40,6 @@ public class AlunoDao implements IGenericDao<Aluno>{
         }
     }
 
-    //ALOdvjnadijvndfijnsdflvjnsadfvjna
     private AlunoDao(Context context){
         this.context = context;
         openHelper = new SQLiteDataHelper(this.context, "Aluno.db", null, 1);
@@ -117,7 +116,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
               aluno.setRA(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
-              aluno.setTurma(turmaEnum);
+              aluno.setTurma(cursor.getString(2));
               aluno.setNotaTrabalho(cursor.getInt(3));
               aluno.setNotaProva(cursor.getInt(4));
               aluno.setMedia(cursor.getDouble(5));
@@ -143,7 +142,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
                     aluno.setRA(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
-                    aluno.setTurma(turmaEnum); // Define a turma do aluno
+                    aluno.setTurma(cursor.getString(2)); // Define a turma do aluno
                     aluno.setNotaTrabalho(cursor.getInt(3));
                     aluno.setNotaProva(cursor.getInt(4));
                     aluno.setMedia(cursor.getDouble(5));
@@ -174,7 +173,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 Aluno aluno = new Aluno();
                 aluno.setRA(cursor.getInt(0));
                 aluno.setNome(cursor.getString(1));
-                aluno.setTurma(enums.turmaEnum.valueOf(cursor.getString(2)));
+                aluno.setTurma(cursor.getString(2));
                 aluno.setNotaTrabalho(cursor.getInt(3));
                 aluno.setNotaProva(cursor.getInt(4));
                 aluno.setMedia(cursor.getDouble(5));

@@ -1,12 +1,12 @@
 package enums;
 
 public enum turmaEnum {
-    PRIMEIRO_ANO_A("1° A"),
-    PRIMEIRO_ANO_B("1° B"),
-    SEGUNDO_ANO_A("2° A"),
-    SEGUNDO_ANO_B("2° B");
+    PRIMEIRO_ANO_A("1A"),
+    PRIMEIRO_ANO_B("1B"),
+    SEGUNDO_ANO_A("2A"),
+    SEGUNDO_ANO_B("2B");
 
-    private String descricao;
+    public final String descricao;
 
     private turmaEnum(String descricao) {
 
