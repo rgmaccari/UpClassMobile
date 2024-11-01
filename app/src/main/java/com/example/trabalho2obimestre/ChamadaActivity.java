@@ -153,7 +153,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     public ChamadaAdapter(ArrayList<ItemChamada> alunos, Context context){
         this.alunos = alunos;
         this.context
-    }
+    }//rtwrtrt
 }
 
 //O banco de dados não abre ao executar o App.
