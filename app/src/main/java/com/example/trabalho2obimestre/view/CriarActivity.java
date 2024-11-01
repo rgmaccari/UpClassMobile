@@ -1,4 +1,4 @@
-package com.example.trabalho2obimestre;
+package com.example.trabalho2obimestre.view;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,11 +6,10 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class MediasActivity extends AppCompatActivity {
+import com.example.trabalho2obimestre.R;
+
+public class CriarActivity extends AppCompatActivity {
 
     private Button btnVoltar;
 
@@ -18,7 +17,7 @@ public class MediasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_medias);
+        setContentView(R.layout.activity_criar);
 
         Button btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -27,6 +26,5 @@ public class MediasActivity extends AppCompatActivity {
                 finish();
             }
             });
-
     }
 }

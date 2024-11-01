@@ -1,6 +1,4 @@
-package model;
-
-import enums.turmaEnum;
+package com.example.trabalho2obimestre.model;
 
 public class Aluno {
     private int RA;

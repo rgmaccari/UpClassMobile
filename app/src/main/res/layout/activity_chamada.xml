@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ChamadaActivity"
+    tools:context=".view.ChamadaActivity"
     android:background="@color/whitesmoke">
 
    <LinearLayout
@@ -76,9 +76,17 @@
    <androidx.recyclerview.widget.RecyclerView
        android:id="@+id/recyclerView"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
        android:layout_margin="10dp">
 
    </androidx.recyclerview.widget.RecyclerView>
+
+   <Button
+       android:id="@+id/btnSalvar"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Salvar"
+       android:visibility="gone"/>
 
 </LinearLayout>

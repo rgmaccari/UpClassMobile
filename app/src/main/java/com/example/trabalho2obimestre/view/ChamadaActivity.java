@@ -1,5 +1,4 @@
-package com.example.trabalho2obimestre;
-import android.content.Context;
+package com.example.trabalho2obimestre.view;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -14,14 +13,16 @@ import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.enums.turmaEnum;
+import com.example.trabalho2obimestre.model.ItemChamada;
+
 import java.util.ArrayList;
 
-import adapter.ChamadaAdapter;
-import controller.AlunoController;
-import enums.turmaEnum;
-import model.Aluno;
-import model.ItemChamada;
-import utils.DatePickerFragment;
+import com.example.trabalho2obimestre.adapter.ChamadaAdapter;
+import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.utils.DatePickerFragment;
 
 public class ChamadaActivity extends AppCompatActivity implements DatePickerFragment.DatePickerListener{
 
@@ -30,6 +31,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private Button menuSerie;
     private Button btnVoltar;
     private Button selecionarData;
+    private Button btnSalvar;
 
 
     @Override
@@ -41,7 +43,16 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         controller = new AlunoController(this);
         recyclerView = findViewById(R.id.recyclerView);
 
-        //DataPicker
+        //Botão Voltar
+        Button btnVoltar = findViewById(R.id.btnVoltar);
+        btnVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        //Exibir o menu de data:
         selecionarData = findViewById(R.id.selecionarData);
         selecionarData.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,16 +65,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         //RecycleView e LayoutManager
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
-
-        //Botão Voltar
-        Button btnVoltar = findViewById(R.id.btnVoltar);
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
         //Botão Menu e seu comportamento ao ser clicado:
         Button menuSerie = findViewById(R.id.menuSerie);
         menuSerie.setOnClickListener(new View.OnClickListener() {
@@ -72,15 +73,11 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                 showPopupMenu(view);
             }
         });
-    }
 
-    private void atualizaLista(ArrayList<Aluno> alunos){
-        //Adapter com a lista sendo inseridos no RecycleView
-        ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos);
-        ChamadaAdapter adapter = new ChamadaAdapter(itemChamadas);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        //Botão Salvar
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setVisibility(View.GONE);//Garantir a visibilidade (não visivel)
+
     }
 
     //Estrutura de seleção do menu PopUp:
@@ -110,6 +107,9 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                 }
 
                 if (turma != null) {
+                    //Settar o btnSalvar para ser visível se o usuário selecionar uma turma.
+                    btnSalvar.setVisibility(View.VISIBLE);
+
                     controller = new AlunoController(ChamadaActivity.this);
                     ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(turma); // A chamada correta
                     updateRecyclerView(alunos);
@@ -127,6 +127,16 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private void exibirAlunosPorTurma(String turma){
         ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(turma);
         atualizaLista(alunos);
+    }
+
+    //Atualiza a lista de alunos.
+    private void atualizaLista(ArrayList<Aluno> alunos){
+        //Adapter com a lista sendo inseridos no RecycleView
+        ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos);
+        ChamadaAdapter adapter = new ChamadaAdapter(itemChamadas);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
     }
 
     //Método que atualiza o RecyclerView com a nova lista:
@@ -148,17 +158,4 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         selecionarData.setText(dataSelecionada); // Exibir a data no botão ou TextView
     }
 
-
-    //Atribuir 1 à lista de chamada ao marcar o checkbox:
-    public ChamadaAdapter(ArrayList<ItemChamada> alunos, Context context){
-        this.alunos = alunos;
-        this.context
-    }//rtwrtrt
 }
-
-//O banco de dados não abre ao executar o App.
-//Como implementar um menu para data (como a data influencia o funcionamento?)
-//Alunos não estão sendo puxados para a tela de chamada ao selecionar a turma.
-//Como fazer com que o Boolean da checkbox atribua 1 à presença do aluno dentro do banco.
-//Como reorganizar os codigos para utilização em mais de um contexto.
-

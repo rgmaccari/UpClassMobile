@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CorrigirActivity"
+    tools:context=".view.CorrigirActivity"
     android:background="@color/whitesmoke">
 
     <LinearLayout

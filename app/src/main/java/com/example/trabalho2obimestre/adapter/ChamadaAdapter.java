@@ -1,7 +1,6 @@
-package adapter;
+package com.example.trabalho2obimestre.adapter;
 import com.example.trabalho2obimestre.R;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import controller.AlunoController;
-import model.Aluno;
-import model.ItemChamada;
+import com.example.trabalho2obimestre.controller.AlunoController;
 
 public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder> {
     private ArrayList<ItemChamada> alunos;
@@ -38,10 +34,33 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemChamada item = alunos.get(position);
+
+        // Configura as informações do aluno
         holder.tvNome.setText(item.getTvNome());
         holder.tvRa.setText(item.getAlunoRa());
         holder.checkboxPresenca.setChecked(item.isCheckboxPresenca());
+
+        // Listener para o checkbox de presença
+        holder.checkboxPresenca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Inicializa o AlunoController com o contexto
+                AlunoController controller = new AlunoController(holder.itemView.getContext());
+
+                // Verifica o estado atual do CheckBox
+                boolean isChecked = holder.checkboxPresenca.isChecked();
+
+                if (isChecked) {
+                    //Incrementar a presença no banco de dados se marcado
+                    controller.incrementarPresenca(Integer.parseInt(item.getAlunoRa()));
+                    item.setCheckboxPresenca(true);//Marcar presença no item
+                } else {
+                    item.setCheckboxPresenca(false);//Atualizar o item visualmente para não presente
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

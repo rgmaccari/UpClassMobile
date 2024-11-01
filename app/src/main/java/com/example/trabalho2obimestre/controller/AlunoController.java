@@ -1,14 +1,13 @@
-package controller;
+package com.example.trabalho2obimestre.controller;
 
 import android.content.Context;
-import android.database.Cursor;
+
+import com.example.trabalho2obimestre.dao.AlunoDao;
+import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
+import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import dao.AlunoDao;
-import model.Aluno;
-import model.ItemChamada;
 
 public class AlunoController {
 
@@ -34,6 +33,8 @@ public class AlunoController {
         return AlunoDao.getInstancia(context).buscarAlunosPorTurma(turma);
     }
 
+    //Para listar os alunos por turma, o objeto Aluno tem que ser convertido em ItemChamda,
+    //No RecycleView irá ser exibido ItemChamada apenas com as informações necessárias na tela.
     public ArrayList<ItemChamada> converterAlunosParaItemChamada(ArrayList<Aluno> alunos) {
         ArrayList<ItemChamada> itemChamadas = new ArrayList<>();
         for (Aluno aluno : alunos) {
@@ -41,6 +42,12 @@ public class AlunoController {
             itemChamadas.add(item);
         }
         return itemChamadas;
+    }
+
+    //Adicionar presença dentro do banco:
+    public void incrementarPresenca(int ra){
+        SQLiteDataHelper dbHelper = new SQLiteDataHelper(context, "Aluno.db", null, 1);
+        dbHelper.incrementarPresenca(ra);
     }
 
 }

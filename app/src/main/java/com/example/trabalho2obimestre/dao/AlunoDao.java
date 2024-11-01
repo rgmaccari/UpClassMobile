@@ -1,4 +1,4 @@
-package dao;
+package com.example.trabalho2obimestre.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,15 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import com.example.trabalho2obimestre.enums.turmaEnum;
+import com.example.trabalho2obimestre.model.Aluno;
 
-import enums.turmaEnum;
-import helper.SQLiteDataHelper;
-import model.Aluno;
-import model.ItemChamada;
-import helper.SQLiteDataHelper;
+import java.util.ArrayList;
+
+import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 
 public class AlunoDao implements IGenericDao<Aluno>{
     private SQLiteOpenHelper openHelper;
@@ -110,7 +107,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
               //Converter ENUM para String:
               String turmaString = cursor.getString(2);
-              enums.turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString);
+              turmaEnum turmaEnum = com.example.trabalho2obimestre.enums.turmaEnum.valueOf(turmaString);
 
               aluno.setRA(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
@@ -136,7 +133,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 do {
                     Aluno aluno = new Aluno();
                     String turmaString = cursor.getString(2); // Obtém a turma como String
-                    turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString); // Converte para turmaEnum
+                    turmaEnum turmaEnum = com.example.trabalho2obimestre.enums.turmaEnum.valueOf(turmaString); // Converte para turmaEnum
 
                     aluno.setRA(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
@@ -158,11 +155,11 @@ public class AlunoDao implements IGenericDao<Aluno>{
     }
 
     //Método para busca de alunos por turma:
-    //Ele é criado no Helper e para chegar até o Controller, precisa do intermedio da Dao
+    //Ele é criado no Helper e para chegar até o Controller, precisa do intermedio da Dao.
     public ArrayList<Aluno> buscarAlunosPorTurma(String turma) {
         ArrayList<Aluno> listaAlunos = new ArrayList<>();
-        // Implementar a lógica para buscar alunos da turma no banco
-        // Exemplo (ajuste conforme sua lógica):
+        //Implementar a lógica para buscar alunos da turma no banco
+        //Exemplo (ajuste conforme sua lógica):
         String query = "SELECT * FROM Aluno WHERE Turma = ?";
         Cursor cursor = dataBase.rawQuery(query, new String[]{turma});
 
@@ -182,8 +179,5 @@ public class AlunoDao implements IGenericDao<Aluno>{
         cursor.close(); // Feche o cursor após o uso
         return listaAlunos;
     }
-
-
-
 
 }

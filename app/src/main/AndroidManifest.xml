@@ -13,19 +13,19 @@
         android:theme="@style/Theme.Trabalho2oBimestre"
         tools:targetApi="31">
         <activity
-            android:name=".MediasActivity"
+            android:name=".view.MediasActivity"
             android:exported="false" />
         <activity
-            android:name=".CorrigirActivity"
+            android:name=".view.CorrigirActivity"
             android:exported="false" />
         <activity
-            android:name=".CriarActivity"
+            android:name=".view.CriarActivity"
             android:exported="false" />
         <activity
-            android:name=".ChamadaActivity"
+            android:name=".view.ChamadaActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

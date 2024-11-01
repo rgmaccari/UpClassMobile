@@ -1,4 +1,4 @@
-package enums;
+package com.example.trabalho2obimestre.enums;
 
 public enum turmaEnum {
     PRIMEIRO_ANO_A("1A"),
