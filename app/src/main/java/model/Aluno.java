@@ -8,13 +8,13 @@ public class Aluno {
     private int notaTrabalho;
     private int notaProva;
     private double media;
-    private boolean presenca;
+    private int presenca = 0;
     private String turma;
 
     public Aluno() {
     }
 
-    public Aluno(int RA, String nome, int notaTrabalho, int notaProva, double media, boolean presenca, String turma) {
+    public Aluno(int RA, String nome, int notaTrabalho, int notaProva, double media, int presenca, String turma) {
         this.RA = RA;
         this.nome = nome;
         this.notaTrabalho = notaTrabalho;
@@ -64,11 +64,11 @@ public class Aluno {
         this.media = media;
     }
 
-    public boolean isPresenca() {
+    public int getPresenca() {
         return presenca;
     }
 
-    public void setPresenca(boolean presenca) {
+    public void setPresenca(int presenca) {
         this.presenca = presenca;
     }
 

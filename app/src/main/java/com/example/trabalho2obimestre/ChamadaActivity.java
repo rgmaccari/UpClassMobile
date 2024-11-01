@@ -1,4 +1,5 @@
 package com.example.trabalho2obimestre;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -36,8 +37,10 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
+
         controller = new AlunoController(this);
         recyclerView = findViewById(R.id.recyclerView);
+
         //DataPicker
         selecionarData = findViewById(R.id.selecionarData);
         selecionarData.setOnClickListener(new View.OnClickListener() {
@@ -72,8 +75,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     }
 
     private void atualizaLista(ArrayList<Aluno> alunos){
-
-
         //Adapter com a lista sendo inseridos no RecycleView
         ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos);
         ChamadaAdapter adapter = new ChamadaAdapter(itemChamadas);
@@ -128,9 +129,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         atualizaLista(alunos);
     }
 
-
-
-
     //Método que atualiza o RecyclerView com a nova lista:
     // ChamadaActivity.java
     private void updateRecyclerView(ArrayList<Aluno> alunos) {
@@ -141,7 +139,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         }
     }
 
-
     //Método para passar os parâmetros de data:
     @Override
     public void onDateSelected(int year, int month, int day) {
@@ -149,6 +146,13 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         String dataSelecionada = day + "/" + (month + 1) + "/" + year;
         Log.d("Data Selecionada", dataSelecionada);
         selecionarData.setText(dataSelecionada); // Exibir a data no botão ou TextView
+    }
+
+
+    //Atribuir 1 à lista de chamada ao marcar o checkbox:
+    public ChamadaAdapter(ArrayList<ItemChamada> alunos, Context context){
+        this.alunos = alunos;
+        this.context
     }
 }
 

@@ -54,7 +54,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
             values.put("NotaTrabalho", aluno.getNotaTrabalho());
             values.put("NotaProva", aluno.getNotaProva());
             values.put("Media", aluno.getMedia());
-            values.put("Presenca", aluno.isPresenca() ? 1 : 0); // Converte boolean para int (1 ou 0)
+            values.put("Presenca", aluno.getPresenca());
 
             // Insere os dados na tabela e retorna o ID do novo registro
             return dataBase.insert(tabela, null, values);
@@ -73,7 +73,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
             valores.put(colunas[2], aluno.getNotaTrabalho());
             valores.put(colunas[3], aluno.getNotaProva());
             valores.put(colunas[4], aluno.getMedia());
-            valores.put(colunas[5], aluno.isPresenca() ? 1 : 0); // Converte boolean para int (1 ou 0)
+            valores.put(colunas[5], aluno.getPresenca());
 
             //Criar um array com o identificador do aluno (RA):
             //Esse array é usado como argumento para saber onde (WHERE) atualizar.
@@ -81,8 +81,6 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
             return dataBase.update(tabela, valores, colunas[0] + "= ?", identificador);
             //O update ocorrerá nas tabelas, irá inserir os valores, onde o RA for igual ao identificador.
-
-
         }catch(SQLException ex){
             Log.e("AlunoDao", "AlunoDao.update()" + ex.getMessage());
         }
@@ -120,7 +118,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
               aluno.setNotaTrabalho(cursor.getInt(3));
               aluno.setNotaProva(cursor.getInt(4));
               aluno.setMedia(cursor.getDouble(5));
-              aluno.setPresenca(cursor.getInt(6) == 1);
+              aluno.setPresenca(cursor.getInt(6));
           }
       }catch(SQLException ex){
           Log.e("AlunoDao", "ERRO: AlunoDao.getById()" + ex.getMessage());
@@ -146,7 +144,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     aluno.setNotaTrabalho(cursor.getInt(3));
                     aluno.setNotaProva(cursor.getInt(4));
                     aluno.setMedia(cursor.getDouble(5));
-                    aluno.setPresenca(cursor.getInt(6) == 1);
+                    aluno.setPresenca(cursor.getInt(6));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
@@ -177,7 +175,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 aluno.setNotaTrabalho(cursor.getInt(3));
                 aluno.setNotaProva(cursor.getInt(4));
                 aluno.setMedia(cursor.getDouble(5));
-                aluno.setPresenca(cursor.getInt(6) == 1);
+                aluno.setPresenca(cursor.getInt(6));
                 listaAlunos.add(aluno);
             } while (cursor.moveToNext());
         }
