@@ -1,5 +1,4 @@
-package com.example.trabalho2obimestre;
-import android.content.Context;
+package com.example.trabalho2obimestre.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuInflater;
@@ -16,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-import adapter.ChamadaAdapter;
-import controller.AlunoController;
-import enums.turmaEnum;
-import model.Aluno;
-import model.ItemChamada;
-import utils.DatePickerFragment;
+import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.adapter.ChamadaAdapter;
+import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.enums.TurmaEnum;
+import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.ItemChamada;
+import com.example.trabalho2obimestre.utils.DatePickerFragment;
 
 public class ChamadaActivity extends AppCompatActivity implements DatePickerFragment.DatePickerListener{
 
@@ -95,16 +95,16 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                 String turma = null;
                 if (itemId == R.id.btnPrimeiroAnoA) {
                     turma = "1A";
-                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_A.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.PRIMEIRO_ANO_A.descricao);
                 } else if (itemId == R.id.btnPrimeiroAnoB) {
                     turma = "1B";
-                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_B.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.PRIMEIRO_ANO_B.descricao);
                 } else if (itemId == R.id.btnSegundoAnoA) {
                     turma = "2A";
-                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_A.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.SEGUNDO_ANO_A.descricao);
                 } else if (itemId == R.id.btnSegundoAnoB) {
                     turma = "2B";
-                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_B.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.SEGUNDO_ANO_B.descricao);
                 } else {
                     return false;
                 }
@@ -150,10 +150,10 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
 
     //Atribuir 1 à lista de chamada ao marcar o checkbox:
-    public ChamadaAdapter(ArrayList<ItemChamada> alunos, Context context){
-        this.alunos = alunos;
-        this.context
-    }//rtwrtrt
+//    public ChamadaAdapter(ArrayList<ItemChamada> alunos, Context context){
+//        this.alunos = alunos;
+//        this.context
+//    }//rtwrtrt
 }
 
 //O banco de dados não abre ao executar o App.

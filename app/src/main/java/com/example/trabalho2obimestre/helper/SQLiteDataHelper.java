@@ -1,6 +1,5 @@
-package helper;
+package com.example.trabalho2obimestre.helper;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,13 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
-import enums.turmaEnum;
-import model.Aluno;
-import model.ItemChamada;
+import com.example.trabalho2obimestre.model.ItemChamada;
 
 public class SQLiteDataHelper extends SQLiteOpenHelper {
     public SQLiteDataHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){

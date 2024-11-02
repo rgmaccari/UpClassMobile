@@ -1,4 +1,4 @@
-package model;
+package com.example.trabalho2obimestre.model;
 
 public class ItemChamada {
     private String alunoRa;

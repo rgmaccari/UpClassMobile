@@ -1,7 +1,6 @@
-package adapter;
+package com.example.trabalho2obimestre.adapter;
 import com.example.trabalho2obimestre.R;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,14 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.trabalho2obimestre.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
-import controller.AlunoController;
-import model.Aluno;
-import model.ItemChamada;
+import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.model.ItemChamada;
 
 public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder> {
     private ArrayList<ItemChamada> alunos;

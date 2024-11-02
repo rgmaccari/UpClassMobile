@@ -1,14 +1,12 @@
-package controller;
+package com.example.trabalho2obimestre.controller;
 
 import android.content.Context;
-import android.database.Cursor;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import dao.AlunoDao;
-import model.Aluno;
-import model.ItemChamada;
+import com.example.trabalho2obimestre.dao.AlunoDao;
+import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.ItemChamada;
 
 public class AlunoController {
 

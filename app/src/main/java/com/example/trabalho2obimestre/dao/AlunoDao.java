@@ -1,4 +1,4 @@
-package dao;
+package com.example.trabalho2obimestre.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,14 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-import enums.turmaEnum;
-import helper.SQLiteDataHelper;
-import model.Aluno;
-import model.ItemChamada;
-import helper.SQLiteDataHelper;
+import com.example.trabalho2obimestre.enums.TurmaEnum;
+import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
+import com.example.trabalho2obimestre.model.Aluno;
 
 public class AlunoDao implements IGenericDao<Aluno>{
     private SQLiteOpenHelper openHelper;
@@ -110,7 +106,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
               //Converter ENUM para String:
               String turmaString = cursor.getString(2);
-              enums.turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString);
+              TurmaEnum turmaEnum = TurmaEnum.valueOf(turmaString);
 
               aluno.setRA(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
@@ -136,7 +132,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 do {
                     Aluno aluno = new Aluno();
                     String turmaString = cursor.getString(2); // Obtém a turma como String
-                    turmaEnum turmaEnum = enums.turmaEnum.valueOf(turmaString); // Converte para turmaEnum
+                    TurmaEnum turmaEnum = TurmaEnum.valueOf(turmaString); // Converte para turmaEnum
 
                     aluno.setRA(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
