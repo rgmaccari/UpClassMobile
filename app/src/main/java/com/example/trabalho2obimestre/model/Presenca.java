@@ -7,11 +7,14 @@ public class Presenca {
     private int id;
     private Date data;
     private boolean presente;
+    private Disciplina disciplina;
 
-    public Presenca(int id, Date data, boolean presente) {
+    public Presenca(int id, Date data, boolean presente, Disciplina disciplina) {
+
         this.id = id;
         this.data = data;
         this.presente = presente;
+        this.disciplina = disciplina;
     }
 
     public Presenca() {
@@ -41,5 +44,11 @@ public class Presenca {
         this.presente = presente;
     }
 
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
 
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
 }
