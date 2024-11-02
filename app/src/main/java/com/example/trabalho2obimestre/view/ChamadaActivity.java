@@ -144,7 +144,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private void updateRecyclerView(ArrayList<Aluno> alunos) {
         ArrayList<ItemChamada> listaAlunos = new ArrayList<>();
         for (Aluno aluno : alunos) {
-            ItemChamada item = new ItemChamada(String.valueOf(aluno.getRA()), aluno.getNome(), false);
+            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
             listaAlunos.add(item);
         }
     }

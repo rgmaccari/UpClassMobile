@@ -12,16 +12,49 @@ import com.example.trabalho2obimestre.model.ItemChamada;
 import java.util.ArrayList;
 
 public class SQLiteDataHelper extends SQLiteOpenHelper {
-    public SQLiteDataHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version){
+    public SQLiteDataHelper(@Nullable Context context, @Nullable String name,
+                            @Nullable SQLiteDatabase.CursorFactory factory, int version){
         super(context, name, factory, version);
 
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
         sqLiteDatabase.
-                execSQL("CREATE TABLE ALUNO (RA INTEGER PRIMARY KEY, Nome TEXT,  Turma TEXT, NotaTrabalho INTEGER," +
-                        " NotaProva INTEGER, Media REAL, Presenca INTEGER DEFAULT 0)");
+                execSQL("CREATE TABLE TURMA (id INTEGER PRIMARY KEY, nomeTurma TEXT, anoLetivo INTEGER)");
+
+        sqLiteDatabase.
+                execSQL("CREATE TABLE ALUNO (matricula INTEGER PRIMARY KEY, nome TEXT,  cpf TEXT, turmaId INTEGER, " +
+                        "FOREIGN KEY (turmaId) REFERENCES TURMA(id))");
+
+        sqLiteDatabase.
+                execSQL("CREATE TABLE PROFESSOR (registro INTEGER PRIMARY KEY, nome TEXT,  cpf TEXT)");
+
+        sqLiteDatabase.
+                execSQL("CREATE TABLE DISCIPLINA (id INTEGER PRIMARY KEY, nome TEXT, professorRegistro INTEGER, " +
+                        "FOREIGN KEY (professorRegistro) REFERENCES PROFESSOR(registro))");
+
+        sqLiteDatabase.
+                execSQL("CREATE TABLE TURMA_DISCIPLINA (disciplinaId INTEGER, turmaId INTEGER, " +
+                        "PRIMARY KEY (disciplinaId, turmaId)," +
+                        "FOREIGN KEY (disciplinaId) REFERENCES DISCIPLINA(id)," +
+                        "FOREIGN KEY (turmaId) REFERENCES TURMA(id))");
+
+        //o invés de BOOLEAN, o SQLite não possui um tipo booleano nativo. Recomenda-se usar INTEGER para valores booleanos (0 para falso e 1 para verdadeiro).
+        sqLiteDatabase.
+                execSQL("CREATE TABLE PRESENCA (id INTEGER PRIMARY KEY, data DATE, presente INTEGER, " +
+                        "   alunoMatricula INTEGER, disciplinaId INTEGER, " +
+                        "FOREIGN KEY (alunoMatricula) REFERENCES ALUNO(matricula), " +
+                        "FOREIGN KEY (disciplinaId) REFERENCES DISCIPLINA(id))");
+
+        sqLiteDatabase.
+                execSQL("CREATE TABLE NOTA (id INTEGER PRIMARY KEY, anoLetivo INTEGER, bimestre TEXT, " +
+                        "notaTrabalho REAL, notaAvaliacao REAL, " +
+                        "alunoMatricula INTEGER, disciplinaId INTEGER, " +
+                        "FOREIGN KEY (alunoMatricula) REFERENCES ALUNO(matricula), " +
+                        "FOREIGN KEY (disciplinaId) REFERENCES DISCIPLINA(id))");
+
 
     }
 
