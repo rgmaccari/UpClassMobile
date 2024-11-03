@@ -1,11 +1,12 @@
 package com.example.trabalho2obimestre.dao;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public interface IGenericDao<Aluno> {
-    long insert(Aluno aluno);
-    long update(Aluno aluno);
-    long delete (Aluno aluno);
-    Aluno getById(long id);
-    List<Aluno> getAll();
+
+public interface IGenericDao<T> {
+    long insert(T obj);
+    long update(T obj);
+    long delete (T obj);
+    T getById(long id);
+    ArrayList<T> getAll();
 }

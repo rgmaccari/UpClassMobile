@@ -29,8 +29,8 @@ public class AlunoController {
         return AlunoDao.getInstancia(context).getById(id);
     }
 
-    public ArrayList<Aluno> retornarAlunosPorTurma(String turma) {
-        return AlunoDao.getInstancia(context).buscarAlunosPorTurma(turma);
+    public ArrayList<Aluno> retornarAlunosPorTurma(int turmaId) {
+        return AlunoDao.getInstancia(context).buscarAlunosPorTurma(turmaId);
     }
 
     //Para listar os alunos por turma, o objeto Aluno tem que ser convertido em ItemChamda,
@@ -38,7 +38,7 @@ public class AlunoController {
     public ArrayList<ItemChamada> converterAlunosParaItemChamada(ArrayList<Aluno> alunos) {
         ArrayList<ItemChamada> itemChamadas = new ArrayList<>();
         for (Aluno aluno : alunos) {
-            ItemChamada item = new ItemChamada(String.valueOf(aluno.getRA()), aluno.getNome(), false);
+            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
             itemChamadas.add(item);
         }
         return itemChamadas;
