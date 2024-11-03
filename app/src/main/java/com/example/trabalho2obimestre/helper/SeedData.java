@@ -32,9 +32,9 @@ public class SeedData {
                 "('Marcos Ferreira', '987.654.321-28', 3)," +
                 "('Vanessa Martins', '123.456.789-29', 3)");
 
-        db.execSQL("INSERT INTO PROFESSOR (registro, nome, cpf) VALUES (1, 'Clara Martins', '123.456.789-00')");
+        db.execSQL("INSERT INTO PROFESSOR (nome, cpf) VALUES ('Clara Martins', '123.456.789-00')");
 
-        db.execSQL("INSERT INTO DISCIPLINA (nome, professorRegistro) VALUES (1, 'Matemática', 1)");
+        db.execSQL("INSERT INTO DISCIPLINA (nome, professorRegistro) VALUES ('Matemática', 1)");
 
         db.execSQL("INSERT INTO TURMA_DISCIPLINA (disciplinaId, turmaId) " +
                 "VALUES (1, 1), (1, 3)");

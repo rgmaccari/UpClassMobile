@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
-import com.example.trabalho2obimestre.enums.turmaEnum;
+import com.example.trabalho2obimestre.enums.TurmaEnum;
 import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
@@ -92,16 +92,16 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                 String turma = null;
                 if (itemId == R.id.btnPrimeiroAnoA) {
                     turma = "1A";
-                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_A.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.PRIMEIRO_ANO_A.descricao);
                 } else if (itemId == R.id.btnPrimeiroAnoB) {
                     turma = "1B";
-                    exibirAlunosPorTurma(turmaEnum.PRIMEIRO_ANO_B.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.PRIMEIRO_ANO_B.descricao);
                 } else if (itemId == R.id.btnSegundoAnoA) {
                     turma = "2A";
-                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_A.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.SEGUNDO_ANO_A.descricao);
                 } else if (itemId == R.id.btnSegundoAnoB) {
                     turma = "2B";
-                    exibirAlunosPorTurma(turmaEnum.SEGUNDO_ANO_B.descricao);
+                    exibirAlunosPorTurma(TurmaEnum.SEGUNDO_ANO_B.descricao);
                 } else {
                     return false;
                 }

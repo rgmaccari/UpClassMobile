@@ -38,7 +38,7 @@ public class AlunoController {
     public ArrayList<ItemChamada> converterAlunosParaItemChamada(ArrayList<Aluno> alunos) {
         ArrayList<ItemChamada> itemChamadas = new ArrayList<>();
         for (Aluno aluno : alunos) {
-            ItemChamada item = new ItemChamada(String.valueOf(aluno.getRA()), aluno.getNome(), false);
+            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
             itemChamadas.add(item);
         }
         return itemChamadas;

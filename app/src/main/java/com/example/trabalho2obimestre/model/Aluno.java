@@ -7,17 +7,17 @@ public class Aluno extends Pessoa{
     private int matricula;
     private ArrayList<Presenca> presencas;
     private ArrayList<Notas> notas;
+    private Turma turma;
 
     public Aluno() {
-        presencas = new ArrayList<>();
-        notas = new ArrayList<>();
     }
 
-    public Aluno(String nome, String cpf, int matricula, ArrayList<Presenca> presencas, ArrayList<Notas> notas) {
+    public Aluno(String nome, String cpf, int matricula, ArrayList<Presenca> presencas, ArrayList<Notas> notas, Turma turma) {
         super(nome, cpf);
         this.matricula = matricula;
         this.presencas = presencas;
         this.notas = notas;
+        this.turma = turma;
     }
 
     public int getMatricula() {
@@ -42,6 +42,14 @@ public class Aluno extends Pessoa{
 
     public void setNotas(ArrayList<Notas> notas) {
         this.notas = notas;
+    }
+
+    public Turma getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     //    private int RA;

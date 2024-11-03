@@ -1,5 +1,6 @@
 package com.example.trabalho2obimestre.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface IGenericDao<Aluno> {
@@ -7,5 +8,5 @@ public interface IGenericDao<Aluno> {
     long update(Aluno aluno);
     long delete (Aluno aluno);
     Aluno getById(long id);
-    List<Aluno> getAll();
+    ArrayList<Aluno> getAll();
 }
