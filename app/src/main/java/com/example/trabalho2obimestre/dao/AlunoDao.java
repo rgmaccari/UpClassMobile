@@ -93,9 +93,9 @@ public class AlunoDao implements IGenericDao<Aluno>{
     }
 
     @Override
-    public Aluno getById(long id) {
+    public Aluno getById(long matricula) {
       try{
-          String[]identificador = {String.valueOf(id)};
+          String[]identificador = {String.valueOf(matricula)};
           Cursor cursor = dataBase.query(tabela, colunas, colunas[0] + "= ?", identificador, null, null, null);
 
           if(cursor.moveToFirst()){
@@ -129,7 +129,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
                     aluno.setCpf(cursor.getString(2));
-                    //aluno.setTurma(); // TODO: implementar
+                    aluno.setTurma(TurmaDao.getInstancia(context).getById(cursor.getInt(4)));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
@@ -144,16 +144,15 @@ public class AlunoDao implements IGenericDao<Aluno>{
     }
 
     //Método para busca de alunos por turma:
-    //Ele é criado no Helper e para chegar até o Controller, precisa do intermedio da Dao.
-    public ArrayList<Aluno> buscarAlunosPorTurma(String turma) {
+    public ArrayList<Aluno> buscarAlunosPorTurma(int turmaId) {
         ArrayList<Aluno> listaAlunos = new ArrayList<>();
 
         //Todo:Alterar oargumento recebido no metodo, para receber uma turma.
         String query = "SELECT * FROM Aluno a " +
                 "INNER JOIN Turma t ON t.id = a.turmaId " +
-                "WHERE t.nomeTurma = ?";
+                "WHERE t.id = ?";
 
-        Cursor cursor = dataBase.rawQuery(query, new String[]{turma});
+        Cursor cursor = dataBase.rawQuery(query, new String[]{String.valueOf(turmaId)});
 
         if (cursor.moveToFirst()) {
             do {
@@ -161,7 +160,6 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 aluno.setMatricula(cursor.getInt(0));
                 aluno.setNome(cursor.getString(1));
                 aluno.setCpf(cursor.getString(2));
-                aluno.setTurma(TurmaDao.getInstancia(context).getById(cursor.getInt(3)));
                 listaAlunos.add(aluno);
             } while (cursor.moveToNext());
         }

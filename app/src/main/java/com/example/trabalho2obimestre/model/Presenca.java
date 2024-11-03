@@ -8,13 +8,14 @@ public class Presenca {
     private Date data;
     private boolean presente;
     private Disciplina disciplina;
+    public Aluno aluno;
 
-    public Presenca(int id, Date data, boolean presente, Disciplina disciplina) {
-
+    public Presenca(int id, Date data, boolean presente, Disciplina disciplina, Aluno aluno) {
         this.id = id;
         this.data = data;
         this.presente = presente;
         this.disciplina = disciplina;
+        this.aluno = aluno;
     }
 
     public Presenca() {
@@ -50,5 +51,13 @@ public class Presenca {
 
     public void setDisciplina(Disciplina disciplina) {
         this.disciplina = disciplina;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 }

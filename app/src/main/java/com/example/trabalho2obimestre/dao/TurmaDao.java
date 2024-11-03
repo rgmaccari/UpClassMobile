@@ -12,7 +12,6 @@ import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 public class TurmaDao implements IGenericDao<Turma>{
@@ -124,6 +123,40 @@ public class TurmaDao implements IGenericDao<Turma>{
                     turmas.add(turma);
                 } while (cursor.moveToNext());
             }
+            Log.d("TurmaDao", "Total de turmas recuperados: " + turmas.size());
+            return turmas;
+
+        } catch (SQLException ex) {
+            Log.e("TurmaDao", "ERRO: TurmaDao.getAll()" + ex.getMessage());
+        }
+        return turmas;
+    }
+
+
+    public ArrayList<Turma> buscarTurmasPorDisciplina(int disciplinaId) {
+
+        ArrayList<Turma> turmas = new ArrayList<>();
+
+        try {
+
+            String query = "SELECT * FROM Turma t " +
+                    "INNER JOIN Turma_Disciplina td ON td.turmaId = t.id " +
+                    "WHERE td.disciplinaId = ?";
+
+            Cursor cursor = dataBase.rawQuery(query, new String[]{String.valueOf(disciplinaId)});
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Turma turma = new Turma();
+
+                    turma.setId(cursor.getInt(0));
+                    turma.setNomeTurma(cursor.getString(1));
+                    turma.setAnoLetivo(cursor.getInt(2));
+
+                    turmas.add(turma);
+                } while (cursor.moveToNext());
+            }
+
             Log.d("TurmaDao", "Total de turmas recuperados: " + turmas.size());
             return turmas;
 

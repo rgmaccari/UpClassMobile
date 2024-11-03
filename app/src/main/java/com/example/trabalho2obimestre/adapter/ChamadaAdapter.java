@@ -75,7 +75,7 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
-            tvRa = itemView.findViewById(R.id.alunoRa);
+            tvRa = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }

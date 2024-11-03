@@ -7,42 +7,56 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.ChamadaActivity"
-    android:background="@color/whitesmoke">
+    android:background="@color/whitesmoke"
+    android:padding="5dp">
 
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-      android:orientation="horizontal"
-       android:layout_marginTop="35dp"
-       android:layout_marginLeft="10dp">
+       android:orientation="horizontal"
+       android:layout_marginTop="35dp">
 
       <Button
           android:id="@+id/btnVoltar"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="Voltar"
-
           android:backgroundTint="@color/oxfordblue"
-          android:layout_weight="1"/>
+          android:layout_marginRight="5dp"
+          android:layout_weight="1"
+          android:padding="0dp"/>
 
       <Button
-          android:id="@+id/menuSerie"
+          android:id="@+id/btnDisciplina"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginRight="5dp"
           android:backgroundTint="@color/azulforte"
-          android:text="Período"/>
+          android:text="Disciplina"
+          android:padding="0dp"/>
+
 
       <Button
-          android:id="@+id/selecionarData"
+          android:id="@+id/btnTurma"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:layout_marginRight="10dp"
+          android:layout_marginRight="5dp"
           android:backgroundTint="@color/azulforte"
-          android:text="Data"/>
+          android:text="Turma"
+          android:padding="0dp"/>
+
+      <Button
+          android:id="@+id/btnData"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_weight="1"
+          android:backgroundTint="@color/azulforte"
+          android:text="Data"
+          android:padding="0dp"/>
+
+
 
    </LinearLayout>
 
@@ -56,8 +70,8 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="RA"
-          android:layout_weight="1"/>
+          android:text="N°"
+          android:layout_weight="2"/>
 
       <TextView
           android:layout_width="match_parent"
@@ -69,7 +83,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:text="Presença"
-          android:layout_weight="1"/>
+          android:layout_weight="2"/>
 
    </LinearLayout>
 

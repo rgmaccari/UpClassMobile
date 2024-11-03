@@ -21,6 +21,9 @@ public class SeedData {
                 "('Larissa Almeida', '123.456.789-07', 1)," +
                 "('Ricardo Pereira', '987.654.321-08', 1)," +
                 "('Juliana Rodrigues', '123.456.789-09', 1)," +
+                "('Ana Souza', '123.456.789-09', 1)," +
+                "('Larissa Rodrigues', '123.456.789-09', 1)," +
+                "('João Pedro', '123.456.789-03', 1)," +
                 "('Carlos Henrique', '987.654.321-20', 3)," +
                 "('Fernanda Ribeiro', '123.456.789-21', 3)," +
                 "('Gustavo Andrade', '987.654.321-22', 3)," +
