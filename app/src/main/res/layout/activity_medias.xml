@@ -31,7 +31,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:backgroundTint="@color/azulforte"
-            android:text="Período"/>
+            android:text="Turma"/>
 
         <Button
             android:id="@+id/menuData"
@@ -40,8 +40,14 @@
             android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:backgroundTint="@color/azulforte"
-            android:text="Data"/>
+            android:text="Ano"/>
 
     </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAlunos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"/>
 
 </LinearLayout>

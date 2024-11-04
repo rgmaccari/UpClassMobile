@@ -1,6 +1,5 @@
 package com.example.trabalho2obimestre.view;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,17 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.controller.DisciplinaController;
 import com.example.trabalho2obimestre.controller.TurmaController;
-import com.example.trabalho2obimestre.enums.TurmaEnum;
 import com.example.trabalho2obimestre.model.Disciplina;
 import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.example.trabalho2obimestre.adapter.ChamadaAdapter;
+import com.example.trabalho2obimestre.adapter.AlunoAdapter;
 import com.example.trabalho2obimestre.controller.AlunoController;
 import com.example.trabalho2obimestre.model.Aluno;
-import com.example.trabalho2obimestre.model.Professor;
 import com.example.trabalho2obimestre.model.Turma;
 import com.example.trabalho2obimestre.utils.DatePickerFragment;
 
@@ -180,7 +177,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private void atualizaLista(ArrayList<Aluno> alunos){
         //Adapter com a lista sendo inseridos no RecycleView
         ArrayList<ItemChamada> itemChamadas = alunoController.converterAlunosParaItemChamada(alunos);
-        ChamadaAdapter adapter = new ChamadaAdapter(itemChamadas);
+        AlunoAdapter adapter = new AlunoAdapter(itemChamadas);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

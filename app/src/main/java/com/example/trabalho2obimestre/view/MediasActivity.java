@@ -6,11 +6,21 @@ import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.adapter.AlunoAdapter;
+import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.ItemChamada;
+
+import java.util.ArrayList;
 
 public class MediasActivity extends AppCompatActivity {
-
+    private RecyclerView recyclerViewAlunos;
+    private AlunoAdapter adapter;
+    private AlunoController controller;
     private Button btnVoltar;
 
     @Override
@@ -19,13 +29,20 @@ public class MediasActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_medias);
 
-        Button btnVoltar = findViewById(R.id.btnVoltar);
-        btnVoltar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-            });
+        recyclerViewAlunos = findViewById(R.id.recyclerViewAlunos);
+        controller = new AlunoController(this);
+
+        ArrayList<Aluno> alunos = controller.retornarTodosAlunos();
+        ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos);
+
+        adapter = new AlunoAdapter(itemChamadas);
+        recyclerViewAlunos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewAlunos.setAdapter(adapter);
+
 
     }
+
+    //Seleção de turma.
+    //Seleção de ano letivo.
+    //CardView expansível para abrir as médias e notas do aluno.
 }

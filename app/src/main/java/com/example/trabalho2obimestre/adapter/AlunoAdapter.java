@@ -15,11 +15,12 @@ import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.controller.AlunoController;
 
-public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHolder> {
+public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> {
     private ArrayList<ItemChamada> alunos;
     private AlunoController controller;
+    private int cardExpansivel = -1; //Necessário para o card expansível na tela de médias.
 
-    public ChamadaAdapter(ArrayList<ItemChamada> alunos) {
+    public AlunoAdapter(ArrayList<ItemChamada> alunos) {
         this.alunos = alunos;
     }
 
@@ -59,8 +60,17 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
                 }
             }
         });
-    }
 
+        //Definir a visibilidade do card com base na posição dele:
+        boolean isExpanded = position == cardExpansivel;
+        holder.cardExpansivel.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        //Listener para expandir o card ao clicar.
+        holder.itemView.setOnClickListener(view -> {
+            cardExpansivel = isExpanded ? -1 : position;
+            notifyDataSetChanged();
+        });
+    }
 
     @Override
     public int getItemCount() {
@@ -71,19 +81,16 @@ public class ChamadaAdapter extends RecyclerView.Adapter<ChamadaAdapter.ViewHold
         TextView tvNome;
         TextView tvRa;
         CheckBox checkboxPresenca;
+        View cardExpansivel;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
             tvRa = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
+            cardExpansivel = itemView.findViewById(R.id.cardExpansivel);
         }
     }
-
-
-
-
-
 
     public void updateData(ArrayList<ItemChamada> novosAlunos) {
         this.alunos.clear();
