@@ -207,6 +207,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         dataChamada = new Date(year, month, day);
 
         exibirAlunosPorTurma();
+        btnSalvar.setVisibility(View.VISIBLE);
     }
 
 }
