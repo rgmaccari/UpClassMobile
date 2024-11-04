@@ -50,7 +50,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
             ContentValues values = new ContentValues();
             values.put(colunas[1], aluno.getNome());
             values.put(colunas[2], aluno.getCpf());
-            values.put(colunas[3], aluno.getTurma().getId());
+            values.put(colunas[3], aluno.getTurma());
 
             // Insere os dados na tabela e retorna o ID do novo registro
             return dataBase.insert(tabela, null, values);
@@ -68,7 +68,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
             ContentValues values = new ContentValues();
             values.put(colunas[1], aluno.getNome());
             values.put(colunas[2], aluno.getCpf());
-            values.put(colunas[3], aluno.getTurma().getId());
+            values.put(colunas[3], aluno.getTurma());
 
             String[] identificador = {String.valueOf(aluno.getMatricula())};
 
@@ -104,7 +104,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
               aluno.setMatricula(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
               aluno.setCpf(cursor.getString(2));
-              aluno.setTurma(TurmaDao.getInstancia(context).getById(cursor.getInt(4))); // TODO: implementar
+              aluno.setTurma(cursor.getInt(4)); // TODO: implementar
 
               return aluno;
           }
@@ -124,12 +124,12 @@ public class AlunoDao implements IGenericDao<Aluno>{
                 do {
                     Aluno aluno = new Aluno();
                     String turmaString = cursor.getString(2); // Obtém a turma como String
-                    TurmaEnum turmaEnum = TurmaEnum.valueOf(turmaString); // Converte para turmaEnum
+                   // TurmaEnum turmaEnum = TurmaEnum.valueOf(turmaString); // Converte para turmaEnum
 
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
                     aluno.setCpf(cursor.getString(2));
-                    aluno.setTurma(TurmaDao.getInstancia(context).getById(cursor.getInt(4)));
+                    aluno.setTurma(cursor.getInt(4));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());

@@ -18,7 +18,6 @@ import com.example.trabalho2obimestre.controller.AlunoController;
 public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> {
     private ArrayList<ItemChamada> alunos;
     private AlunoController controller;
-    private int cardExpansivel = -1; //Necessário para o card expansível na tela de médias.
 
     public AlunoAdapter(ArrayList<ItemChamada> alunos) {
         this.alunos = alunos;
@@ -61,15 +60,6 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
             }
         });
 
-        //Definir a visibilidade do card com base na posição dele:
-        boolean isExpanded = position == cardExpansivel;
-        holder.cardExpansivel.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-
-        //Listener para expandir o card ao clicar.
-        holder.itemView.setOnClickListener(view -> {
-            cardExpansivel = isExpanded ? -1 : position;
-            notifyDataSetChanged();
-        });
     }
 
     @Override

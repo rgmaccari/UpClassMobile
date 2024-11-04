@@ -88,7 +88,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         btnDisciplina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 ArrayList<Disciplina> itens = disciplinaController.listDisciplinasByProf(registroProf);
                 showDisciplinaPopupMenu(view, R.menu.disciplina, itens);
             }
