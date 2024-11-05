@@ -14,12 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.adapter.AlunoAdapter;
 import com.example.trabalho2obimestre.adapter.MediasAdapter;
 import com.example.trabalho2obimestre.controller.AlunoController;
 import com.example.trabalho2obimestre.controller.DisciplinaController;
 import com.example.trabalho2obimestre.controller.TurmaController;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.Disciplina;
+import com.example.trabalho2obimestre.model.ItemChamada;
+import com.example.trabalho2obimestre.model.ItemMedias;
 import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
@@ -33,7 +36,9 @@ public class MediasActivity extends AppCompatActivity {
     private DisciplinaController disciplinaController;
     private Button btnVoltar;
     private Button btnTurma;
+    private Button btnAnoLetivo;
     private Button btnDisciplina;
+    private int itemTurmaId;
     private int itemDisciplinaId;
     private int registroProf;//Variável para armazenar a disciplina selecionada
 
@@ -42,6 +47,8 @@ public class MediasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_medias);
+
+        registroProf = 1;
 
         disciplinaController = new DisciplinaController(this);
         turmaController = new TurmaController(this);
@@ -62,8 +69,6 @@ public class MediasActivity extends AppCompatActivity {
             }
         });
 
-
-
         btnDisciplina = findViewById(R.id.btnDisciplina);
         btnDisciplina.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +87,22 @@ public class MediasActivity extends AppCompatActivity {
                 showTurmaPopupMenu(view, R.menu.turma, itens);
             }
         });
+
+        //btn ano
+        btnAnoLetivo = findViewById(R.id.btnAnoLetivo);
+        btnAnoLetivo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAnoLetivoMenu(view, R.menu.ano_letivo);
+            }
+        });
+    }
+
+    private void showAnoLetivoMenu(View view, int menuId){
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(menuId, popupMenu.getMenu());
+        popupMenu.show();
     }
 
     private void showTurmaPopupMenu(View view, int turmaId, ArrayList<Turma> turmas) {
@@ -114,4 +135,36 @@ public class MediasActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
+
+    private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> itens){
+
+        PopupMenu popupMenu = new PopupMenu(this, view);
+
+        for (Disciplina item : itens){
+            popupMenu.getMenu().add(0, item.getId(), 0, item.getNome());
+        }
+
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(menuId, popupMenu.getMenu());
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                itemDisciplinaId = item.getItemId();
+
+                if(itemDisciplinaId != 0) {
+                    Toast.makeText(MediasActivity.this, "Disciplina selecionada: " + item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+
+                    return true;
+                }
+
+                return false;
+
+            }
+        });
+        popupMenu.show();
+    }
+
+
 }
+
