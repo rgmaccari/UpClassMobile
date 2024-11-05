@@ -14,15 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
-import com.example.trabalho2obimestre.adapter.AlunoAdapter;
 import com.example.trabalho2obimestre.adapter.MediasAdapter;
 import com.example.trabalho2obimestre.controller.AlunoController;
 import com.example.trabalho2obimestre.controller.DisciplinaController;
 import com.example.trabalho2obimestre.controller.TurmaController;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.Disciplina;
-import com.example.trabalho2obimestre.model.ItemChamada;
-import com.example.trabalho2obimestre.model.ItemMedias;
 import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
@@ -41,6 +38,7 @@ public class MediasActivity extends AppCompatActivity {
     private int itemTurmaId;
     private int itemDisciplinaId;
     private int registroProf;//Variável para armazenar a disciplina selecionada
+    private int anoLetivoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,34 +96,45 @@ public class MediasActivity extends AppCompatActivity {
         });
     }
 
-    private void showAnoLetivoMenu(View view, int menuId){
+    private void showAnoLetivoMenu(View view, int menuId) {
         PopupMenu popupMenu = new PopupMenu(this, view);
         MenuInflater inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
-        popupMenu.show();
-    }
-
-    private void showTurmaPopupMenu(View view, int turmaId, ArrayList<Turma> turmas) {
-
-        PopupMenu popupMenu = new PopupMenu(this, view);
-
-
-        for (Turma item : turmas) {
-            popupMenu.getMenu().add(0, item.getId(), 0, item.getNomeTurma());
-        }
-
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(R.menu.disciplina, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                int selectedDisciplinaId = item.getItemId();
-                itemDisciplinaId = selectedDisciplinaId;
+                anoLetivoSelecionado = item.getItemId();
+                Toast.makeText(MediasActivity.this, "Ano letivo selecionado: " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                return true; // Retorne true para indicar que o evento foi tratado
+            }
+        });
+        popupMenu.show();
+    }
 
+    private void showTurmaPopupMenu(View view, int menuId, ArrayList<Turma> turmas) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+
+        // Adiciona as turmas ao menu popup
+        for (Turma item : turmas) {
+            popupMenu.getMenu().add(0, item.getId(), 0, item.getNomeTurma());
+        }
+
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                int selectedTurmaId = item.getItemId();
+                itemTurmaId = selectedTurmaId;
+
+                // Buscar alunos da turma selecionada
+                ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(itemTurmaId);
+                // Atualizar o adapter com a nova lista de alunos
+                adapter.updateAlunos(alunos);
+
+                // Mostrar mensagem de confirmação
                 for (Turma turma : turmas) {
-                    if (turma.getId() == selectedDisciplinaId) {
-                        Toast.makeText(MediasActivity.this, "Disciplina selecionada: " + turma.getNomeTurma(), Toast.LENGTH_SHORT).show();
+                    if (turma.getId() == selectedTurmaId) {
+                        Toast.makeText(MediasActivity.this, "Turma selecionada: " + turma.getNomeTurma(), Toast.LENGTH_SHORT).show();
                         break;
                     }
                 }
@@ -133,19 +142,18 @@ public class MediasActivity extends AppCompatActivity {
                 return true;
             }
         });
+
         popupMenu.show();
     }
 
-    private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> itens){
 
+
+    private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> itens) {
         PopupMenu popupMenu = new PopupMenu(this, view);
 
-        for (Disciplina item : itens){
+        for (Disciplina item : itens) {
             popupMenu.getMenu().add(0, item.getId(), 0, item.getNome());
         }
-
-        MenuInflater inflater = popupMenu.getMenuInflater();
-        inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
@@ -155,15 +163,20 @@ public class MediasActivity extends AppCompatActivity {
                 if(itemDisciplinaId != 0) {
                     Toast.makeText(MediasActivity.this, "Disciplina selecionada: " + item.getTitle().toString(), Toast.LENGTH_SHORT).show();
 
+                    // Após selecionar a disciplina, atualizar as turmas disponíveis
+                    ArrayList<Turma> turmas = turmaController.listTurmasPorDisciplina(itemDisciplinaId);
+                    showTurmaPopupMenu(view, R.menu.turma, turmas);
+
                     return true;
                 }
 
                 return false;
-
             }
         });
+
         popupMenu.show();
     }
+
 
 
 }

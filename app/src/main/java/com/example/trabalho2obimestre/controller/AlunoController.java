@@ -6,6 +6,7 @@ import com.example.trabalho2obimestre.dao.AlunoDao;
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.ItemChamada;
+import com.example.trabalho2obimestre.model.Notas;
 
 import java.util.ArrayList;
 
@@ -49,5 +50,21 @@ public class AlunoController {
         SQLiteDataHelper dbHelper = new SQLiteDataHelper(context, "Aluno.db", null, 1);
         dbHelper.incrementarPresenca(ra);
     }
+
+    //Retornar os alunos com nota por turma
+    public ArrayList<Aluno> retornarAlunosComNotasPorTurmaEAno(int turmaId, int anoLetivoSelecionado) {
+        ArrayList<Aluno> alunos = AlunoDao.getInstancia(context).buscarAlunosPorTurma(turmaId);
+
+        NotaController notaController = new NotaController(context); // Criar uma instância do NotaController
+
+
+        for (Aluno aluno : alunos) {
+            ArrayList<Notas> notas = notaController.buscarNotasPorAluno(aluno.getId(), anoLetivoSelecionado);
+            aluno.setNotas(notas); // Associa as notas ao aluno
+        }
+
+        return alunos;
+    }
+
 
 }

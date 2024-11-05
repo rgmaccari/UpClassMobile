@@ -1,6 +1,7 @@
 package com.example.trabalho2obimestre.adapter;
 import com.example.trabalho2obimestre.R;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.trabalho2obimestre.model.ItemChamada;
 import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.view.MediasActivity;
 
 public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> {
     private ArrayList<ItemChamada> alunos;
@@ -35,12 +37,12 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ItemChamada item = alunos.get(position);
 
-        // Configura as informações do aluno
+        //Configura as informações do aluno
         holder.tvNome.setText(item.getTvNome());
         holder.tvRa.setText(item.getAlunoRa());
         holder.checkboxPresenca.setChecked(item.isCheckboxPresenca());
 
-        // Listener para o checkbox de presença
+        //Listener para o checkbox de presença
         holder.checkboxPresenca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,14 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
                 } else {
                     item.setCheckboxPresenca(false);//Atualizar o item visualmente para não presente
                 }
+            }
+        });
+
+        //Listener para o card expansivel
+        holder.cardExpansivel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

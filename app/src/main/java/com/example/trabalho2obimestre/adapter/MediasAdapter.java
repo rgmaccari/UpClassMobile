@@ -111,4 +111,11 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.ViewHolder
             tvNotaProva4 = itemView.findViewById(R.id.tvNotaProva4);
         }
     }
+
+    public void updateAlunos(ArrayList<Aluno> novosAlunos) {
+        this.alunos.clear();
+        this.alunos.addAll(novosAlunos);
+        notifyDataSetChanged();
+    }
+
 }
