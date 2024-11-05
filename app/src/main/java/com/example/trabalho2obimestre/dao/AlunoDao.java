@@ -129,7 +129,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
                     aluno.setCpf(cursor.getString(2));
-                    aluno.setTurma(cursor.getInt(4));
+                    aluno.setTurma(cursor.getInt(3));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
