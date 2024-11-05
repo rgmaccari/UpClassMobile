@@ -118,4 +118,12 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.ViewHolder
         notifyDataSetChanged();
     }
 
+    /*//Listener para o card expansivel
+        holder.cardExpansivel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });*/
+
 }

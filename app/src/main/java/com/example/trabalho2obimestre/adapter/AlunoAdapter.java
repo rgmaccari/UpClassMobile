@@ -62,13 +62,7 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
             }
         });
 
-        //Listener para o card expansivel
-        holder.cardExpansivel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
     }
 
@@ -81,14 +75,13 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
         TextView tvNome;
         TextView tvRa;
         CheckBox checkboxPresenca;
-        View cardExpansivel;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
             tvRa = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
-            cardExpansivel = itemView.findViewById(R.id.cardExpansivel);
         }
     }
 

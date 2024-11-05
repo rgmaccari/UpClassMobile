@@ -59,7 +59,7 @@ public class AlunoController {
 
 
         for (Aluno aluno : alunos) {
-            ArrayList<Notas> notas = notaController.listarNotasPorAluno(aluno.getId());
+            ArrayList<Notas> notas = notaController.listarNotasPorAluno(aluno.getMatricula());
             aluno.setNotas(notas);
         }
 
