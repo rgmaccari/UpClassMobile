@@ -52,15 +52,15 @@ public class AlunoController {
     }
 
     //Retornar os alunos com nota por turma
-    public ArrayList<Aluno> retornarAlunosComNotasPorTurmaEAno(int turmaId, int anoLetivoSelecionado) {
+    public ArrayList<Aluno> retornarAlunosComNotasPorTurmaEAno(int turmaId) {
         ArrayList<Aluno> alunos = AlunoDao.getInstancia(context).buscarAlunosPorTurma(turmaId);
 
         NotaController notaController = new NotaController(context); // Criar uma instância do NotaController
 
 
         for (Aluno aluno : alunos) {
-            ArrayList<Notas> notas = notaController.buscarNotasPorAluno(aluno.getId(), anoLetivoSelecionado);
-            aluno.setNotas(notas); // Associa as notas ao aluno
+            ArrayList<Notas> notas = notaController.listarNotasPorAluno(aluno.getId());
+            aluno.setNotas(notas);
         }
 
         return alunos;
