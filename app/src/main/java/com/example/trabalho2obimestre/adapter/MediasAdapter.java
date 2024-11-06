@@ -1,8 +1,11 @@
 package com.example.trabalho2obimestre.adapter;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,43 +13,102 @@ import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.model.Aluno;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasViewHolder> {
+public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.ViewHolder> {
+    private ArrayList<Aluno> alunos;
+    private int cardExpansivel = -1;
 
-    private ArrayList<Aluno> listaAlunos;
-
-    public MediasAdapter(ArrayList<Aluno> listaAlunos) {
-        this.listaAlunos = listaAlunos;
+    public MediasAdapter(ArrayList<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
     @NonNull
     @Override
-    public MediasViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_medias, parent, false);
-        return new MediasViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MediasViewHolder holder, int position) {
-        Aluno aluno = listaAlunos.get(position);
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Aluno aluno = alunos.get(position);
         holder.tvNome.setText(aluno.getNome());
-        holder.tvCpf.setText(aluno.getCpf());
+
+        //Configurar o estado do card inicial.
+        boolean isExpanded = position == cardExpansivel;
+        holder.cardExpansivel.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+
+        if (isExpanded) {
+            for (int i = 0; i < aluno.getNotas().size(); i++) {
+                if (i == 0) {
+                    holder.tvBimestre1.setText("1° Bimestre");
+                    holder.tvNotaTrabalho1.setText(String.valueOf(aluno.getNotas().get(i).getNotaTrabalho()));
+                    holder.tvNotaProva1.setText(String.valueOf(aluno.getNotas().get(i).getNotaAvaliacao()));
+                } else if (i == 1) {
+                    holder.tvBimestre2.setText("2° Bimestre");
+                    holder.tvNotaTrabalho2.setText(String.valueOf(aluno.getNotas().get(i).getNotaTrabalho()));
+                    holder.tvNotaProva2.setText(String.valueOf(aluno.getNotas().get(i).getNotaAvaliacao()));
+                } else if (i == 2) {
+                    holder.tvBimestre3.setText("3° Bimestre");
+                    holder.tvNotaTrabalho3.setText(String.valueOf(aluno.getNotas().get(i).getNotaTrabalho()));
+                    holder.tvNotaProva3.setText(String.valueOf(aluno.getNotas().get(i).getNotaAvaliacao()));
+                } else if (i == 3) {
+                    holder.tvBimestre4.setText("4° Bimestre");
+                    holder.tvNotaTrabalho4.setText(String.valueOf(aluno.getNotas().get(i).getNotaTrabalho()));
+                    holder.tvNotaProva4.setText(String.valueOf(aluno.getNotas().get(i).getNotaAvaliacao()));
+                }
+            }
+        } else {
+            //Limpa os campos.
+            holder.tvBimestre1.setText("");
+            holder.tvNotaTrabalho1.setText("");
+            holder.tvNotaProva1.setText("");
+            holder.tvBimestre2.setText("");
+            holder.tvNotaTrabalho2.setText("");
+            holder.tvNotaProva2.setText("");
+            holder.tvBimestre3.setText("");
+            holder.tvNotaTrabalho3.setText("");
+            holder.tvNotaProva3.setText("");
+            holder.tvBimestre4.setText("");
+            holder.tvNotaTrabalho4.setText("");
+            holder.tvNotaProva4.setText("");
+        }
+
+        holder.itemView.setOnClickListener(view -> {
+            cardExpansivel = isExpanded ? -1 : position; //Alternar o estado de expandido
+            notifyDataSetChanged(); //Atualizar a lista
+        });
     }
 
     @Override
     public int getItemCount() {
-        return listaAlunos.size();
+        return alunos.size(); //Retornar o tamanho da lista de alunos;
     }
 
-    static class MediasViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNome;
-        TextView tvCpf;
+        TextView tvBimestre1, tvNotaTrabalho1, tvNotaProva1;
+        TextView tvBimestre2, tvNotaTrabalho2, tvNotaProva2;
+        TextView tvBimestre3, tvNotaTrabalho3, tvNotaProva3;
+        TextView tvBimestre4, tvNotaTrabalho4, tvNotaProva4;
+        LinearLayout cardExpansivel;
 
-        public MediasViewHolder(@NonNull View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
-            tvCpf = itemView.findViewById(R.id.tvCpf);
+            cardExpansivel = itemView.findViewById(R.id.cardExpansivel);
+            tvBimestre1 = itemView.findViewById(R.id.tvBimestre1);
+            tvNotaTrabalho1 = itemView.findViewById(R.id.tvNotaTrabalho1);
+            tvNotaProva1 = itemView.findViewById(R.id.tvNotaProva1);
+            tvBimestre2 = itemView.findViewById(R.id.tvBimestre2);
+            tvNotaTrabalho2 = itemView.findViewById(R.id.tvNotaTrabalho2);
+            tvNotaProva2 = itemView.findViewById(R.id.tvNotaProva2);
+            tvBimestre3 = itemView.findViewById(R.id.tvBimestre3);
+            tvNotaTrabalho3 = itemView.findViewById(R.id.tvNotaTrabalho3);
+            tvNotaProva3 = itemView.findViewById(R.id.tvNotaProva3);
+            tvBimestre4 = itemView.findViewById(R.id.tvBimestre4);
+            tvNotaTrabalho4 = itemView.findViewById(R.id.tvNotaTrabalho4);
+            tvNotaProva4 = itemView.findViewById(R.id.tvNotaProva4);
         }
     }
 }
