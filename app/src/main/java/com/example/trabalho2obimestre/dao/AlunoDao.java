@@ -104,7 +104,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
               aluno.setMatricula(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
               aluno.setCpf(cursor.getString(2));
-              aluno.setTurma(cursor.getInt(4)); // TODO: implementar
+              aluno.setTurma(cursor.getInt(3));
 
               return aluno;
           }
@@ -129,7 +129,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
                     aluno.setCpf(cursor.getString(2));
-                    aluno.setTurma(cursor.getInt(4));
+                    aluno.setTurma(cursor.getInt(3));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
@@ -145,26 +145,32 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
     //Método para busca de alunos por turma:
     public ArrayList<Aluno> buscarAlunosPorTurma(int turmaId) {
-        ArrayList<Aluno> listaAlunos = new ArrayList<>();
+        ArrayList<Aluno> alunos = new ArrayList<>();
+        Cursor cursor = null;
 
-        //Todo:Alterar oargumento recebido no metodo, para receber uma turma.
-        String query = "SELECT * FROM Aluno a " +
-                "INNER JOIN Turma t ON t.id = a.turmaId " +
-                "WHERE t.id = ?";
+        try {
+            String[] args = {String.valueOf(turmaId)};
+            cursor = dataBase.query("ALUNO", new String[]{"matricula", "nome", "cpf", "turmaId"},
+                    "turmaId = ?", args, null, null, "nome");
 
-        Cursor cursor = dataBase.rawQuery(query, new String[]{String.valueOf(turmaId)});
-
-        if (cursor.moveToFirst()) {
-            do {
-                Aluno aluno = new Aluno();
-                aluno.setMatricula(cursor.getInt(0));
-                aluno.setNome(cursor.getString(1));
-                aluno.setCpf(cursor.getString(2));
-                listaAlunos.add(aluno);
-            } while (cursor.moveToNext());
+            if (cursor != null && cursor.moveToFirst()) {
+                do {
+                    Aluno aluno = new Aluno();
+                    aluno.setMatricula(cursor.getInt(0));
+                    aluno.setNome(cursor.getString(1));
+                    aluno.setCpf(cursor.getString(2));
+                    aluno.setTurma(cursor.getInt(3));
+                    alunos.add(aluno);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        cursor.close(); // Feche o cursor após o uso
-        return listaAlunos;
+        return alunos;
     }
+
+
 
 }
