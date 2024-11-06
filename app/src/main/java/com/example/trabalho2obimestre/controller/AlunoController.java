@@ -17,8 +17,16 @@ public class AlunoController {
         this.context = context;
     }
 
+    public String salvarAluno(){
+        return null;
+    }
+
     public ArrayList<Aluno> retornarTodosAlunos(){
         return AlunoDao.getInstancia(context).getAll();
+    }
+
+    public Aluno retornarAlunoPorId(long id){
+        return AlunoDao.getInstancia(context).getById(id);
     }
 
     public ArrayList<Aluno> retornarAlunosPorTurma(int turmaId) {

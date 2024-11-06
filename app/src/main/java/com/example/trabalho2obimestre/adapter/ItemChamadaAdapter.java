@@ -58,6 +58,8 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
             }
         });
 
+
+
     }
 
     @Override
@@ -69,14 +71,13 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
         TextView tvNome;
         TextView tvMatricula;
         CheckBox checkboxPresenca;
-        View cardExpansivel;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
             tvMatricula = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
-            cardExpansivel = itemView.findViewById(R.id.cardExpansivel);
         }
     }
 
