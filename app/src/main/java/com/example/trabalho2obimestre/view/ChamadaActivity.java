@@ -14,16 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
-import com.example.trabalho2obimestre.controller.DisciplinaController;
-import com.example.trabalho2obimestre.controller.TurmaController;
+import com.example.trabalho2obimestre.controller.ChamadaController;
 import com.example.trabalho2obimestre.model.Disciplina;
 import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
-import com.example.trabalho2obimestre.adapter.AlunoAdapter;
-import com.example.trabalho2obimestre.controller.AlunoController;
+import com.example.trabalho2obimestre.adapter.ItemChamadaAdapter;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.Turma;
 import com.example.trabalho2obimestre.utils.DatePickerFragment;
@@ -31,15 +30,20 @@ import com.example.trabalho2obimestre.utils.DatePickerFragment;
 public class ChamadaActivity extends AppCompatActivity implements DatePickerFragment.DatePickerListener{
 
     private RecyclerView recyclerView;
-    private AlunoController alunoController;
-    private TurmaController turmaController;
-    private DisciplinaController disciplinaController;
-    private int registroProf;
+    private ItemChamadaAdapter adapter;
+
+    private ChamadaController controller;
+
     private Button btnTurma;
     private Button btnVoltar;
     private Button btnData;
     private Button btnSalvar;
     private Button btnDisciplina;
+
+    private PopupMenu popupMenu;
+    private MenuInflater inflater;
+
+    private int registroProf;
 
     private int itemDisciplinaId;
     private int itemTurmaId;
@@ -52,12 +56,11 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
 
-        //Como ainda n foi implementado método de login, por padrão utilizamos o professor id 1
+        controller = new ChamadaController(this);
+
+        //Como ainda não foi implementado método de login, por padrão utilizamos o professor id 1
         registroProf = 1;
 
-        alunoController = new AlunoController(this);
-        turmaController = new TurmaController(this);
-        disciplinaController = new DisciplinaController(this);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -88,7 +91,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         btnDisciplina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Disciplina> itens = disciplinaController.listDisciplinasByProf(registroProf);
+                ArrayList<Disciplina> itens = controller.listDisciplinasByProf(registroProf);
                 showDisciplinaPopupMenu(view, R.menu.disciplina, itens);
             }
         });
@@ -99,7 +102,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
             @Override
             public void onClick(View view) {
 
-               ArrayList<Turma> itens = turmaController.listTurmasPorDisciplina(itemDisciplinaId);
+               ArrayList<Turma> itens = controller.listTurmasPorDisciplina(itemDisciplinaId);
                showTurmaPopupMenu(view, R.menu.turma, itens);
             }
         });
@@ -107,6 +110,12 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         //Botão Salvar
         btnSalvar = findViewById(R.id.btnSalvar);
         btnSalvar.setVisibility(View.GONE);//Garantir a visibilidade (não visivel)
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarPresenca();
+            }
+        });
 
     }
 
@@ -114,13 +123,13 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     //Estrutura de seleção do menu PopUp:
     private void showTurmaPopupMenu(View view, int menuId, ArrayList<Turma> itens){
 
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu = new PopupMenu(this, view);
 
         for (Turma item : itens){
             popupMenu.getMenu().add(0, item.getId(), 0, item.getNomeTurma());
         }
 
-        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -128,7 +137,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
             public boolean onMenuItemClick(MenuItem item) {
                 itemTurmaId = item.getItemId();
                 if(itemTurmaId != 0) {
-                    Toast.makeText(ChamadaActivity.this, "Turma selecionada: " + item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                    btnTurma.setText(item.getTitle());
                     return true;
                 }
                 return false;
@@ -140,13 +149,13 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
     private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> itens){
 
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu = new PopupMenu(this, view);
 
         for (Disciplina item : itens){
             popupMenu.getMenu().add(0, item.getId(), 0, item.getNome());
         }
 
-        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -155,7 +164,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
                 itemDisciplinaId = item.getItemId();
 
                 if(itemDisciplinaId != 0) {
-                    Toast.makeText(ChamadaActivity.this, "Disciplina selecionada: " + item.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                    btnDisciplina.setText(item.getTitle());
 
                     return true;
                 }
@@ -168,42 +177,55 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     }
 
     private void exibirAlunosPorTurma(){
-        ArrayList<Aluno> alunos = alunoController.retornarAlunosPorTurma(itemTurmaId);
+        ArrayList<Aluno> alunos = controller.retornarAlunosPorTurma(itemTurmaId);
         atualizaLista(alunos);
     }
 
     //Atualiza a lista de alunos.
     private void atualizaLista(ArrayList<Aluno> alunos){
         //Adapter com a lista sendo inseridos no RecycleView
-        ArrayList<ItemChamada> itemChamadas = alunoController.converterAlunosParaItemChamada(alunos);
-        AlunoAdapter adapter = new AlunoAdapter(itemChamadas);
+        ArrayList<ItemChamada> itemChamadas = controller.converterAlunosParaItemChamada(alunos, itemDisciplinaId, dataChamada);
+        adapter = new ItemChamadaAdapter(itemChamadas);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
 
-    //Método que atualiza o RecyclerView com a nova lista:
-    // ChamadaActivity.java
-    private void updateRecyclerView(ArrayList<Aluno> alunos) {
-        ArrayList<ItemChamada> listaAlunos = new ArrayList<>();
-        for (Aluno aluno : alunos) {
-            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
-            listaAlunos.add(item);
-        }
-    }
+//    //Método que atualiza o RecyclerView com a nova lista:
+//    // ChamadaActivity.java
+//    private void updateRecyclerView(ArrayList<Aluno> alunos) {
+//        ArrayList<ItemChamada> listaAlunos = new ArrayList<>();
+//        for (Aluno aluno : alunos) {
+//            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
+//            listaAlunos.add(item);
+//        }
+//    }
 
     //Método para passar os parâmetros de data:
     @Override
     public void onDateSelected(int year, int month, int day) {
         // Ação ao selecionar uma data
         String dataSelecionada = day + "/" + (month + 1) + "/" + year;
-        Toast.makeText(ChamadaActivity.this, "Data selecionada: " + dataSelecionada, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ChamadaActivity.this, "Data selecionada: " + dataSelecionada, Toast.LENGTH_SHORT).show();
         btnData.setText(dataSelecionada); // Exibir a data no botão ou TextView
 
-        dataChamada = new Date(year, month, day);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        dataChamada = calendar.getTime();
 
         exibirAlunosPorTurma();
         btnSalvar.setVisibility(View.VISIBLE);
+    }
+
+
+    public void salvarPresenca() {
+        ArrayList<ItemChamada> listaItemChamada = ((ItemChamadaAdapter) recyclerView.getAdapter())
+                .getListaItemChamadaAtualizada();
+
+        controller.salvarChamada(listaItemChamada, dataChamada, itemDisciplinaId);
+
+        Toast.makeText(this, "Presença salva com sucesso!", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
 }

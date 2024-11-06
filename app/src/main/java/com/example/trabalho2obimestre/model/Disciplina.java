@@ -4,12 +4,12 @@ public class Disciplina {
 
     private int id;
     private String nome;
-    private Professor professor;
+    private int registroProfessor;
 
-    public Disciplina(int id, String nome, Professor professor) {
+    public Disciplina(int id, String nome, int registroProfessor) {
         this.id = id;
         this.nome = nome;
-        this.professor = professor;
+        this.registroProfessor = registroProfessor;
     }
 
     public Disciplina(){
@@ -31,11 +31,11 @@ public class Disciplina {
         this.nome = nome;
     }
 
-    public Professor getProfessor() {
-        return professor;
+    public int getRegistroProfessor() {
+        return registroProfessor;
     }
 
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
+    public void setRegistroProfessor(int registroProfessor) {
+        this.registroProfessor = registroProfessor;
     }
 }

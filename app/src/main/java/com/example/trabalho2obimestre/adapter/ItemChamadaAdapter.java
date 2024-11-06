@@ -1,7 +1,6 @@
 package com.example.trabalho2obimestre.adapter;
 import com.example.trabalho2obimestre.R;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +14,13 @@ import com.example.trabalho2obimestre.model.ItemChamada;
 import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.controller.AlunoController;
-import com.example.trabalho2obimestre.view.MediasActivity;
 
-public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> {
-    private ArrayList<ItemChamada> alunos;
+public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.ViewHolder> {
+    private ArrayList<ItemChamada> listaItemChamada;
     private AlunoController controller;
 
-    public AlunoAdapter(ArrayList<ItemChamada> alunos) {
-        this.alunos = alunos;
+    public ItemChamadaAdapter(ArrayList<ItemChamada> listaItemChamada) {
+        this.listaItemChamada = listaItemChamada;
     }
 
     @NonNull
@@ -35,26 +33,24 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ItemChamada item = alunos.get(position);
+        ItemChamada item = listaItemChamada.get(position);
 
-        //Configura as informações do aluno
-        holder.tvNome.setText(item.getTvNome());
-        holder.tvRa.setText(item.getAlunoRa());
+        // Configura as informações do aluno
+        holder.tvNome.setText(item.getNome());
+        holder.tvMatricula.setText(item.getMatricula());
         holder.checkboxPresenca.setChecked(item.isCheckboxPresenca());
 
-        //Listener para o checkbox de presença
+        // Listener para o checkbox de presença
         holder.checkboxPresenca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Inicializa o AlunoController com o contexto
-                AlunoController controller = new AlunoController(holder.itemView.getContext());
+                controller = new AlunoController(holder.itemView.getContext());
 
                 // Verifica o estado atual do CheckBox
                 boolean isChecked = holder.checkboxPresenca.isChecked();
 
                 if (isChecked) {
-                    //Incrementar a presença no banco de dados se marcado
-                    controller.incrementarPresenca(Integer.parseInt(item.getAlunoRa()));
                     item.setCheckboxPresenca(true);//Marcar presença no item
                 } else {
                     item.setCheckboxPresenca(false);//Atualizar o item visualmente para não presente
@@ -68,27 +64,32 @@ public class AlunoAdapter extends RecyclerView.Adapter<AlunoAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return alunos.size();
+        return listaItemChamada.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNome;
-        TextView tvRa;
+        TextView tvMatricula;
         CheckBox checkboxPresenca;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
-            tvRa = itemView.findViewById(R.id.alunoNumero);
+            tvMatricula = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
     }
 
     public void updateData(ArrayList<ItemChamada> novosAlunos) {
-        this.alunos.clear();
-        this.alunos.addAll(novosAlunos);
+        this.listaItemChamada.clear();
+        this.listaItemChamada.addAll(novosAlunos);
         notifyDataSetChanged();
+    }
+
+    //Recupera a lista no seu estado atual.
+    public ArrayList<ItemChamada> getListaItemChamadaAtualizada() {
+        return listaItemChamada;
     }
 
 }

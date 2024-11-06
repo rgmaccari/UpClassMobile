@@ -7,21 +7,15 @@ public class Turma {
     private int id;
     private String nomeTurma;
     private int anoLetivo;
-    private ArrayList<Disciplina> diciplinas;
-    private ArrayList<Aluno> alunos;
 
-    public Turma(int id, String nomeTurma, int anoLetivo, ArrayList<Disciplina> diciplinas, ArrayList<Aluno> alunos) {
+
+    public Turma(int id, String nomeTurma, int anoLetivo) {
         this.id = id;
         this.nomeTurma = nomeTurma;
         this.anoLetivo = anoLetivo;
-        this.diciplinas = diciplinas;
-        this.alunos = alunos;
     }
 
     public Turma() {
-        diciplinas = new ArrayList<>();
-        alunos = new ArrayList<>();
-
     }
 
     public int getId() {
@@ -48,20 +42,5 @@ public class Turma {
         this.anoLetivo = anoLetivo;
     }
 
-    public ArrayList<Disciplina> getDiciplinas() {
-        return diciplinas;
-    }
-
-    public void setDiciplinas(ArrayList<Disciplina> diciplinas) {
-        this.diciplinas = diciplinas;
-    }
-
-    public ArrayList<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(ArrayList<Aluno> alunos) {
-        this.alunos = alunos;
-    }
 
 }

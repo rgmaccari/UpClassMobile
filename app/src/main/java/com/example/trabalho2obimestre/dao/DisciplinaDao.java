@@ -47,7 +47,7 @@ public class DisciplinaDao implements IGenericDao<Disciplina> {
         try {
             ContentValues values = new ContentValues();
             values.put(colunas[1], disciplina.getNome());
-            values.put(colunas[2], disciplina.getProfessor().getRegistro());
+            values.put(colunas[2], disciplina.getRegistroProfessor());
 
             return dataBase.insert(tabela,null, values);
 
@@ -62,7 +62,7 @@ public class DisciplinaDao implements IGenericDao<Disciplina> {
         try{
             ContentValues values = new ContentValues();
             values.put(colunas[1], disciplina.getNome());
-            values.put(colunas[2], disciplina.getProfessor().getRegistro());
+            values.put(colunas[2], disciplina.getRegistroProfessor());
 
             String[] identificador = {String.valueOf(disciplina.getId())};
 

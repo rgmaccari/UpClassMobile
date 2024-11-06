@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.trabalho2obimestre.enums.TurmaEnum;
 import com.example.trabalho2obimestre.model.Aluno;
 
 import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
+import com.example.trabalho2obimestre.model.Presenca;
 import com.example.trabalho2obimestre.model.Turma;
 
 public class AlunoDao implements IGenericDao<Aluno>{
@@ -104,7 +104,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
               aluno.setMatricula(cursor.getInt(0));
               aluno.setNome(cursor.getString(1));
               aluno.setCpf(cursor.getString(2));
-              aluno.setTurma(cursor.getInt(3));
+              aluno.setTurma(cursor.getInt(4)); // TODO: implementar
 
               return aluno;
           }
@@ -129,7 +129,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));
                     aluno.setCpf(cursor.getString(2));
-                    aluno.setTurma(cursor.getInt(3));
+                    aluno.setTurma(cursor.getInt(4));
 
                     listaAlunos.add(aluno);
                 } while (cursor.moveToNext());
@@ -145,32 +145,26 @@ public class AlunoDao implements IGenericDao<Aluno>{
 
     //Método para busca de alunos por turma:
     public ArrayList<Aluno> buscarAlunosPorTurma(int turmaId) {
-        ArrayList<Aluno> alunos = new ArrayList<>();
-        Cursor cursor = null;
+        ArrayList<Aluno> listaAlunos = new ArrayList<>();
 
-        try {
-            String[] args = {String.valueOf(turmaId)};
-            cursor = dataBase.query("ALUNO", new String[]{"matricula", "nome", "cpf", "turmaId"},
-                    "turmaId = ?", args, null, null, "nome");
+        //Todo:Alterar oargumento recebido no metodo, para receber uma turma.
+        String query = "SELECT * FROM Aluno a " +
+                "INNER JOIN Turma t ON t.id = a.turmaId " +
+                "WHERE t.id = ?";
 
-            if (cursor != null && cursor.moveToFirst()) {
-                do {
-                    Aluno aluno = new Aluno();
-                    aluno.setMatricula(cursor.getInt(0));
-                    aluno.setNome(cursor.getString(1));
-                    aluno.setCpf(cursor.getString(2));
-                    aluno.setTurma(cursor.getInt(3));
-                    alunos.add(aluno);
-                } while (cursor.moveToNext());
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
+        Cursor cursor = dataBase.rawQuery(query, new String[]{String.valueOf(turmaId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                Aluno aluno = new Aluno();
+                aluno.setMatricula(cursor.getInt(0));
+                aluno.setNome(cursor.getString(1));
+                aluno.setCpf(cursor.getString(2));
+                listaAlunos.add(aluno);
+            } while (cursor.moveToNext());
         }
-        return alunos;
+        cursor.close(); // Feche o cursor após o uso
+        return listaAlunos;
     }
-
-
 
 }
