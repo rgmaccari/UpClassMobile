@@ -76,7 +76,6 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
             tvNome = itemView.findViewById(R.id.tvNome);
             tvMatricula = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
-            cardExpansivel = itemView.findViewById(R.id.cardExpansivel);
         }
     }
 

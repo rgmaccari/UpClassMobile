@@ -36,13 +36,17 @@ public class NotaDao {
 
     public ArrayList<Aluno> buscarAlunosPorDisciplinaETurma(int disciplinaId, int turmaId) {
         ArrayList<Aluno> alunos = new ArrayList<>();
-        Cursor cursor = null; // Declarar o cursor fora do bloco try
+        Cursor cursor = null;
 
         try {
-            String query = "SELECT a.id, a.nome, a.cpf FROM Alunos a " +
-                    "JOIN Matricula m ON a.id = m.aluno_id " +
-                    "WHERE m.disciplina_id = ? AND m.turma_id = ?";
+            String query = "SELECT a.matricula, a.nome, a.cpf " +
+                    "FROM ALUNO a " +
+                    "JOIN TURMA t ON a.turmaId = t.id " +
+                    "JOIN DISCIPLINA d ON t.id = d.id " +
+                    "WHERE t.id = ? AND d.id = ?" +
+                    "ORDER BY a.nome ASC";
             cursor = dataBase.rawQuery(query, new String[]{String.valueOf(disciplinaId), String.valueOf(turmaId)});
+            Log.d("NotaDao", "Cursor count: " + cursor.getCount());
 
             if(cursor.moveToFirst()) {
                 do{
@@ -54,7 +58,7 @@ public class NotaDao {
                 }while(cursor.moveToNext());
             }
         }catch(Exception e) {
-            e.printStackTrace(); // Loga o erro no console
+            Log.e("NotaDao", "Erro ao buscar alunos", e);
         }finally{
             if (cursor != null) {
                 cursor.close();

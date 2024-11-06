@@ -49,4 +49,11 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
             tvCpf = itemView.findViewById(R.id.tvCpf);
         }
     }
+
+    public void updateAlunos(ArrayList<Aluno> novosAlunos) {
+        this.listaAlunos.clear();
+        this.listaAlunos.addAll(novosAlunos);
+        notifyDataSetChanged();
+    }
+
 }

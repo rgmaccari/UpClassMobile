@@ -18,6 +18,7 @@ import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.adapter.MediasAdapter;
 import com.example.trabalho2obimestre.controller.AlunoController;
 import com.example.trabalho2obimestre.controller.DisciplinaController;
+import com.example.trabalho2obimestre.controller.NotaController;
 import com.example.trabalho2obimestre.controller.TurmaController;
 import com.example.trabalho2obimestre.dao.NotaDao;
 import com.example.trabalho2obimestre.model.Aluno;
@@ -39,6 +40,7 @@ public class MediasActivity extends AppCompatActivity {
     private Button btnTurma;
     private Button btnAnoLetivo;
 
+    private NotaController notaController;
     private DisciplinaController disciplinaController;
     private int registroProf;
     private TurmaController turmaController;
@@ -52,6 +54,7 @@ public class MediasActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_medias);
 
+        notaController = new NotaController(this);
         disciplinaController = new DisciplinaController(this);
         turmaController = new TurmaController(this);
 
@@ -70,6 +73,7 @@ public class MediasActivity extends AppCompatActivity {
         btnDisciplina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 ArrayList<Disciplina> disciplinas = disciplinaController.listDisciplinasByProf(registroProf);
                 showDisciplinaPopupMenu(view, R.menu.disciplina, disciplinas);
             }
@@ -178,7 +182,7 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemAnoLetivoSelecionado = item.getTitle().toString();
                 Toast.makeText(MediasActivity.this, "Ano Letivo selecionado: " + itemAnoLetivoSelecionado, Toast.LENGTH_SHORT).show();
-                atualizarListaDeAlunos();  // Atualiza a lista de alunos
+                atualizarListaDeAlunos();
                 return true;
             }
         });
