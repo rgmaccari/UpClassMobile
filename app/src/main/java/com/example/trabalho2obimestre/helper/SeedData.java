@@ -2,8 +2,6 @@ package com.example.trabalho2obimestre.helper;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.trabalho2obimestre.enums.TurmaEnum;
-
 public class SeedData {
 
     public static void insertInitialData(SQLiteDatabase db){

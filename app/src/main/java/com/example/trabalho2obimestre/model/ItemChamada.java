@@ -1,33 +1,33 @@
 package com.example.trabalho2obimestre.model;
 
 public class ItemChamada {
-    private String alunoRa;
-    private String tvNome;
+    private String matricula;
+    private String nome;
     private boolean checkboxPresenca;
 
     public ItemChamada() {
     }
 
-    public ItemChamada(String alunoRa, String tvNome, boolean checkboxPresenca) {
-        this.alunoRa = alunoRa;
-        this.tvNome = tvNome;
+    public ItemChamada(String matricula, String nome, boolean checkboxPresenca) {
+        this.matricula = matricula;
+        this.nome = nome;
         this.checkboxPresenca = checkboxPresenca;
     }
 
-    public String getAlunoRa() {
-        return alunoRa;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setAlunoRa(String alunoRa) {
-        this.alunoRa = alunoRa;
+    public void setMatricula(String alunoRa) {
+        this.matricula = alunoRa;
     }
 
-    public String getTvNome() {
-        return tvNome;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTvNome(String tvNome) {
-        this.tvNome = tvNome;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public boolean isCheckboxPresenca() {

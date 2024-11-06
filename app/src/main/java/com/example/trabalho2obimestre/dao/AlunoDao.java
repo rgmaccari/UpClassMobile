@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.trabalho2obimestre.enums.TurmaEnum;
 import com.example.trabalho2obimestre.model.Aluno;
 
 import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
+import com.example.trabalho2obimestre.model.Presenca;
 import com.example.trabalho2obimestre.model.Turma;
 
 public class AlunoDao implements IGenericDao<Aluno>{

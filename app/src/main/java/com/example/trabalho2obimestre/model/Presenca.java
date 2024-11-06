@@ -7,15 +7,15 @@ public class Presenca {
     private int id;
     private Date data;
     private boolean presente;
-    private Disciplina disciplina;
-    public Aluno aluno;
+    private int disciplinaId;
+    public int alunoMatricula;
 
-    public Presenca(int id, Date data, boolean presente, Disciplina disciplina, Aluno aluno) {
+    public Presenca(int id, Date data, boolean presente, int disciplinaId, int alunoMatricula) {
         this.id = id;
         this.data = data;
         this.presente = presente;
-        this.disciplina = disciplina;
-        this.aluno = aluno;
+        this.disciplinaId = disciplinaId;
+        this.alunoMatricula = alunoMatricula;
     }
 
     public Presenca() {
@@ -45,19 +45,19 @@ public class Presenca {
         this.presente = presente;
     }
 
-    public Disciplina getDisciplina() {
-        return disciplina;
+    public int getDisciplinaId() {
+        return disciplinaId;
     }
 
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
+    public void setDisciplinaId(int disciplinaId) {
+        this.disciplinaId = disciplinaId;
     }
 
-    public Aluno getAluno() {
-        return aluno;
+    public int getAlunoMatricula() {
+        return alunoMatricula;
     }
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
+    public void setAlunoMatricula(int alunoMatricula) {
+        this.alunoMatricula = alunoMatricula;
     }
 }
