@@ -14,8 +14,8 @@ public class NotaController{
         this.context = context;
     }
 
-    public ArrayList<Notas> listarNotasPorAluno(int alunoId) {
-        return NotaDao.getInstancia(context).buscarNotasPorAluno(alunoId);
-    }
+//    public ArrayList<Notas> listarNotasPorAluno(int alunoId) {
+//        return NotaDao.getInstancia(context).buscarNotasPorAluno(alunoId);
+//    }
 
 }
