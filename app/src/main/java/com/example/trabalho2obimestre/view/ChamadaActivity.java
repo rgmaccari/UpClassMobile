@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +34,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private ItemChamadaAdapter adapter;
 
     private ChamadaController controller;
-
+    private CardView cardView;
     private Button btnTurma;
     private Button btnVoltar;
     private Button btnData;
@@ -55,6 +56,7 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chamada);
+
 
         controller = new ChamadaController(this);
 
@@ -213,8 +215,13 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         calendar.set(year, month, day);
         dataChamada = calendar.getTime();
 
+
+        cardView = findViewById(R.id.cardView);
+        cardView.setVisibility(View.VISIBLE);
+
         exibirAlunosPorTurma();
         btnSalvar.setVisibility(View.VISIBLE);
+        //
     }
 
 
