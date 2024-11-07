@@ -35,6 +35,7 @@
           android:layout_marginRight="5dp"
           android:fontFamily="@font/raleway_light"
           android:textColor="@color/richblack"
+          android:backgroundTint="@color/cinzinha"
           android:text="Disciplina"
           android:padding="0dp"/>
 
@@ -45,8 +46,9 @@
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:layout_marginRight="5dp"
+          android:textColor="@color/richblack"
           android:fontFamily="@font/raleway_light"
-          android:backgroundTint="@color/azulforte"
+          android:backgroundTint="@color/cinzinha"
           android:text="Turma"
           android:padding="0dp"/>
 
@@ -55,8 +57,9 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:textColor="@color/richblack"
           android:fontFamily="@font/raleway_light"
-          android:backgroundTint="@color/azulforte"
+          android:backgroundTint="@color/cinzinha"
           android:text="Data"
           android:padding="0dp"/>
 
