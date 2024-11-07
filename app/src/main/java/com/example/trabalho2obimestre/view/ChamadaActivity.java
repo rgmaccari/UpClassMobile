@@ -110,8 +110,8 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         });
 
         //Botão Salvar
+
         btnSalvar = findViewById(R.id.btnSalvar);
-        btnSalvar.setVisibility(View.GONE);//Garantir a visibilidade (não visivel)
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,15 +218,16 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
         cardView = findViewById(R.id.cardView);
         cardView.setVisibility(View.VISIBLE);
-        btnSalvar.setVisibility(View.VISIBLE);
-
         exibirAlunosPorTurma();
+
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setVisibility(View.VISIBLE);
 
         //
     }
 
 
-    public void salvarPresenca() {
+    private void salvarPresenca() {
         ArrayList<ItemChamada> listaItemChamada = ((ItemChamadaAdapter) recyclerView.getAdapter())
                 .getListaItemChamadaAtualizada();
 
