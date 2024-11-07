@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.adapter.MediasAdapter;
-import com.example.trabalho2obimestre.controller.AlunoController;
 import com.example.trabalho2obimestre.controller.DisciplinaController;
 import com.example.trabalho2obimestre.controller.NotaController;
 import com.example.trabalho2obimestre.controller.TurmaController;
@@ -32,23 +31,29 @@ public class MediasActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private MediasAdapter mediasAdapter;
-    private ArrayList<Aluno> listaAlunos;
-    private NotaDao notaDao;
+    //private ArrayList<Aluno> listaAlunos;
+    //private NotaDao notaDao;
 
-    private int itemDisciplinaId = -1;
+    private NotaController controller;
+
     private Button btnVoltar;
     private Button btnDisciplina;
     private Button btnTurma;
     private Button btnAnoLetivo;
     private CardView cardView;
 
-    private NotaController notaController;
-    private DisciplinaController disciplinaController;
+    //private DisciplinaController disciplinaController;
+    //private TurmaController turmaController;
+
+    private PopupMenu popupMenu;
+    private MenuInflater inflater;
+
     private int registroProf;
-    private TurmaController turmaController;
+
+
+    private int itemDisciplinaId = -1;
     private int itemTurmaId = -1;
-    //Item disciplina já está sendo declarada lá em cima.
-    private String itemAnoLetivoSelecionado = "";
+    private int itemAnoLetivoSelecionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +61,7 @@ public class MediasActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_medias);
 
-        notaController = new NotaController(this);
-        disciplinaController = new DisciplinaController(this);
-        turmaController = new TurmaController(this);
+        controller = new NotaController(this);
 
         //Button Voltar:
         btnVoltar = findViewById(R.id.btnVoltar);
@@ -69,14 +72,13 @@ public class MediasActivity extends AppCompatActivity {
             }
         });
 
-
         //Button Disciplina:
         btnDisciplina = findViewById(R.id.btnDisciplina);
         btnDisciplina.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ArrayList<Disciplina> disciplinas = disciplinaController.listDisciplinasByProf(registroProf);
+                ArrayList<Disciplina> disciplinas = controller.listDisciplinasByProf(registroProf);
                 showDisciplinaPopupMenu(view, R.menu.disciplina, disciplinas);
             }
         });
@@ -90,7 +92,7 @@ public class MediasActivity extends AppCompatActivity {
                     Toast.makeText(MediasActivity.this, "Selecione uma disciplina primeiro", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ArrayList<Turma> turmas = turmaController.listTurmasPorDisciplina(itemDisciplinaId);
+                ArrayList<Turma> turmas = controller.listTurmasPorDisciplina(itemDisciplinaId);
                 showTurmaPopupMenu(view, R.menu.turma, turmas);
             }
         });
@@ -107,30 +109,29 @@ public class MediasActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewAlunos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        notaDao = notaDao.getInstancia(this);
-        listaAlunos = notaDao.buscarAlunosPorDisciplinaETurma(itemDisciplinaId, itemTurmaId);
-        Log.d("MediasActivity", "Lista de alunos: " + listaAlunos.size());
-        for (Aluno aluno : listaAlunos) {
-            Log.d("MediasActivity", "Aluno: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
-        }
-
-        if(listaAlunos.isEmpty()){
-            Toast.makeText(this, "Nenhum aluno encontrado", Toast.LENGTH_SHORT).show();
-        }else{
-            mediasAdapter = new MediasAdapter(listaAlunos);
-            recyclerView.setAdapter(mediasAdapter);
-        }
+//        listaAlunos = notaDao.buscarAlunosPorDisciplinaETurma(itemDisciplinaId, itemTurmaId);
+//        Log.d("MediasActivity", "Lista de alunos: " + listaAlunos.size());
+//        for (Aluno aluno : listaAlunos) {
+//            Log.d("MediasActivity", "Aluno: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
+//        }
+//
+//        if(listaAlunos.isEmpty()){
+//            Toast.makeText(this, "Nenhum aluno encontrado", Toast.LENGTH_SHORT).show();
+//        }else{
+//            mediasAdapter = new MediasAdapter(listaAlunos);
+//            recyclerView.setAdapter(mediasAdapter);
+//        }
     }
 
     //Menu Disciplina
     private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> disciplinas) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu = new PopupMenu(this, view);
 
         for(Disciplina item : disciplinas){
             popupMenu.getMenu().add(0, item.getId(), 0, item.getNome());
         }
 
-        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener(){
@@ -138,8 +139,8 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemDisciplinaId = item.getItemId();
                 if(itemDisciplinaId != 0){
-                    Toast.makeText(MediasActivity.this, "Disciplina selecionada: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                    atualizarListaDeAlunos();
+
+                    btnDisciplina.setText(item.getTitle());
                 }
                 return true;
             }
@@ -149,13 +150,13 @@ public class MediasActivity extends AppCompatActivity {
 
     //Menu Turma
     private void showTurmaPopupMenu(View view, int menuId, ArrayList<Turma> turmas){
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu = new PopupMenu(this, view);
 
         for(Turma item : turmas){
             popupMenu.getMenu().add(0, item.getId(), 0, item.getNomeTurma());
         }
 
-        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -163,8 +164,10 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemTurmaId = item.getItemId();
                 if(itemTurmaId != 0){
-                    Toast.makeText(MediasActivity.this, "Turma selecionada: " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                    atualizarListaDeAlunos();
+
+                    btnTurma.setText(item.getTitle());
+                    return true;
+
                 }
                 return true;
             }
@@ -174,16 +177,16 @@ public class MediasActivity extends AppCompatActivity {
 
     //Menu Ano:
     private void showAnoLetivoPopupMenu(View view, int menuId) {
-        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu = new PopupMenu(this, view);
 
-        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater = popupMenu.getMenuInflater();
         inflater.inflate(menuId, popupMenu.getMenu());
 
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item){
-                itemAnoLetivoSelecionado = item.getTitle().toString();
-                Toast.makeText(MediasActivity.this, "Ano Letivo selecionado: " + itemAnoLetivoSelecionado, Toast.LENGTH_SHORT).show();
+                itemAnoLetivoSelecionado = Integer.parseInt(item.getTitle().toString());
+                btnAnoLetivo.setText(item.getTitle());
                 atualizarListaDeAlunos();
                 return true;
             }
@@ -194,8 +197,11 @@ public class MediasActivity extends AppCompatActivity {
     //Método para atualizar o RecycleView:
     //Utilizar a cada verificação.
     private void atualizarListaDeAlunos(){
-        if(itemDisciplinaId != -1 && itemTurmaId != -1 && !itemAnoLetivoSelecionado.isEmpty()) {
-            listaAlunos = notaDao.buscarAlunosPorDisciplinaETurma(itemDisciplinaId, itemTurmaId);
+
+        ArrayList<Aluno> listaAlunos;
+
+        if(itemDisciplinaId != -1 && itemTurmaId != -1) {
+            listaAlunos = controller.retornarAlunosPorTurma(itemTurmaId);
 
             if(listaAlunos.isEmpty()){
                 Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
