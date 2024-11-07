@@ -39,6 +39,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         holder.tvCpf.setOnClickListener(toggleListener);
     }
 
+    //Visibilidade do cardView com as informações.
     private void toggleCardVisibility(CardView cardNotas) {
         if (cardNotas.getVisibility() == View.GONE) {
             cardNotas.setVisibility(View.VISIBLE);

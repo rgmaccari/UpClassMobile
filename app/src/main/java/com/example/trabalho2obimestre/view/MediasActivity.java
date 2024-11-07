@@ -34,6 +34,15 @@ public class MediasActivity extends AppCompatActivity {
     private TextView tvCpf;
     private CardView cardNotas;
 
+    private TextView notaTrabalho1;
+    private TextView notaProva1;
+    private TextView notaTrabalho2;
+    private TextView notaProva2;
+    private TextView notaTrabalho3;
+    private TextView notaProva3;
+    private TextView notaTrabalho4;
+    private TextView notaProva4;
+
     private RecyclerView recyclerView;
     private MediasAdapter mediasAdapter;
     //private ArrayList<Aluno> listaAlunos;
@@ -116,7 +125,7 @@ public class MediasActivity extends AppCompatActivity {
 
     }
 
-    //Menu Disciplina
+    //Menu Disciplina.
     private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> disciplinas) {
         popupMenu = new PopupMenu(this, view);
 
@@ -140,7 +149,8 @@ public class MediasActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
-    //Menu Turma
+
+    //Menu Turma.
     private void showTurmaPopupMenu(View view, int menuId, ArrayList<Turma> turmas){
         popupMenu = new PopupMenu(this, view);
 
@@ -166,7 +176,8 @@ public class MediasActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
-    //Menu Ano:
+
+    //Menu Ano.
     private void showAnoLetivoPopupMenu(View view, int menuId) {
         popupMenu = new PopupMenu(this, view);
 
@@ -189,12 +200,9 @@ public class MediasActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    //Método para atualizar o RecycleView:
-    //Utilizar a cada verificação.
+    //Método para atualizar o RecycleView.
     private void atualizarListaDeAlunos(){
-
         ArrayList<Aluno> listaAlunos;
-
         if(itemDisciplinaId != -1 && itemTurmaId != -1) {
             listaAlunos = controller.retornarAlunosPorTurma(itemTurmaId);
 
