@@ -15,68 +15,67 @@
        android:id="@+id/top_buttons_layout"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
+       android:layout_margin="10dp"
        android:orientation="horizontal"
-       android:layout_marginTop="35dp"
        app:layout_constraintTop_toTopOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
-       android:layout_marginHorizontal="10dp">
+       android:weightSum="4">
 
       <Button
           android:id="@+id/btnVoltar"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Voltar"
-          android:minWidth="80dp"
-          android:gravity="center"
           android:backgroundTint="@color/azulforte"
-          android:fontFamily="@font/raleway_light"/>
+          android:text="Voltar"
+          android:textSize="14sp"
+          android:fontFamily="@font/raleway_light"
+          android:padding="5dp"/>
 
       <Button
           android:id="@+id/btnDisciplina"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Disciplina"
-          android:minWidth="80dp"
-          android:gravity="center"
           android:backgroundTint="@color/cinzinha"
+          android:text="Disciplina"
           android:textColor="@color/richblack"
-          android:fontFamily="@font/raleway_light"/>
+          android:textSize="14sp"
+          android:fontFamily="@font/raleway_light"
+          android:padding="5dp"/>
 
       <Button
           android:id="@+id/btnTurma"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Turma"
-          android:minWidth="80dp"
-          android:gravity="center"
           android:backgroundTint="@color/cinzinha"
+          android:text="Turma"
           android:textColor="@color/richblack"
-          android:fontFamily="@font/raleway_light"/>
+          android:textSize="14sp"
+          android:fontFamily="@font/raleway_light"
+          android:padding="5dp"/>
 
       <Button
           android:id="@+id/btnData"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
-          android:text="Data"
-          android:minWidth="80dp"
-          android:gravity="center"
           android:backgroundTint="@color/cinzinha"
+          android:text="Data"
           android:textColor="@color/richblack"
-          android:fontFamily="@font/raleway_light"/>
+          android:textSize="14sp"
+          android:fontFamily="@font/raleway_light"
+          android:padding="5dp"/>
    </LinearLayout>
 
-   <!-- Cabeçalho das colunas (N°, Nome, Presença) -->
    <LinearLayout
        android:id="@+id/header_layout"
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_marginTop="10dp"
+       android:layout_margin="10dp"
        app:layout_constraintTop_toBottomOf="@id/top_buttons_layout"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent">
@@ -102,11 +101,12 @@
           android:layout_height="wrap_content"
           android:layout_weight="2"
           android:text="Presença"
+          android:layout_marginRight="20dp"
+          android:gravity="end"
           android:fontFamily="@font/raleway_semibold"
           android:textColor="@color/richblack"/>
    </LinearLayout>
 
-   <!-- CardView com RecyclerView para exibir os alunos -->
    <androidx.cardview.widget.CardView
        android:id="@+id/cardView"
        android:layout_width="0dp"
@@ -127,7 +127,6 @@
           android:layout_margin="10dp"/>
    </androidx.cardview.widget.CardView>
 
-   <!-- Botão Salvar fixado na parte inferior, com margem extra para evitar a sobreposição pela barra de navegação -->
    <Button
        android:id="@+id/btnSalvar"
        android:layout_width="0dp"
@@ -138,5 +137,6 @@
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
-       android:visibility="gone"/>
+       android:visibility="gone"
+       android:backgroundTint="@color/azulforte"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
