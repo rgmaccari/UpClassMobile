@@ -36,4 +36,6 @@ public class NotaController{
     public ArrayList<Aluno> retornarAlunosPorTurma(int itemTurmaId) {
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
+
+
 }

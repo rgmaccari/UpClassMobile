@@ -147,7 +147,6 @@ public class MediasActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
-
     //Menu Turma
     private void showTurmaPopupMenu(View view, int menuId, ArrayList<Turma> turmas){
         popupMenu = new PopupMenu(this, view);
@@ -174,7 +173,6 @@ public class MediasActivity extends AppCompatActivity {
         });
         popupMenu.show();
     }
-
     //Menu Ano:
     private void showAnoLetivoPopupMenu(View view, int menuId) {
         popupMenu = new PopupMenu(this, view);
