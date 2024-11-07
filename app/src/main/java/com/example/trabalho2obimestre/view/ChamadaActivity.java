@@ -218,9 +218,10 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
         cardView = findViewById(R.id.cardView);
         cardView.setVisibility(View.VISIBLE);
+        btnSalvar.setVisibility(View.VISIBLE);
 
         exibirAlunosPorTurma();
-        btnSalvar.setVisibility(View.VISIBLE);
+
         //
     }
 

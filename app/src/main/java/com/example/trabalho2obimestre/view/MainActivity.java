@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper = new SQLiteDataHelper(this, "ALUNO.db", null, 1);
 
         btnChamada = findViewById(R.id.btnChamada);
-        btnCriar = findViewById(R.id.btnCriar);
         btnCorrigir = findViewById(R.id.btnCorrigir);
         btnMedias = findViewById(R.id.btnMedias);
         btnSair = findViewById(R.id.btnSair);
@@ -42,14 +41,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ChamadaActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnCriar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CriarActivity.class);
                 startActivity(intent);
             }
         });

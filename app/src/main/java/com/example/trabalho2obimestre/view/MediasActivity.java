@@ -187,6 +187,10 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemAnoLetivoSelecionado = Integer.parseInt(item.getTitle().toString());
                 btnAnoLetivo.setText(item.getTitle());
+
+                cardView = findViewById(R.id.cardView);
+                cardView.setVisibility(View.VISIBLE);
+
                 atualizarListaDeAlunos();
                 return true;
             }
