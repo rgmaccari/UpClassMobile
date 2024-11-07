@@ -34,7 +34,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int day) {
+        public void onDateSet(DatePicker view, int year, int month, int day) {
         if (listener != null) {
             listener.onDateSelected(year, month, day); // Envia a data para a Activity
         }
