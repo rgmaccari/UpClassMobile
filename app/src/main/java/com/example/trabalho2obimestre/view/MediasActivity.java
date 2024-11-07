@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +40,7 @@ public class MediasActivity extends AppCompatActivity {
     private Button btnDisciplina;
     private Button btnTurma;
     private Button btnAnoLetivo;
+    private CardView cardView;
 
     //private DisciplinaController disciplinaController;
     //private TurmaController turmaController;
@@ -183,6 +185,10 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemAnoLetivoSelecionado = Integer.parseInt(item.getTitle().toString());
                 btnAnoLetivo.setText(item.getTitle());
+
+                cardView = findViewById(R.id.cardView);
+                cardView.setVisibility(View.VISIBLE);
+
                 atualizarListaDeAlunos();
                 return true;
             }

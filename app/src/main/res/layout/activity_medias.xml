@@ -21,7 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Voltar"
-            android:backgroundTint="@color/oxfordblue"
+            android:backgroundTint="@color/azulforte"
+            android:fontFamily="@font/raleway_medium"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:padding="0dp"/>
@@ -32,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            android:backgroundTint="@color/azulforte"
+            android:textColor="@color/richblack"
+            android:fontFamily="@font/raleway_light"
+            android:backgroundTint="@color/cinzinha"
             android:text="Disciplina"
             android:padding="0dp"/>
 
@@ -43,7 +46,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            android:backgroundTint="@color/azulforte"
+            android:textColor="@color/richblack"
+            android:fontFamily="@font/raleway_light"
+            android:backgroundTint="@color/cinzinha"
             android:text="Turma"
             android:padding="0dp"/>
 
@@ -52,16 +57,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/azulforte"
+            android:textColor="@color/richblack"
+            android:fontFamily="@font/raleway_light"
+            android:backgroundTint="@color/cinzinha"
             android:text="Data"
             android:padding="0dp"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAlunos"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        android:backgroundTint="@color/platinum"
+        android:visibility="gone">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAlunos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
