@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -28,6 +29,10 @@ import com.example.trabalho2obimestre.model.Turma;
 import java.util.ArrayList;
 
 public class MediasActivity extends AppCompatActivity {
+
+    private TextView tvNome;
+    private TextView tvCpf;
+    private CardView cardNotas;
 
     private RecyclerView recyclerView;
     private MediasAdapter mediasAdapter;
@@ -109,18 +114,6 @@ public class MediasActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewAlunos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        listaAlunos = notaDao.buscarAlunosPorDisciplinaETurma(itemDisciplinaId, itemTurmaId);
-//        Log.d("MediasActivity", "Lista de alunos: " + listaAlunos.size());
-//        for (Aluno aluno : listaAlunos) {
-//            Log.d("MediasActivity", "Aluno: " + aluno.getNome() + ", CPF: " + aluno.getCpf());
-//        }
-//
-//        if(listaAlunos.isEmpty()){
-//            Toast.makeText(this, "Nenhum aluno encontrado", Toast.LENGTH_SHORT).show();
-//        }else{
-//            mediasAdapter = new MediasAdapter(listaAlunos);
-//            recyclerView.setAdapter(mediasAdapter);
-//        }
     }
 
     //Menu Disciplina

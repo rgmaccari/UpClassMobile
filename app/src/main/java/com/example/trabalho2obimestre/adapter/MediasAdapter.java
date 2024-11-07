@@ -4,6 +4,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
@@ -32,6 +33,18 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         Aluno aluno = listaAlunos.get(position);
         holder.tvNome.setText(aluno.getNome());
         holder.tvCpf.setText(aluno.getCpf());
+
+        View.OnClickListener toggleListener = v -> toggleCardVisibility(holder.cardNotas);
+        holder.tvNome.setOnClickListener(toggleListener);
+        holder.tvCpf.setOnClickListener(toggleListener);
+    }
+
+    private void toggleCardVisibility(CardView cardNotas) {
+        if (cardNotas.getVisibility() == View.GONE) {
+            cardNotas.setVisibility(View.VISIBLE);
+        } else {
+            cardNotas.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -42,11 +55,13 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     static class MediasViewHolder extends RecyclerView.ViewHolder {
         TextView tvNome;
         TextView tvCpf;
+        CardView cardNotas;
 
         public MediasViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
             tvCpf = itemView.findViewById(R.id.tvCpf);
+            cardNotas = itemView.findViewById(R.id.cardNotas);
         }
     }
 
