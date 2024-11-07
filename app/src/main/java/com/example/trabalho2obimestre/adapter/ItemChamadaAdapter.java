@@ -17,7 +17,6 @@ import com.example.trabalho2obimestre.controller.AlunoController;
 
 public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.ViewHolder> {
     private ArrayList<ItemChamada> listaItemChamada;
-    private AlunoController controller;
 
     public ItemChamadaAdapter(ArrayList<ItemChamada> listaItemChamada) {
         this.listaItemChamada = listaItemChamada;
@@ -44,8 +43,6 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
         holder.checkboxPresenca.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Inicializa o AlunoController com o contexto
-                controller = new AlunoController(holder.itemView.getContext());
 
                 // Verifica o estado atual do CheckBox
                 boolean isChecked = holder.checkboxPresenca.isChecked();
