@@ -40,5 +40,12 @@ public class SeedData {
         db.execSQL("INSERT INTO TURMA_DISCIPLINA (disciplinaId, turmaId) " +
                 "VALUES (1, 1), (1, 3)");
 
+        db.execSQL("INSERT INTO NOTA (anoLetivo, bimestre, notaTrabalho, " +
+                "notaAvaliacao, alunoMatricula, disciplinaId) " +
+                "VALUES (2024, '1', 8.5, 7.0, 1, 1), " +
+                "(2024, '2', 8.8, 8.8, 1, 1)," +
+                "(2024, '3', 6.2, 5.0, 1, 1)," +
+                "(2024, '4', 9.1, 7.0, 1, 1)");
+
     }
 }

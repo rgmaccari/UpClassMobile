@@ -71,6 +71,7 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
     }
 
     //Método para adicionar a presença dentro do banco:

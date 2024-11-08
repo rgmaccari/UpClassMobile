@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.Notas;
+
 import java.util.ArrayList;
 
 public class NotaDao {
@@ -66,6 +68,15 @@ public class NotaDao {
         }
         return alunos;
     }
+
+   // public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
+        //ArrayList<Notas> notas = new ArrayList<>();
+        //Cursor cursor = null;
+
+        //try{
+            ///String query = "SELECT
+        //}
+    //}
 
 
 }

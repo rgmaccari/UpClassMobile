@@ -14,13 +14,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Informações do aluno -->
+            <!--Informações do aluno-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!-- Nome e CPF que serão clicados para expandir as notas -->
                 <TextView
                     android:id="@+id/tvCpf"
                     android:layout_width="0dp"
@@ -38,6 +37,7 @@
                     android:textStyle="bold"/>
             </LinearLayout>
 
+            <!--Card Expansível-->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardNotas"
                 android:layout_width="match_parent"
@@ -49,6 +49,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                    <!--Itens do topo-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -98,7 +99,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:layout_gravity="center"/>
 
                         <TextView
@@ -107,11 +107,105 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- 2° Bimestre -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:textSize="18sp"
+                            android:text="2° Bimestre"/>
+
+                        <TextView
+                            android:id="@+id/notaTrabalho2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:text="Aopa"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/notaProva2"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
                             android:text="Aopa"
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- Continue com os bimestres... -->
+                    <!-- 3° Bimestre -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:textSize="18sp"
+                            android:text="3° Bimestre"/>
+
+                        <TextView
+                            android:id="@+id/notaTrabalho3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:text="Aopa"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/notaProva3"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:text="Aopa"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- 4° Bimestre -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:textSize="18sp"
+                            android:text="4° Bimestre"/>
+
+                        <TextView
+                            android:id="@+id/notaTrabalho4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:text="Aopa"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/notaProva4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="15sp"
+                            android:text="Aopa"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>

@@ -16,6 +16,7 @@ public class NotaController{
     private AlunoController alunoController;
     private TurmaController turmaController;
     private DisciplinaController disciplinaController;
+    private NotaDao notaDao;
 
     public NotaController(Context context) {
         this.context = context;
@@ -36,6 +37,10 @@ public class NotaController{
     public ArrayList<Aluno> retornarAlunosPorTurma(int itemTurmaId) {
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
+
+    //public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
+        //return new NotaDao(context).retornarNotasPorAluno(itemAlunoId, disciplinaId);
+    //}
 
 
 }
