@@ -129,7 +129,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:layout_gravity="center"/>
 
                         <TextView
@@ -138,7 +137,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -161,7 +159,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:layout_gravity="center"/>
 
                         <TextView
@@ -170,7 +167,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -193,7 +189,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:layout_gravity="center"/>
 
                         <TextView
@@ -202,7 +197,6 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:text="Aopa"
                             android:gravity="center"/>
                     </LinearLayout>
 
