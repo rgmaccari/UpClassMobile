@@ -210,7 +210,9 @@ public class MediasActivity extends AppCompatActivity {
                 Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
             }else{
                 mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemTurmaId);
+                Log.d("MediasActivity", "Notas passadas para o adapter: " + listaAlunos.size());
                 recyclerView.setAdapter(mediasAdapter);
+
             }
         }else{
             Toast.makeText(this, "Selecione uma turma e ano letivo para exibir os alunos", Toast.LENGTH_SHORT).show();

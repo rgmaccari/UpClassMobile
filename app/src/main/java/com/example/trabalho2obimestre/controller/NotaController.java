@@ -1,6 +1,7 @@
 package com.example.trabalho2obimestre.controller;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.trabalho2obimestre.dao.NotaDao;
 import com.example.trabalho2obimestre.model.Aluno;
@@ -41,7 +42,9 @@ public class NotaController{
     }
 
     public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
-        return notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId);
+        ArrayList<Notas> notas = notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId);
+        Log.d("NotaController", "Notas recuperadas: " + notas.size());
+        return notas;
     }
 
 

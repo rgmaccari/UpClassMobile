@@ -74,11 +74,12 @@ public class NotaDao {
         ArrayList<Notas> listaNotas = new ArrayList<>();
 
         String[] columns = {"bimestre","notaTrabalho", "notaAvaliacao"};
-        String selection = "alunoId = ? AND disciplinaId = ?";
+        String selection = "alunoMatricula = ? AND disciplinaId = ?";
         String[] selectionArgs = {String.valueOf(alunoId), String.valueOf(disciplinaId)};
 
         try (Cursor cursor = db.query("NOTA", columns, selection, selectionArgs, null, null, null)) {
             if (cursor.moveToFirst()) {
+                Log.d("NotaDao", "Notas encontradas para o aluno: " + cursor.getCount());
                 String bimestre = cursor.getString(cursor.getColumnIndexOrThrow("bimestre"));
                 double notaTrabalho = cursor.getDouble(cursor.getColumnIndexOrThrow("notaTrabalho"));
                 double notaAvaliacao = cursor.getDouble(cursor.getColumnIndexOrThrow("notaAvaliacao"));

@@ -1,4 +1,5 @@
 package com.example.trabalho2obimestre.adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,8 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     @Override
     public void onBindViewHolder(@NonNull MediasViewHolder holder, int position) {
         Aluno aluno = listaAlunos.get(position);
+        Log.d("MediasAdapter", "Exibindo notas para o aluno: " + aluno.getMatricula());
+
         holder.tvNome.setText(aluno.getNome());
         holder.tvCpf.setText(aluno.getCpf());
 
