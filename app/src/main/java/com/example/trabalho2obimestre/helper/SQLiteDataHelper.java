@@ -60,6 +60,12 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
                         "FOREIGN KEY (alunoMatricula) REFERENCES ALUNO(matricula), " +
                         "FOREIGN KEY (disciplinaId) REFERENCES DISCIPLINA(id))");
 
+        sqLiteDatabase.
+                execSQL("CREATE TABLE PLANEJAMENTO (id INTEGER PRIMARY KEY, descricao TEXT, feito INTEGER, " +
+                        "disciplinaId INTEGER, turmaId INTEGER, " +
+                        "FOREIGN KEY (turmaId) REFERENCES TURMA(id), " +
+                        "FOREIGN KEY (disciplinaId) REFERENCES DISCIPLINA(id))");
+
         SeedData.insertInitialData(sqLiteDatabase);
     }
 

@@ -32,8 +32,8 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
     private RecyclerView recyclerView;
     private ItemChamadaAdapter adapter;
-
     private ChamadaController controller;
+
     private CardView cardView;
     private Button btnTurma;
     private Button btnVoltar;
@@ -45,7 +45,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
     private MenuInflater inflater;
 
     private int registroProf;
-
     private int itemDisciplinaId;
     private int itemTurmaId;
     private Date dataChamada;

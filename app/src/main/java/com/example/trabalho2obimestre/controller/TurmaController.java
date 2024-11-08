@@ -18,4 +18,9 @@ public class TurmaController {
     public ArrayList<Turma> listTurmasPorDisciplina(int disciplinaId){
         return TurmaDao.getInstancia(context).buscarTurmasPorDisciplina(disciplinaId);
     }
+
+    public ArrayList<Turma> listTurmasPorDisciplinaEAnoLetivo(int disciplinaId, int anoLetivo){
+        return TurmaDao.getInstancia(context)
+                .buscarTurmasPorDisciplinaEAnoLetivo(disciplinaId, anoLetivo);
+    }
 }
