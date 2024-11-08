@@ -43,6 +43,7 @@ public class SeedData {
         //Aparentemente tem um limite de inserts que podem ser feitos de uma unica vez.
         //Tentei replicar o método para inserir aos poucos, mas não consegui.
         //Se você olhar a tabela ele só inseriu 50 registros.
+        //Para poder continuar eu fiz um insert manual.
         db.execSQL("INSERT INTO NOTA (anoLetivo, bimestre, notaTrabalho, notaAvaliacao, alunoMatricula, disciplinaId) VALUES " +
                 //Aluno 1
                 "(2024, '1', 8.5, 7.0, 1, 1)," +
