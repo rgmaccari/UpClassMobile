@@ -80,13 +80,15 @@ public class NotaDao {
         try (Cursor cursor = db.query("NOTA", columns, selection, selectionArgs, null, null, null)) {
             if (cursor.moveToFirst()) {
                 Log.d("NotaDao", "Notas encontradas para o aluno: " + cursor.getCount());
-                String bimestre = cursor.getString(cursor.getColumnIndexOrThrow("bimestre"));
-                double notaTrabalho = cursor.getDouble(cursor.getColumnIndexOrThrow("notaTrabalho"));
-                double notaAvaliacao = cursor.getDouble(cursor.getColumnIndexOrThrow("notaAvaliacao"));
+                do {
+                    String bimestre = cursor.getString(cursor.getColumnIndexOrThrow("bimestre"));
+                    double notaTrabalho = cursor.getDouble(cursor.getColumnIndexOrThrow("notaTrabalho"));
+                    double notaAvaliacao = cursor.getDouble(cursor.getColumnIndexOrThrow("notaAvaliacao"));
 
-                Notas notas = new Notas(alunoId, disciplinaId, bimestre, notaTrabalho, notaAvaliacao);
-                listaNotas.add(notas);
-            }while (cursor.moveToNext());
+                    Notas notas = new Notas(alunoId, disciplinaId, bimestre, notaTrabalho, notaAvaliacao);
+                    listaNotas.add(notas);
+                } while (cursor.moveToNext());
+            }
         }catch (SQLException e) {
             Log.e("NotaDao", "Erro ao buscar notas", e);
         }
