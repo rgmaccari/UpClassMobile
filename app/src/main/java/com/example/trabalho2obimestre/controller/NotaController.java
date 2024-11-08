@@ -24,6 +24,8 @@ public class NotaController{
         alunoController = new AlunoController(context);
         turmaController = new TurmaController(context);
         disciplinaController = new DisciplinaController(context);
+        notaDao = NotaDao.getInstancia(context);
+
     }
 
     public ArrayList<Disciplina> listDisciplinasByProf(int registroProf) {
@@ -38,9 +40,9 @@ public class NotaController{
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
 
-    //public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
-        //return new NotaDao(context).retornarNotasPorAluno(itemAlunoId, disciplinaId);
-    //}
+    public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
+        return notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId);
+    }
 
 
 }

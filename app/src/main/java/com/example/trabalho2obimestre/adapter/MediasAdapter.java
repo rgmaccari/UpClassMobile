@@ -8,7 +8,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.controller.NotaController;
 import com.example.trabalho2obimestre.model.Aluno;
+import com.example.trabalho2obimestre.model.Notas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +18,15 @@ import java.util.List;
 public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasViewHolder> {
 
     private ArrayList<Aluno> listaAlunos;
+    private NotaController notaController;
+    private int itemDisciplinaId;
+    private int itemTurmaId;
 
-    public MediasAdapter(ArrayList<Aluno> listaAlunos) {
+    public MediasAdapter(ArrayList<Aluno> listaAlunos, NotaController notaController, int itemDisciplinaId, int itemTurmaId) {
         this.listaAlunos = listaAlunos;
+        this.notaController = notaController;
+        this.itemDisciplinaId = itemDisciplinaId;
+        this.itemTurmaId = itemTurmaId;
     }
 
     @NonNull
@@ -33,6 +41,31 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         Aluno aluno = listaAlunos.get(position);
         holder.tvNome.setText(aluno.getNome());
         holder.tvCpf.setText(aluno.getCpf());
+
+        ArrayList<Notas> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId);
+
+        for (Notas notas : listaNotas) {
+            String bimestre = notas.getBimestre();
+
+            switch (bimestre) {
+                case "1":
+                    holder.notaTrabalho1.setText(String.valueOf(notas.getNotaTrabalho()));
+                    holder.notaProva1.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    break;
+                case "2":
+                    holder.notaTrabalho2.setText(String.valueOf(notas.getNotaTrabalho()));
+                    holder.notaProva2.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    break;
+                case "3":
+                    holder.notaTrabalho3.setText(String.valueOf(notas.getNotaTrabalho()));
+                    holder.notaProva3.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    break;
+                case "4":
+                    holder.notaTrabalho4.setText(String.valueOf(notas.getNotaTrabalho()));
+                    holder.notaProva4.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    break;
+            }
+        }
 
         View.OnClickListener toggleListener = v -> toggleCardVisibility(holder.cardNotas);
         holder.tvNome.setOnClickListener(toggleListener);
@@ -54,8 +87,11 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     }
 
     static class MediasViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNome;
-        TextView tvCpf;
+        TextView tvNome, tvCpf;
+        TextView notaTrabalho1, notaProva1;
+        TextView notaTrabalho2, notaProva2;
+        TextView notaTrabalho3, notaProva3;
+        TextView notaTrabalho4, notaProva4;
         CardView cardNotas;
 
         public MediasViewHolder(@NonNull View itemView) {
@@ -63,6 +99,15 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
             tvNome = itemView.findViewById(R.id.tvNome);
             tvCpf = itemView.findViewById(R.id.tvCpf);
             cardNotas = itemView.findViewById(R.id.cardNotas);
+
+            notaTrabalho1 = itemView.findViewById(R.id.notaTrabalho1);
+            notaProva1 = itemView.findViewById(R.id.notaProva1);
+            notaTrabalho2 = itemView.findViewById(R.id.notaTrabalho2);
+            notaProva2 = itemView.findViewById(R.id.notaProva2);
+            notaTrabalho3 = itemView.findViewById(R.id.notaTrabalho3);
+            notaProva3 = itemView.findViewById(R.id.notaProva3);
+            notaTrabalho4 = itemView.findViewById(R.id.notaTrabalho4);
+            notaProva4 = itemView.findViewById(R.id.notaProva4);
         }
     }
 

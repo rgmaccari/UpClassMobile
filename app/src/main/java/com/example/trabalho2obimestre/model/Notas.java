@@ -10,11 +10,11 @@ public class Notas {
     private double notaAvaliacao;
     private double notaTrabalho;
 
-    public Notas(int id, int anoLetivo, BimestreEnum bimestreEnum, double notaAvaliacao,
+    public Notas(int id, int anoLetivo, String bimestre, double notaAvaliacao,
                  double notaTrabalho) {
         this.id = id;
         this.anoLetivo = anoLetivo;
-        this.bimestre = bimestreEnum.descricao;
+        this.bimestre = bimestre;
         this.notaAvaliacao = notaAvaliacao;
         this.notaTrabalho = notaTrabalho;
     }

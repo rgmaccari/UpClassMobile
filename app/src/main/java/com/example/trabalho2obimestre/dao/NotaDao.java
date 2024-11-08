@@ -69,14 +69,28 @@ public class NotaDao {
         return alunos;
     }
 
-   // public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
-        //ArrayList<Notas> notas = new ArrayList<>();
-        //Cursor cursor = null;
+    public ArrayList<Notas> buscarNotasPorAlunoBimestreDisciplina(int alunoId, int disciplinaId) {
+        SQLiteDatabase db = openHelper.getReadableDatabase();
+        ArrayList<Notas> listaNotas = new ArrayList<>();
 
-        //try{
-            ///String query = "SELECT
-        //}
-    //}
+        String[] columns = {"bimestre","notaTrabalho", "notaAvaliacao"};
+        String selection = "alunoId = ? AND disciplinaId = ?";
+        String[] selectionArgs = {String.valueOf(alunoId), String.valueOf(disciplinaId)};
+
+        try (Cursor cursor = db.query("NOTA", columns, selection, selectionArgs, null, null, null)) {
+            if (cursor.moveToFirst()) {
+                String bimestre = cursor.getString(cursor.getColumnIndexOrThrow("bimestre"));
+                double notaTrabalho = cursor.getDouble(cursor.getColumnIndexOrThrow("notaTrabalho"));
+                double notaAvaliacao = cursor.getDouble(cursor.getColumnIndexOrThrow("notaAvaliacao"));
+
+                Notas notas = new Notas(alunoId, disciplinaId, bimestre, notaTrabalho, notaAvaliacao);
+                listaNotas.add(notas);
+            }while (cursor.moveToNext());
+        }catch (SQLException e) {
+            Log.e("NotaDao", "Erro ao buscar notas", e);
+        }
+        return listaNotas;
+    }
 
 
 }
