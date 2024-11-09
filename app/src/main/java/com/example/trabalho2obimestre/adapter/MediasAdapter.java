@@ -21,14 +21,12 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     private ArrayList<Aluno> listaAlunos;
     private NotaController notaController;
     private int itemDisciplinaId;
-    private int itemTurmaId;
     private int itemAnoLetivo;
 
-    public MediasAdapter(ArrayList<Aluno> listaAlunos, NotaController notaController, int itemDisciplinaId, int itemTurmaId, int itemAnoLetivo) {
+    public MediasAdapter(ArrayList<Aluno> listaAlunos, NotaController notaController, int itemDisciplinaId, int itemAnoLetivo) {
         this.listaAlunos = listaAlunos;
         this.notaController = notaController;
         this.itemDisciplinaId = itemDisciplinaId;
-        this.itemTurmaId = itemTurmaId;
         this.itemAnoLetivo = itemAnoLetivo;
     }
 
