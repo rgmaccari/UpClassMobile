@@ -17,10 +17,6 @@ public class AlunoController {
         this.context = context;
     }
 
-    public ArrayList<Aluno> retornarTodosAlunos(){
-        return AlunoDao.getInstancia(context).getAll();
-    }
-
     public ArrayList<Aluno> retornarAlunosPorTurma(int turmaId) {
         return AlunoDao.getInstancia(context).buscarAlunosPorTurma(turmaId);
     }
