@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="35dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <Button
             android:id="@+id/btnVoltar"
@@ -59,7 +60,7 @@
             android:textColor="@color/richblack"
             android:fontFamily="@font/raleway_light"
             android:backgroundTint="@color/cinzinha"
-            android:text="Data"
+            android:text="Ano"
             android:padding="0dp"/>
 
     </LinearLayout>

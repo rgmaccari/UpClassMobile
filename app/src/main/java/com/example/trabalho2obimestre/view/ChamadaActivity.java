@@ -8,6 +8,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.DialogFragment;
@@ -80,7 +81,10 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
             @Override
             public void onClick(View view) {
 
-                if(itemDisciplinaId <= 0 || itemTurmaId <= 0) return;
+                if(itemDisciplinaId <= 0 || itemTurmaId <= 0) {
+                    Toast.makeText(ChamadaActivity.this, "Selecione uma turma primeiro.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 DialogFragment dataPicker = new DatePickerFragment(ChamadaActivity.this); // Corrige para passar "this"
                 dataPicker.show(getSupportFragmentManager(), "DatePicker");
@@ -102,6 +106,12 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         btnTurma.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(itemDisciplinaId <= 0) {
+
+                    Toast.makeText(ChamadaActivity.this, "Selecione uma disciplina primeiro.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                ArrayList<Turma> itens = controller.listTurmasPorDisciplina(itemDisciplinaId);
                showTurmaPopupMenu(view, R.menu.turma, itens);

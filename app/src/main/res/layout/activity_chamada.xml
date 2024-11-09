@@ -31,7 +31,8 @@
           android:text="Voltar"
           android:textSize="14sp"
           android:fontFamily="@font/raleway_light"
-          android:padding="5dp"/>
+          android:padding="5dp"
+          android:layout_marginRight="5dp"/>
 
       <Button
           android:id="@+id/btnDisciplina"
@@ -43,7 +44,8 @@
           android:textColor="@color/richblack"
           android:textSize="14sp"
           android:fontFamily="@font/raleway_light"
-          android:padding="5dp"/>
+          android:padding="5dp"
+          android:layout_marginRight="5dp"/>
 
       <Button
           android:id="@+id/btnTurma"
@@ -55,7 +57,8 @@
           android:textColor="@color/richblack"
           android:textSize="14sp"
           android:fontFamily="@font/raleway_light"
-          android:padding="5dp"/>
+          android:padding="5dp"
+          android:layout_marginRight="5dp"/>
 
       <Button
           android:id="@+id/btnData"
@@ -75,7 +78,7 @@
        android:layout_width="0dp"
        android:layout_height="wrap_content"
        android:orientation="horizontal"
-       android:layout_margin="10dp"
+       android:layout_margin="15dp"
        app:layout_constraintTop_toBottomOf="@id/top_buttons_layout"
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintEnd_toEndOf="parent">
@@ -83,15 +86,16 @@
       <TextView
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_weight="2"
+          android:layout_weight="1"
           android:text="N°"
+          android:paddingLeft="10dp"
           android:fontFamily="@font/raleway_semibold"
           android:textColor="@color/richblack"/>
 
       <TextView
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_weight="1"
+          android:layout_weight="3"
           android:text="Nome"
           android:fontFamily="@font/raleway_semibold"
           android:textColor="@color/richblack"/>
@@ -99,10 +103,9 @@
       <TextView
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:layout_weight="2"
+          android:layout_weight="1"
           android:text="Presença"
-          android:layout_marginRight="20dp"
-          android:gravity="end"
+          android:textAlignment="center"
           android:fontFamily="@font/raleway_semibold"
           android:textColor="@color/richblack"/>
    </LinearLayout>
