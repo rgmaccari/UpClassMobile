@@ -41,8 +41,8 @@ public class NotaController{
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
 
-    public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId){
-        ArrayList<Notas> notas = notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId);
+    public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId, int anoLetivo){
+        ArrayList<Notas> notas = notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId, anoLetivo);
         Log.d("NotaController", "Notas recuperadas: " + notas.size());
         return notas;
     }

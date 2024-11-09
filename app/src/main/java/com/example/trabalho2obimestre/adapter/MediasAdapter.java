@@ -22,12 +22,14 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     private NotaController notaController;
     private int itemDisciplinaId;
     private int itemTurmaId;
+    private int itemAnoLetivo;
 
-    public MediasAdapter(ArrayList<Aluno> listaAlunos, NotaController notaController, int itemDisciplinaId, int itemTurmaId) {
+    public MediasAdapter(ArrayList<Aluno> listaAlunos, NotaController notaController, int itemDisciplinaId, int itemTurmaId, int itemAnoLetivo) {
         this.listaAlunos = listaAlunos;
         this.notaController = notaController;
         this.itemDisciplinaId = itemDisciplinaId;
         this.itemTurmaId = itemTurmaId;
+        this.itemAnoLetivo = itemAnoLetivo;
     }
 
     @NonNull
@@ -45,7 +47,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         holder.tvNome.setText(aluno.getNome());
         holder.tvCpf.setText(aluno.getCpf());
 
-        ArrayList<Notas> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId);
+        ArrayList<Notas> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId, itemAnoLetivo);
 
         for (Notas notas : listaNotas) {
             String bimestre = notas.getBimestre();
