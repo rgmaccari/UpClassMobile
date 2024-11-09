@@ -25,7 +25,7 @@ public class PresencaDao implements IGenericDao<Presenca> {
     private Context context;
     private static PresencaDao instancia;
 
-    SimpleDateFormat dateFormat;
+    private SimpleDateFormat dateFormat;
 
     public static PresencaDao getInstancia(Context context){
         if(instancia == null){
@@ -152,7 +152,7 @@ public class PresencaDao implements IGenericDao<Presenca> {
         return presencas;
     }
 
-    public Presenca buscarPresenca(Date data, int alunoMatricula, int disciplinaId){
+    public Presenca buscarPresencaPorDataAlunoEDisciplina(Date data, int alunoMatricula, int disciplinaId){
 
         try {
             String selection = "data = ? AND alunoMatricula = ? AND disciplinaId = ?";

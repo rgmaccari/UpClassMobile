@@ -48,7 +48,7 @@ public class ChamadaController {
         for (Aluno aluno : alunos) {
 
             Presenca presenca = PresencaDao.getInstancia(context)
-                    .buscarPresenca(data, aluno.getMatricula(), disciplinaId);
+                    .buscarPresencaPorDataAlunoEDisciplina(data, aluno.getMatricula(), disciplinaId);
 
             if(presenca != null){
                 ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), presenca.isPresente());
@@ -69,7 +69,7 @@ public class ChamadaController {
             for(ItemChamada item : listaItemChamada){
 
                 Presenca presenca = PresencaDao.getInstancia(context)
-                        .buscarPresenca(data, Integer.parseInt(item.getMatricula()), disciplinaId);
+                        .buscarPresencaPorDataAlunoEDisciplina(data, Integer.parseInt(item.getMatricula()), disciplinaId);
 
                 if(presenca != null){
                     presenca.setPresente(item.isCheckboxPresenca());
