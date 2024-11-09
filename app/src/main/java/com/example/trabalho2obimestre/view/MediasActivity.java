@@ -195,7 +195,7 @@ public class MediasActivity extends AppCompatActivity {
         if(listaAlunos.isEmpty()){
             Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
         }else{
-            mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemTurmaId, itemAnoLetivoSelecionado);
+            mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemAnoLetivoSelecionado);
             Log.d("MediasActivity", "Nota passadas para o adapter: " + listaAlunos.size());
             recyclerView.setAdapter(mediasAdapter);
 

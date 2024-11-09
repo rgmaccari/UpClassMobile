@@ -16,20 +16,15 @@ import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 public class MainActivity extends AppCompatActivity {
 
     private ImageView btnChamada;
-    private ImageView btnCriar;
     private ImageView btnCorrigir;
     private ImageView btnMedias;
     private Button btnSair;
-    private SQLiteDataHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-
-        //Abrir a DataBase:
-        dbHelper = new SQLiteDataHelper(this, "ALUNO.db", null, 1);
 
         btnChamada = findViewById(R.id.btnChamada);
         btnCorrigir = findViewById(R.id.btnCorrigir);
@@ -67,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
                 finishAffinity();
             }
         });
-
-
-
 
 
     }
