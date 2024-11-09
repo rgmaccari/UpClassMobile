@@ -23,6 +23,7 @@ public class AlunoDao implements IGenericDao<Aluno>{
     private String tabela = "Aluno";
     private Context context;
     private static AlunoDao instancia;
+
     public static AlunoDao getInstancia(Context context){
         if(instancia == null){
             instancia = new AlunoDao(context);
