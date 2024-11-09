@@ -5,14 +5,13 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <!--Alterar para minHeight, padding não funcionou-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="7dp"
         android:backgroundTint="@color/platinum"
         android:minHeight="50dp"
-        app:cardElevation="30dp">
+        android:foreground="@drawable/card_border">
 
         <LinearLayout
             android:layout_width="match_parent"
