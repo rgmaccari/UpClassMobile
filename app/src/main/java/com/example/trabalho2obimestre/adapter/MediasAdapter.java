@@ -44,7 +44,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         Log.d("MediasAdapter", "Exibindo notas para o aluno: " + aluno.getMatricula());
 
         holder.tvNome.setText(aluno.getNome());
-        holder.tvCpf.setText(aluno.getCpf());
+        holder.tvMatricula.setText(String.valueOf(aluno.getMatricula()));
 
         ArrayList<Nota> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId, itemAnoLetivo);
 
@@ -73,7 +73,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
 
         View.OnClickListener toggleListener = v -> toggleCardVisibility(holder.cardNotas);
         holder.tvNome.setOnClickListener(toggleListener);
-        holder.tvCpf.setOnClickListener(toggleListener);
+        holder.tvMatricula.setOnClickListener(toggleListener);
     }
 
     //Visibilidade do cardView com as informações.
@@ -91,7 +91,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
     }
 
     static class MediasViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNome, tvCpf;
+        TextView tvNome, tvMatricula;
         TextView notaTrabalho1, notaProva1;
         TextView notaTrabalho2, notaProva2;
         TextView notaTrabalho3, notaProva3;
@@ -101,7 +101,7 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         public MediasViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
-            tvCpf = itemView.findViewById(R.id.tvCpf);
+            tvMatricula = itemView.findViewById(R.id.tvMatricula);
             cardNotas = itemView.findViewById(R.id.cardNotas);
 
             notaTrabalho1 = itemView.findViewById(R.id.notaTrabalho1);
