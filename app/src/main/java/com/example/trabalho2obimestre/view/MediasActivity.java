@@ -76,6 +76,7 @@ public class MediasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medias);
 
         controller = new NotaController(this);
+        registroProf = 1;
 
         //Button Voltar:
         btnVoltar = findViewById(R.id.btnVoltar);
@@ -210,7 +211,7 @@ public class MediasActivity extends AppCompatActivity {
                 Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
             }else{
                 mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemTurmaId, itemAnoLetivoSelecionado);
-                Log.d("MediasActivity", "Notas passadas para o adapter: " + listaAlunos.size());
+                Log.d("MediasActivity", "Nota passadas para o adapter: " + listaAlunos.size());
                 recyclerView.setAdapter(mediasAdapter);
 
             }

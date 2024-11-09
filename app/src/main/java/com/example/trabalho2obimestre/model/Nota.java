@@ -1,25 +1,25 @@
 package com.example.trabalho2obimestre.model;
 
-
-import com.example.trabalho2obimestre.enums.BimestreEnum;
-
-public class Notas {
+public class Nota {
     private int id;
     private int anoLetivo;
     private String bimestre;
     private double notaAvaliacao;
     private double notaTrabalho;
+    private int alunoMatricula;
+    private int disciplinaId;
 
-    public Notas(int id, int anoLetivo, String bimestre, double notaAvaliacao,
-                 double notaTrabalho) {
+    public Nota(int id, int anoLetivo, String bimestre, double notaAvaliacao, double notaTrabalho, int alunoMatricula, int disciplinaId) {
         this.id = id;
         this.anoLetivo = anoLetivo;
         this.bimestre = bimestre;
         this.notaAvaliacao = notaAvaliacao;
         this.notaTrabalho = notaTrabalho;
+        this.alunoMatricula = alunoMatricula;
+        this.disciplinaId = disciplinaId;
     }
 
-    public Notas() {
+    public Nota() {
     }
 
     public int getId() {
@@ -62,5 +62,19 @@ public class Notas {
         this.notaTrabalho = notaTrabalho;
     }
 
+    public int getAlunoMatricula() {
+        return alunoMatricula;
+    }
 
+    public void setAlunoMatricula(int alunoMatricula) {
+        this.alunoMatricula = alunoMatricula;
+    }
+
+    public int getDisciplinaId() {
+        return disciplinaId;
+    }
+
+    public void setDisciplinaId(int disciplinaId) {
+        this.disciplinaId = disciplinaId;
+    }
 }

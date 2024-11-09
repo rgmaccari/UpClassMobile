@@ -1,5 +1,6 @@
 package com.example.trabalho2obimestre.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -7,18 +8,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
-import com.example.trabalho2obimestre.model.Aluno;
-import com.example.trabalho2obimestre.model.Notas;
+import com.example.trabalho2obimestre.model.Nota;
+import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
 
-public class NotaDao {
+public class NotaDao implements IGenericDao<Nota> {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase dataBase;
-    private String[] colunas = {"matricula", "nome", "cpf"};
-    private String tabela = "ALUNO";
+    private String[] colunas = {
+            "id", "anoLetivo", "bimestre", "notaTrabalho",
+            "notaAvaliacao", "alunoMatricula", "disciplinaId"
+    };
+    private String tabela = "Nota";
     private Context context;
-
     private static NotaDao instancia;
 
     public static NotaDao getInstancia(Context context) {
@@ -36,57 +39,142 @@ public class NotaDao {
         dataBase = openHelper.getWritableDatabase();
     }
 
-    public ArrayList<Aluno> buscarAlunosPorDisciplinaETurma(int disciplinaId, int turmaId) {
-        ArrayList<Aluno> alunos = new ArrayList<>();
-        Cursor cursor = null;
-
+    @Override
+    public long insert(Nota nota) {
         try {
-            String query = "SELECT a.matricula, a.nome, a.cpf " +
-                    "FROM ALUNO a " +
-                    "JOIN TURMA t ON a.turmaId = t.id " +
-                    "JOIN DISCIPLINA d ON t.id = d.id " +
-                    "WHERE t.id = ? AND d.id = ?" +
-                    "ORDER BY a.nome ASC";
-            cursor = dataBase.rawQuery(query, new String[]{String.valueOf(disciplinaId), String.valueOf(turmaId)});
-            Log.d("NotaDao", "Cursor count: " + cursor.getCount());
+            ContentValues values = new ContentValues();
+            values.put(colunas[1], nota.getAnoLetivo());
+            values.put(colunas[2], nota.getBimestre());
+            values.put(colunas[3], nota.getNotaTrabalho());
+            values.put(colunas[4], nota.getNotaAvaliacao());
+            values.put(colunas[5], nota.getAlunoMatricula());
+            values.put(colunas[7], nota.getDisciplinaId());
 
-            if(cursor.moveToFirst()) {
-                do{
-                    Aluno aluno = new Aluno();
-                    aluno.setMatricula(cursor.getInt(0));
-                    aluno.setNome(cursor.getString(1));
-                    aluno.setCpf(cursor.getString(2));
-                    alunos.add(aluno);
-                }while(cursor.moveToNext());
-            }
-        }catch(Exception e) {
-            Log.e("NotaDao", "Erro ao buscar alunos", e);
-        }finally{
-            if (cursor != null) {
-                cursor.close();
-            }
+            return dataBase.insert(tabela,null, values);
+
+        }catch (SQLException ex){
+            Log.e("NotaDao", "Erro: NotaDao.insert()" + ex.getMessage());
         }
-        return alunos;
+        return 0;
     }
 
-    public ArrayList<Notas> buscarNotasPorAlunoBimestreDisciplina(int alunoId, int disciplinaId, int anoLetivo) {
-        SQLiteDatabase db = openHelper.getReadableDatabase();
-        ArrayList<Notas> listaNotas = new ArrayList<>();
+    @Override
+    public long update(Nota nota) {
+        try{
+            ContentValues values = new ContentValues();
+            values.put(colunas[1], nota.getAnoLetivo());
+            values.put(colunas[2], nota.getBimestre());
+            values.put(colunas[3], nota.getNotaTrabalho());
+            values.put(colunas[4], nota.getNotaAvaliacao());
+            values.put(colunas[5], nota.getAlunoMatricula());
+            values.put(colunas[7], nota.getDisciplinaId());
 
-        String[] columns = {"bimestre","notaTrabalho", "notaAvaliacao"};
+            String[] identificador = {String.valueOf(nota.getId())};
+
+            return dataBase.update(tabela, values, colunas[0] + "= ?", identificador);
+
+        }catch (SQLException ex){
+            Log.e("NotaDao", "Erro: NotaDao.update" + ex.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public long delete(Nota nota) {
+        try{
+            String[]identificador = {String.valueOf(nota.getId())};
+
+            return dataBase.delete(tabela, colunas[0] + "= ?", identificador);
+        }catch(SQLException ex){
+            Log.e("NotaDao", "NotaDao.delete()" + ex.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public Nota getById(long id) {
+        try {
+            String[] identificador = {String.valueOf(id)};
+            Cursor cursor = dataBase.query(tabela, colunas, colunas[0] + "= ?", identificador, null, null, null);
+
+            if(cursor.moveToFirst()){
+                return new Nota(
+                        cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getDouble(3),
+                        cursor.getDouble(4),
+                        cursor.getInt(5),
+                        cursor.getInt(6)
+                );
+            }
+
+        }catch (SQLException ex) {
+            Log.e("NotaDao", "ERRO: NotaDao.getById()" + ex.getMessage());
+        }
+
+        return null;
+    }
+
+    @Override
+    public ArrayList<Nota> getAll() {
+
+        ArrayList<Nota> notas = new ArrayList<>();
+
+        try {
+            Cursor cursor = dataBase.query(tabela, colunas, null, null, null, null, colunas[1]);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    Nota nota = new Nota(
+                            cursor.getInt(0),
+                            cursor.getInt(1),
+                            cursor.getString(2),
+                            cursor.getDouble(3),
+                            cursor.getDouble(4),
+                            cursor.getInt(5),
+                            cursor.getInt(6)
+                    );
+
+                    notas.add(nota);
+                } while (cursor.moveToNext());
+            }
+            Log.d("NotaDao", "Total de turmas recuperados: " + notas.size());
+            return notas;
+
+        } catch (SQLException ex) {
+            Log.e("NotaDao", "ERRO: NotaDao.getAll()" + ex.getMessage());
+        }
+        return notas;
+    }
+
+    public ArrayList<Nota> buscarNotasPorAlunoBimestreDisciplina(int alunoId, int disciplinaId, int anoLetivo) {
+        //SQLiteDatabase db = openHelper.getReadableDatabase();
+        ArrayList<Nota> listaNotas = new ArrayList<>();
+
+
         String selection = "alunoMatricula = ? AND disciplinaId = ? AND anoLetivo = ?";
         String[] selectionArgs = {String.valueOf(alunoId), String.valueOf(disciplinaId), String.valueOf(anoLetivo)};
 
-        try (Cursor cursor = db.query("NOTA", columns, selection, selectionArgs, null, null, null)) {
-            if (cursor.moveToFirst()) {
-                Log.d("NotaDao", "Notas encontradas para o aluno: " + cursor.getCount());
-                do {
-                    String bimestre = cursor.getString(cursor.getColumnIndexOrThrow("bimestre"));
-                    double notaTrabalho = cursor.getDouble(cursor.getColumnIndexOrThrow("notaTrabalho"));
-                    double notaAvaliacao = cursor.getDouble(cursor.getColumnIndexOrThrow("notaAvaliacao"));
+        try {
 
-                    Notas notas = new Notas(alunoId, disciplinaId, bimestre, notaTrabalho, notaAvaliacao);
-                    listaNotas.add(notas);
+            Cursor cursor = dataBase.query(tabela, colunas, selection, selectionArgs, null, null, null);
+
+            if (cursor.moveToFirst()) {
+                Log.d("NotaDao", "Nota encontradas para o aluno: " + cursor.getCount());
+
+                do {
+                    Nota nota = new Nota(
+                            cursor.getInt(0),
+                            cursor.getInt(1),
+                            cursor.getString(2),
+                            cursor.getDouble(3),
+                            cursor.getDouble(4),
+                            cursor.getInt(5),
+                            cursor.getInt(6)
+                    );
+
+                    listaNotas.add(nota);
                 } while (cursor.moveToNext());
             }
         }catch (SQLException e) {
@@ -96,6 +184,7 @@ public class NotaDao {
         }
         return listaNotas;
     }
+
 
 
 }

@@ -106,9 +106,9 @@
                     android:id="@+id/btnMedias"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/notas"
                     android:contentDescription="Notas"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/notas" />
 
                 <TextView
                     android:layout_width="match_parent"

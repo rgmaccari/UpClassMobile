@@ -6,7 +6,7 @@ import android.util.Log;
 import com.example.trabalho2obimestre.dao.NotaDao;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.Disciplina;
-import com.example.trabalho2obimestre.model.Notas;
+import com.example.trabalho2obimestre.model.Nota;
 import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
@@ -17,7 +17,6 @@ public class NotaController{
     private AlunoController alunoController;
     private TurmaController turmaController;
     private DisciplinaController disciplinaController;
-    private NotaDao notaDao;
 
     public NotaController(Context context) {
         this.context = context;
@@ -25,7 +24,6 @@ public class NotaController{
         alunoController = new AlunoController(context);
         turmaController = new TurmaController(context);
         disciplinaController = new DisciplinaController(context);
-        notaDao = NotaDao.getInstancia(context);
 
     }
 
@@ -41,9 +39,9 @@ public class NotaController{
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
 
-    public ArrayList<Notas> retornarNotasPorAluno(int itemAlunoId, int disciplinaId, int anoLetivo){
-        ArrayList<Notas> notas = notaDao.buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId, anoLetivo);
-        Log.d("NotaController", "Notas recuperadas: " + notas.size());
+    public ArrayList<Nota> retornarNotasPorAluno(int itemAlunoId, int disciplinaId, int anoLetivo){
+        ArrayList<Nota> notas = NotaDao.getInstancia(context).buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId, anoLetivo);
+        Log.d("NotaController", "Nota recuperadas: " + notas.size());
         return notas;
     }
 

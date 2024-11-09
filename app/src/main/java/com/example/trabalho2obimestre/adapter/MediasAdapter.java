@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.controller.NotaController;
 import com.example.trabalho2obimestre.model.Aluno;
-import com.example.trabalho2obimestre.model.Notas;
+import com.example.trabalho2obimestre.model.Nota;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasViewHolder> {
 
@@ -47,27 +46,27 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         holder.tvNome.setText(aluno.getNome());
         holder.tvCpf.setText(aluno.getCpf());
 
-        ArrayList<Notas> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId, itemAnoLetivo);
+        ArrayList<Nota> listaNotas = notaController.retornarNotasPorAluno(aluno.getMatricula(), itemDisciplinaId, itemAnoLetivo);
 
-        for (Notas notas : listaNotas) {
-            String bimestre = notas.getBimestre();
+        for (Nota nota : listaNotas) {
+            String bimestre = nota.getBimestre();
 
             switch (bimestre) {
                 case "1":
-                    holder.notaTrabalho1.setText(String.valueOf(notas.getNotaTrabalho()));
-                    holder.notaProva1.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    holder.notaTrabalho1.setText(String.valueOf(nota.getNotaTrabalho()));
+                    holder.notaProva1.setText(String.valueOf(nota.getNotaAvaliacao()));
                     break;
                 case "2":
-                    holder.notaTrabalho2.setText(String.valueOf(notas.getNotaTrabalho()));
-                    holder.notaProva2.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    holder.notaTrabalho2.setText(String.valueOf(nota.getNotaTrabalho()));
+                    holder.notaProva2.setText(String.valueOf(nota.getNotaAvaliacao()));
                     break;
                 case "3":
-                    holder.notaTrabalho3.setText(String.valueOf(notas.getNotaTrabalho()));
-                    holder.notaProva3.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    holder.notaTrabalho3.setText(String.valueOf(nota.getNotaTrabalho()));
+                    holder.notaProva3.setText(String.valueOf(nota.getNotaAvaliacao()));
                     break;
                 case "4":
-                    holder.notaTrabalho4.setText(String.valueOf(notas.getNotaTrabalho()));
-                    holder.notaProva4.setText(String.valueOf(notas.getNotaAvaliacao()));
+                    holder.notaTrabalho4.setText(String.valueOf(nota.getNotaTrabalho()));
+                    holder.notaProva4.setText(String.valueOf(nota.getNotaAvaliacao()));
                     break;
             }
         }
