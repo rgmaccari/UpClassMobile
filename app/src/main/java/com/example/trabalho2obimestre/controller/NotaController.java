@@ -40,7 +40,7 @@ public class NotaController{
     }
 
     public ArrayList<Nota> retornarNotasPorAluno(int itemAlunoId, int disciplinaId, int anoLetivo){
-        ArrayList<Nota> notas = NotaDao.getInstancia(context).buscarNotasPorAlunoBimestreDisciplina(itemAlunoId, disciplinaId, anoLetivo);
+        ArrayList<Nota> notas = NotaDao.getInstancia(context).buscarNotasPorAlunoBimestreDisciplinaEAnoLetivo(itemAlunoId, disciplinaId, anoLetivo);
         Log.d("NotaController", "Nota recuperadas: " + notas.size());
         return notas;
     }

@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 import com.example.trabalho2obimestre.model.Nota;
-import com.example.trabalho2obimestre.model.Turma;
 
 import java.util.ArrayList;
 
@@ -148,7 +147,7 @@ public class NotaDao implements IGenericDao<Nota> {
         return notas;
     }
 
-    public ArrayList<Nota> buscarNotasPorAlunoBimestreDisciplina(int alunoId, int disciplinaId, int anoLetivo) {
+    public ArrayList<Nota> buscarNotasPorAlunoBimestreDisciplinaEAnoLetivo(int alunoId, int disciplinaId, int anoLetivo) {
         //SQLiteDatabase db = openHelper.getReadableDatabase();
         ArrayList<Nota> listaNotas = new ArrayList<>();
 
