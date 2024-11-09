@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trabalho2obimestre.R;
 
-public class CorrigirActivity extends AppCompatActivity {
+public class PlanejamentoActivity extends AppCompatActivity {
 
     private Button btnVoltar;
 
@@ -17,7 +17,7 @@ public class CorrigirActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_corrigir);
+        setContentView(R.layout.activity_planejamento);
 
         Button btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {

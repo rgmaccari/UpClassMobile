@@ -16,10 +16,7 @@
             android:name=".view.MediasActivity"
             android:exported="false" />
         <activity
-            android:name=".view.CorrigirActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.CriarActivity"
+            android:name=".view.PlanejamentoActivity"
             android:exported="false" />
         <activity
             android:name=".view.ChamadaActivity"

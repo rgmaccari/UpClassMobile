@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btnCorrigir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, CorrigirActivity.class);
+                Intent intent = new Intent(MainActivity.this, PlanejamentoActivity.class);
                 startActivity(intent);
             }
         });
