@@ -21,27 +21,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Voltar"
-            android:backgroundTint="@color/oxfordblue"
+            android:backgroundTint="@color/azulforte"
+            android:fontFamily="@font/raleway_regular"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/menuSerie"
+            android:id="@+id/btnDisciplina"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:backgroundTint="@color/azulforte"
-            android:text="Período"/>
+            android:backgroundTint="@color/platinum"
+            android:textColor="@color/richblack"
+            android:fontFamily="@font/raleway_regular"
+            android:text="Disciplina"/>
 
         <Button
-            android:id="@+id/menuData"
+            android:id="@+id/btnTurma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:fontFamily="@font/raleway_regular"
             android:layout_marginRight="10dp"
-            android:backgroundTint="@color/azulforte"
-            android:text="Data"/>
+            android:backgroundTint="@color/platinum"
+            android:textColor="@color/richblack"
+            android:text="Turma"/>
 
     </LinearLayout>
 
