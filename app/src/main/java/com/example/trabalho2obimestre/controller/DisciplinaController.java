@@ -17,8 +17,6 @@ public class DisciplinaController {
     }
 
     public ArrayList<Disciplina> listDisciplinasByProf(int regProf){
-        ArrayList<Disciplina> disciplinas = DisciplinaDao.getInstancia(context).buscarDisciplinasPorProfessor(regProf);
-
-        return disciplinas;
+        return DisciplinaDao.getInstancia(context).buscarDisciplinasPorProfessor(regProf);
     }
 }
