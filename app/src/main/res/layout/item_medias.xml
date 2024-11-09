@@ -24,12 +24,31 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="N° "
+                    android:layout_marginLeft="8dp"
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/azulforte"/>
+
+                <TextView
                     android:id="@+id/tvMatricula"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.1"
+                    android:gravity="center"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/azulforte"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.01"
+                    android:text=" - "
+                    android:gravity="left"
+                    android:textColor="@color/azulforte"
+                    android:fontFamily="@font/raleway_bold"/>
 
                 <TextView
                     android:id="@+id/tvNome"
@@ -37,7 +56,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="18sp"
-                    android:textStyle="bold"/>
+                    android:fontFamily="@font/raleway_bold"
+                    android:textColor="@color/azulforte"/>
             </LinearLayout>
 
             <!--Card Expansível-->
@@ -45,7 +65,7 @@
                 android:id="@+id/cardNotas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -60,26 +80,28 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:textSize="18sp"
-                            android:textStyle="bold"/>
+                            android:layout_marginLeft="6dp"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/raleway_regular"
+                            android:textColor="@color/richblack"
                             android:text="Nota Trabalho"
-                            android:layout_gravity="center"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:textStyle="bold"
                             android:text="Nota Prova"
+                            android:fontFamily="@font/raleway_regular"
+                            android:textColor="@color/richblack"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -92,9 +114,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:textSize="18sp"
-                            android:text="1° Bimestre"/>
+                            android:fontFamily="@font/raleway_medium"
+                            android:textColor="@color/richblack"
+                            android:text="1° Bimestre"
+                            android:layout_marginLeft="6dp"/>
 
                         <TextView
                             android:id="@+id/notaTrabalho1"
@@ -102,7 +127,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:layout_gravity="center"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/notaProva1"
@@ -122,9 +147,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:textSize="18sp"
-                            android:text="2° Bimestre"/>
+                            android:fontFamily="@font/raleway_medium"
+                            android:textColor="@color/richblack"
+                            android:text="2° Bimestre"
+                            android:layout_marginLeft="6dp"/>
 
                         <TextView
                             android:id="@+id/notaTrabalho2"
@@ -132,7 +160,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:layout_gravity="center"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/notaProva2"
@@ -152,9 +180,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:textSize="18sp"
-                            android:text="3° Bimestre"/>
+                            android:fontFamily="@font/raleway_medium"
+                            android:textColor="@color/richblack"
+                            android:text="3° Bimestre"
+                            android:layout_marginLeft="6dp"/>
 
                         <TextView
                             android:id="@+id/notaTrabalho3"
@@ -162,7 +193,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:layout_gravity="center"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/notaProva3"
@@ -182,9 +213,12 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_weight="1"
                             android:textSize="18sp"
-                            android:text="4° Bimestre"/>
+                            android:fontFamily="@font/raleway_medium"
+                            android:textColor="@color/richblack"
+                            android:text="4° Bimestre"
+                            android:layout_marginLeft="6dp"/>
 
                         <TextView
                             android:id="@+id/notaTrabalho4"
@@ -192,7 +226,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textSize="15sp"
-                            android:layout_gravity="center"/>
+                            android:gravity="center"/>
 
                         <TextView
                             android:id="@+id/notaProva4"
