@@ -69,8 +69,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         android:backgroundTint="@color/whitesmoke"
         android:visibility="gone">
 
