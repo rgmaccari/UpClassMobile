@@ -74,11 +74,4 @@ public class SQLiteDataHelper extends SQLiteOpenHelper {
 
     }
 
-    //Método para adicionar a presença dentro do banco:
-    public void incrementarPresenca(int ra){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("UPDATE ALUNO SET Presenca = Presenca + 1 WHERE RA = ?", new Integer[]{ra});
-        db.close();
-    }
-
 }
