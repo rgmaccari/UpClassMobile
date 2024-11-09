@@ -3,6 +3,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -71,17 +72,20 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
             }
         }
 
-        View.OnClickListener toggleListener = v -> toggleCardVisibility(holder.cardNotas);
+        View.OnClickListener toggleListener = v -> toggleCardVisibility(holder.cardNotas, holder.imgArrow);
         holder.tvNome.setOnClickListener(toggleListener);
         holder.tvMatricula.setOnClickListener(toggleListener);
+        holder.imgArrow.setOnClickListener(toggleListener);
     }
 
-    //Visibilidade do cardView com as informações.
-    private void toggleCardVisibility(CardView cardNotas) {
+    //Visibilidade do cardView com as informações e seta indicadora (arrow).
+    private void toggleCardVisibility(CardView cardNotas, ImageView imgArrow) {
         if (cardNotas.getVisibility() == View.GONE) {
             cardNotas.setVisibility(View.VISIBLE);
+            imgArrow.setImageResource(R.drawable.arrowdown);
         } else {
             cardNotas.setVisibility(View.GONE);
+            imgArrow.setImageResource(R.drawable.arrowright);
         }
     }
 
@@ -97,12 +101,14 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         TextView notaTrabalho3, notaProva3;
         TextView notaTrabalho4, notaProva4;
         CardView cardNotas;
+        ImageView imgArrow;
 
         public MediasViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNome = itemView.findViewById(R.id.tvNome);
             tvMatricula = itemView.findViewById(R.id.tvMatricula);
             cardNotas = itemView.findViewById(R.id.cardNotas);
+            imgArrow = itemView.findViewById(R.id.imgArrow);
 
             notaTrabalho1 = itemView.findViewById(R.id.notaTrabalho1);
             notaProva1 = itemView.findViewById(R.id.notaProva1);

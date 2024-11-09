@@ -71,7 +71,7 @@
         android:layout_margin="10dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="16dp"
-        android:backgroundTint="@color/platinum"
+        android:backgroundTint="@color/whitesmoke"
         android:visibility="gone">
 
         <androidx.recyclerview.widget.RecyclerView

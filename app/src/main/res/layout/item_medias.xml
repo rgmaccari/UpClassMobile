@@ -5,12 +5,15 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <!--Alterar para minHeight, padding não funcionou-->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="7dp"
         android:elevation="8dp"
-        android:backgroundTint="@color/whitesmoke">
+        android:backgroundTint="@color/platinum"
+        android:padding="20px"
+        app:cardElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,6 +61,13 @@
                     android:textSize="18sp"
                     android:fontFamily="@font/raleway_bold"
                     android:textColor="@color/azulforte"/>
+
+                <ImageView
+                    android:id="@+id/imgArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrowright"
+                    android:layout_marginRight="8dp"/>
             </LinearLayout>
 
             <!--Card Expansível-->
@@ -65,7 +75,9 @@
                 android:id="@+id/cardNotas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible">
+                android:visibility="gone"
+                android:backgroundTint="@color/platinum"
+                android:padding="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
