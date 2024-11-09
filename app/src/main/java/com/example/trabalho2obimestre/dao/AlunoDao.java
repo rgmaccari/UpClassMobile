@@ -18,17 +18,11 @@ import com.example.trabalho2obimestre.model.Turma;
 
 public class AlunoDao implements IGenericDao<Aluno>{
     private SQLiteOpenHelper openHelper;
-
     private SQLiteDatabase dataBase;
-
     private String[] colunas = {"matricula", "nome", "cpf", "turmaId"};
-
     private String tabela = "Aluno";
-
     private Context context;
-
     private static AlunoDao instancia;
-
     public static AlunoDao getInstancia(Context context){
         if(instancia == null){
             instancia = new AlunoDao(context);
@@ -37,7 +31,6 @@ public class AlunoDao implements IGenericDao<Aluno>{
             return instancia;
         }
     }
-
     private AlunoDao(Context context){
         this.context = context;
         openHelper = new SQLiteDataHelper(this.context, "DB_UpClass", null, 1);
@@ -170,7 +163,5 @@ public class AlunoDao implements IGenericDao<Aluno>{
         }
         return alunos;
     }
-
-
 
 }
