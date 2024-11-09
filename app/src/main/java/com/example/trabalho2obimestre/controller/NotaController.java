@@ -31,11 +31,11 @@ public class NotaController{
         return disciplinaController.listDisciplinasByProf(registroProf);
     }
 
-    public ArrayList<Turma> listTurmasPorDisciplina(int itemDisciplinaId) {
-        return turmaController.listTurmasPorDisciplina(itemDisciplinaId);
+    public ArrayList<Turma> listTurmasPorDisciplinaEAnoLetivo(int itemDisciplinaId, int anoLetivo) {
+        return turmaController.listTurmasPorDisciplinaEAnoLetivo(itemDisciplinaId, anoLetivo);
     }
 
-    public ArrayList<Aluno> retornarAlunosPorTurma(int itemTurmaId) {
+    public ArrayList<Aluno> listAlunosPorTurma(int itemTurmaId){
         return alunoController.retornarAlunosPorTurma(itemTurmaId);
     }
 

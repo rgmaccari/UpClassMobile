@@ -41,18 +41,6 @@
             android:padding="0dp"/>
 
         <Button
-            android:id="@+id/btnTurma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/richblack"
-            android:fontFamily="@font/raleway_light"
-            android:backgroundTint="@color/cinzinha"
-            android:text="Turma"
-            android:padding="0dp"/>
-
-        <Button
             android:id="@+id/btnAnoLetivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -61,6 +49,19 @@
             android:fontFamily="@font/raleway_light"
             android:backgroundTint="@color/cinzinha"
             android:text="Ano"
+            android:padding="0dp"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/btnTurma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:textColor="@color/richblack"
+            android:fontFamily="@font/raleway_light"
+            android:backgroundTint="@color/cinzinha"
+            android:text="Turma"
             android:padding="0dp"/>
 
     </LinearLayout>

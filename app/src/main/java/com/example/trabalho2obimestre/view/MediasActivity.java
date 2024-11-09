@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -18,10 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.trabalho2obimestre.R;
 import com.example.trabalho2obimestre.adapter.MediasAdapter;
-import com.example.trabalho2obimestre.controller.DisciplinaController;
 import com.example.trabalho2obimestre.controller.NotaController;
-import com.example.trabalho2obimestre.controller.TurmaController;
-import com.example.trabalho2obimestre.dao.NotaDao;
 import com.example.trabalho2obimestre.model.Aluno;
 import com.example.trabalho2obimestre.model.Disciplina;
 import com.example.trabalho2obimestre.model.Turma;
@@ -30,23 +26,8 @@ import java.util.ArrayList;
 
 public class MediasActivity extends AppCompatActivity {
 
-    private TextView tvNome;
-    private TextView tvCpf;
-    private CardView cardNotas;
-
-    private TextView notaTrabalho1;
-    private TextView notaProva1;
-    private TextView notaTrabalho2;
-    private TextView notaProva2;
-    private TextView notaTrabalho3;
-    private TextView notaProva3;
-    private TextView notaTrabalho4;
-    private TextView notaProva4;
-
     private RecyclerView recyclerView;
     private MediasAdapter mediasAdapter;
-    //private ArrayList<Aluno> listaAlunos;
-    //private NotaDao notaDao;
 
     private NotaController controller;
 
@@ -56,17 +37,13 @@ public class MediasActivity extends AppCompatActivity {
     private Button btnAnoLetivo;
     private CardView cardView;
 
-    //private DisciplinaController disciplinaController;
-    //private TurmaController turmaController;
-
     private PopupMenu popupMenu;
     private MenuInflater inflater;
 
     private int registroProf;
 
-
-    private int itemDisciplinaId = -1;
-    private int itemTurmaId = -1;
+    private int itemDisciplinaId;
+    private int itemTurmaId;
     private int itemAnoLetivoSelecionado;
 
     @Override
@@ -77,6 +54,9 @@ public class MediasActivity extends AppCompatActivity {
 
         controller = new NotaController(this);
         registroProf = 1;
+
+        recyclerView = findViewById(R.id.recyclerViewAlunos);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //Button Voltar:
         btnVoltar = findViewById(R.id.btnVoltar);
@@ -98,31 +78,38 @@ public class MediasActivity extends AppCompatActivity {
             }
         });
 
-        //Button Turma:
-        btnTurma = findViewById(R.id.btnTurma);
-        btnTurma.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                if(itemDisciplinaId == -1){
-                    Toast.makeText(MediasActivity.this, "Selecione uma disciplina primeiro", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                ArrayList<Turma> turmas = controller.listTurmasPorDisciplina(itemDisciplinaId);
-                showTurmaPopupMenu(view, R.menu.turma, turmas);
-            }
-        });
-
         //Button Ano Letivo:
         btnAnoLetivo = findViewById(R.id.btnAnoLetivo);
         btnAnoLetivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(itemDisciplinaId <= 0){
+                    Toast.makeText(MediasActivity.this, "Selecione uma disciplina primeiro.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 showAnoLetivoPopupMenu(view, R.menu.ano_letivo);
             }
         });
 
-        recyclerView = findViewById(R.id.recyclerViewAlunos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //Button Turma:
+        btnTurma = findViewById(R.id.btnTurma);
+        btnTurma.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                if(itemAnoLetivoSelecionado  <= 0 || itemDisciplinaId <= 0 ){
+                    Toast.makeText(MediasActivity.this, "Selecione o ano letivo primeiro.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                ArrayList<Turma> turmas = controller.listTurmasPorDisciplinaEAnoLetivo(itemDisciplinaId, itemAnoLetivoSelecionado);
+
+                if(turmas.isEmpty()){
+                    Toast.makeText(MediasActivity.this, "Nenhuma turma encontrada para esse ano letivo", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                showTurmaPopupMenu(view, R.menu.turma, turmas);
+            }
+        });
 
     }
 
@@ -167,8 +154,11 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemTurmaId = item.getItemId();
                 if(itemTurmaId != 0){
-
                     btnTurma.setText(item.getTitle());
+                    cardView = findViewById(R.id.cardView);
+                    cardView.setVisibility(View.VISIBLE);
+
+                    atualizarListaDeAlunos();
                     return true;
 
                 }
@@ -190,11 +180,6 @@ public class MediasActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item){
                 itemAnoLetivoSelecionado = Integer.parseInt(item.getTitle().toString());
                 btnAnoLetivo.setText(item.getTitle());
-
-                cardView = findViewById(R.id.cardView);
-                cardView.setVisibility(View.VISIBLE);
-
-                atualizarListaDeAlunos();
                 return true;
             }
         });
@@ -204,20 +189,18 @@ public class MediasActivity extends AppCompatActivity {
     //Método para atualizar o RecycleView.
     private void atualizarListaDeAlunos(){
         ArrayList<Aluno> listaAlunos;
-        if(itemDisciplinaId != -1 && itemTurmaId != -1) {
-            listaAlunos = controller.retornarAlunosPorTurma(itemTurmaId);
 
-            if(listaAlunos.isEmpty()){
-                Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
-            }else{
-                mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemTurmaId, itemAnoLetivoSelecionado);
-                Log.d("MediasActivity", "Nota passadas para o adapter: " + listaAlunos.size());
-                recyclerView.setAdapter(mediasAdapter);
+        listaAlunos = controller.listAlunosPorTurma(itemTurmaId);
 
-            }
+        if(listaAlunos.isEmpty()){
+            Toast.makeText(this, "Nenhum aluno encontrado para essa seleção", Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(this, "Selecione uma turma e ano letivo para exibir os alunos", Toast.LENGTH_SHORT).show();
+            mediasAdapter = new MediasAdapter(listaAlunos, controller, itemDisciplinaId, itemTurmaId, itemAnoLetivoSelecionado);
+            Log.d("MediasActivity", "Nota passadas para o adapter: " + listaAlunos.size());
+            recyclerView.setAdapter(mediasAdapter);
+
         }
+
     }
 }
 
