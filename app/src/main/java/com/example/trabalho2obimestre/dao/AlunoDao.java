@@ -13,8 +13,6 @@ import com.example.trabalho2obimestre.model.Aluno;
 import java.util.ArrayList;
 
 import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
-import com.example.trabalho2obimestre.model.Presenca;
-import com.example.trabalho2obimestre.model.Turma;
 
 public class AlunoDao implements IGenericDao<Aluno>{
     private SQLiteOpenHelper openHelper;
@@ -117,8 +115,6 @@ public class AlunoDao implements IGenericDao<Aluno>{
             if (cursor.moveToFirst()) {
                 do {
                     Aluno aluno = new Aluno();
-                    String turmaString = cursor.getString(2); // Obtém a turma como String
-                   // TurmaEnum turmaEnum = TurmaEnum.valueOf(turmaString); // Converte para turmaEnum
 
                     aluno.setMatricula(cursor.getInt(0));
                     aluno.setNome(cursor.getString(1));

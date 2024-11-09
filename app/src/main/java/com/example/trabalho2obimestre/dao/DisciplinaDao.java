@@ -138,7 +138,9 @@ public class DisciplinaDao implements IGenericDao<Disciplina> {
         ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
         try {
-            Cursor cursor = dataBase.query(tabela, colunas, null, null, null, null, colunas[1]);
+
+            String[] identificador = {String.valueOf(regProfessor)};
+            Cursor cursor = dataBase.query(tabela, colunas, colunas[2] + "= ?", identificador, null, null, null);
 
             if (cursor.moveToFirst()) {
                 do {

@@ -192,16 +192,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         recyclerView.setAdapter(adapter);
     }
 
-//    //Método que atualiza o RecyclerView com a nova lista:
-//    // ChamadaActivity.java
-//    private void updateRecyclerView(ArrayList<Aluno> alunos) {
-//        ArrayList<ItemChamada> listaAlunos = new ArrayList<>();
-//        for (Aluno aluno : alunos) {
-//            ItemChamada item = new ItemChamada(String.valueOf(aluno.getMatricula()), aluno.getNome(), false);
-//            listaAlunos.add(item);
-//        }
-//    }
-
     //Método para passar os parâmetros de data:
     @Override
     public void onDateSelected(int year, int month, int day) {

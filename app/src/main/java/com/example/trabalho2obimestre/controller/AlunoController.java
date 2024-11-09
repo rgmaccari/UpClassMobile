@@ -3,9 +3,7 @@ package com.example.trabalho2obimestre.controller;
 import android.content.Context;
 
 import com.example.trabalho2obimestre.dao.AlunoDao;
-import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
 import com.example.trabalho2obimestre.model.Aluno;
-import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
 

@@ -13,8 +13,6 @@ import com.example.trabalho2obimestre.model.ItemChamada;
 
 import java.util.ArrayList;
 
-import com.example.trabalho2obimestre.controller.AlunoController;
-
 public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.ViewHolder> {
     private ArrayList<ItemChamada> listaItemChamada;
 
@@ -66,7 +64,6 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
         TextView tvNome;
         TextView tvMatricula;
         CheckBox checkboxPresenca;
-        View cardExpansivel;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -74,12 +71,6 @@ public class ItemChamadaAdapter extends RecyclerView.Adapter<ItemChamadaAdapter.
             tvMatricula = itemView.findViewById(R.id.alunoNumero);
             checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
         }
-    }
-
-    public void updateData(ArrayList<ItemChamada> novosAlunos) {
-        this.listaItemChamada.clear();
-        this.listaItemChamada.addAll(novosAlunos);
-        notifyDataSetChanged();
     }
 
     //Recupera a lista no seu estado atual.

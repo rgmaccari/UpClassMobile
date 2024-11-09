@@ -6,7 +6,6 @@ import com.example.trabalho2obimestre.dao.DisciplinaDao;
 import com.example.trabalho2obimestre.model.Disciplina;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class DisciplinaController {
 
