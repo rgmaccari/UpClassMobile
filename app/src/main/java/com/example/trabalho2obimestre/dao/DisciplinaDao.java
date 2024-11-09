@@ -16,17 +16,12 @@ import java.util.ArrayList;
 public class DisciplinaDao implements IGenericDao<Disciplina> {
 
     private SQLiteOpenHelper openHelper;
-
     private SQLiteDatabase dataBase;
-
     private String[] colunas = {"id", "nome", "professorRegistro"};
-
     private String tabela = "Disciplina";
-
     private Context context;
 
     private static DisciplinaDao instancia;
-
     public static DisciplinaDao getInstancia(Context context){
         if(instancia == null){
             instancia = new DisciplinaDao(context);
