@@ -119,7 +119,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
         });
 
         //Botão Salvar
-
         btnSalvar = findViewById(R.id.btnSalvar);
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,7 +223,6 @@ public class ChamadaActivity extends AppCompatActivity implements DatePickerFrag
 
         //
     }
-
 
     private void salvarPresenca() {
         ArrayList<ItemChamada> listaItemChamada = ((ItemChamadaAdapter) recyclerView.getAdapter())
