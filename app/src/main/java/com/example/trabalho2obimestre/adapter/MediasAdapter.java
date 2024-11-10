@@ -119,10 +119,5 @@ public class MediasAdapter extends RecyclerView.Adapter<MediasAdapter.MediasView
         }
     }
 
-    public void updateAlunos(ArrayList<Aluno> novosAlunos) {
-        this.listaAlunos.clear();
-        this.listaAlunos.addAll(novosAlunos);
-        notifyDataSetChanged();
-    }
 
 }
