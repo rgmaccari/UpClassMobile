@@ -24,7 +24,7 @@ import com.example.trabalho2obimestre.model.Planejamento;
 import java.util.ArrayList;
 
 public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapter.PlanejamentoViewHolder> {
-
+//teste
     private ArrayList<Planejamento> listaPlanejamentos;
 
     public PlanejamentoAdapter(ArrayList<Planejamento> listaPlanejamentos) {
