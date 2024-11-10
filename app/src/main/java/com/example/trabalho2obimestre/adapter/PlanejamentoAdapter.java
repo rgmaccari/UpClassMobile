@@ -57,7 +57,7 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
 
     @Override
     public int getItemCount() {
-        return listaPlanejamentos.size();
+        return listaPlanejamentos.size() > 0 ? listaPlanejamentos.size() : 1;
     }
 
     public static class PlanejamentoViewHolder extends RecyclerView.ViewHolder {
