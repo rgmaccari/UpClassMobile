@@ -11,23 +11,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.trabalho2obimestre.R;
 
-import com.example.trabalho2obimestre.helper.SQLiteDataHelper;
-
 public class MainActivity extends AppCompatActivity {
 
     private ImageView btnChamada;
-    private ImageView btnCorrigir;
+    private ImageView btnPlanejamento;
     private ImageView btnMedias;
     private Button btnSair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
+        EdgeToEdge.enable(this);        setContentView(R.layout.activity_main);
 
         btnChamada = findViewById(R.id.btnChamada);
-        btnCorrigir = findViewById(R.id.btnCorrigir);
+        btnPlanejamento = findViewById(R.id.btnPlanejamento);
         btnMedias = findViewById(R.id.btnMedias);
         btnSair = findViewById(R.id.btnSair);
 
@@ -40,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnCorrigir.setOnClickListener(new View.OnClickListener() {
+        btnPlanejamento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, PlanejamentoActivity.class);
