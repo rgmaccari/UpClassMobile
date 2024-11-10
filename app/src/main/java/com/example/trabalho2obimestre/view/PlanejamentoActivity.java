@@ -1,6 +1,7 @@
 package com.example.trabalho2obimestre.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,8 +51,12 @@ public class PlanejamentoActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Log.d("PlanejamentoActivity", "LayoutManager configurado no RecyclerView");
+
         adapter = new PlanejamentoAdapter(new ArrayList<>());
+        Log.d("PlanejamentoActivity", "Adapter criado e setado no RecyclerView");
         recyclerView.setAdapter(adapter);
+
 
         btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -133,13 +138,19 @@ public class PlanejamentoActivity extends AppCompatActivity {
     }
 
     private void exibirPlanejamentos() {
+        Log.d("PlanejamentoActivity", "exibirPlanejamentos chamado");
+
         if (itemDisciplinaId > 0 && itemTurmaId > 0) {
+            Log.d("PlanejamentoActivity", "Disciplina e Turma válidas: Disciplina ID = " + itemDisciplinaId + ", Turma ID = " + itemTurmaId);
             ArrayList<Planejamento> planejamentos = controller.listPlanejamentosPorTumaEDisciplina(itemDisciplinaId, itemTurmaId);
-            // Atualize a lista de planejamentos no RecyclerView
+            Log.d("PlanejamentoActivity", "Número de planejamentos: " + planejamentos.size());
             PlanejamentoAdapter adapter = new PlanejamentoAdapter(planejamentos);
             recyclerView.setAdapter(adapter);
+
         } else {
+            Log.d("PlanejamentoActivity", "Disciplina ou Turma não selecionados corretamente");
             Toast.makeText(this, "Selecione uma disciplina e uma turma", Toast.LENGTH_SHORT).show();
         }
     }
+
 }
