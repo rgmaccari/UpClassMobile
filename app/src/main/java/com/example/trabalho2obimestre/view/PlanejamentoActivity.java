@@ -44,7 +44,7 @@ public class PlanejamentoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_planejamento);
-//reste
+
         controller = new PlanejamentoController(this);
         registroProf = 1;
 
