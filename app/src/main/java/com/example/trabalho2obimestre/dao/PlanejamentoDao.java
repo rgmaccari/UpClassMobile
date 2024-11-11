@@ -181,4 +181,16 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
         return null;
     }
 
+    public void salvarPlanejamento(Planejamento planejamento) {
+        ContentValues values = new ContentValues();
+        values.put("descricao", planejamento.getDescricao());
+        values.put("feito", planejamento.isCompleto() ? 1 : 0);
+        values.put("disciplinaId", planejamento.getDisciplinaId());
+        values.put("turmaId", planejamento.getTurmaId());
+
+        long resultado = dataBase.insert("Planejamento", null, values);
+        if (resultado == -1) {
+            throw new RuntimeException("Erro ao salvar o planejamento.");
+        }
+    }
 }

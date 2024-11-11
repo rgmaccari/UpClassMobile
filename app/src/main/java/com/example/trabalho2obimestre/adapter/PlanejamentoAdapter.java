@@ -24,7 +24,6 @@ import com.example.trabalho2obimestre.model.Planejamento;
 import java.util.ArrayList;
 
 public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapter.PlanejamentoViewHolder> {
-
     private ArrayList<Planejamento> listaPlanejamentos;
 
     public PlanejamentoAdapter(ArrayList<Planejamento> listaPlanejamentos) {
@@ -43,9 +42,9 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
         Planejamento planejamento = listaPlanejamentos.get(position);
 
         holder.edDescricao.setText(planejamento.getDescricao());
-        holder.checkboxPresenca.setChecked(planejamento.isCompleto());
+        holder.checkboxFeito.setChecked(planejamento.isCompleto());
 
-        holder.checkboxPresenca.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        holder.checkboxFeito.setOnCheckedChangeListener((buttonView, isChecked) -> {
             planejamento.setCompleto(isChecked);
         });
 
@@ -57,20 +56,30 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
 
     @Override
     public int getItemCount() {
-        return listaPlanejamentos.size() > 0 ? listaPlanejamentos.size() : 1;
+        return listaPlanejamentos.size();
+    }
+
+    public void addItem() {
+        listaPlanejamentos.add(new Planejamento());
+        notifyItemInserted(listaPlanejamentos.size() - 1);
+    }
+
+    public ArrayList<Planejamento> getListaPlanejamentos() {
+        return listaPlanejamentos;
     }
 
     public static class PlanejamentoViewHolder extends RecyclerView.ViewHolder {
         EditText edDescricao;
-        CheckBox checkboxPresenca;
+        CheckBox checkboxFeito;
         ImageView imgLixeira;
 
         public PlanejamentoViewHolder(View itemView) {
             super(itemView);
-
             edDescricao = itemView.findViewById(R.id.edDescricao);
-            checkboxPresenca = itemView.findViewById(R.id.checkboxPresenca);
+            checkboxFeito = itemView.findViewById(R.id.checkboxFeito);
             imgLixeira = itemView.findViewById(R.id.imgLixeira);
+
         }
     }
 }
+

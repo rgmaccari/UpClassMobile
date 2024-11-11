@@ -6,6 +6,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -28,6 +29,8 @@ public class PlanejamentoActivity extends AppCompatActivity {
     private Button btnVoltar;
     private Button btnDisciplina;
     private Button btnTurma;
+    private Button btnAdicionar;
+    private Button btnSalvar;
 
     private PopupMenu popupMenu;
     private MenuInflater inflater;
@@ -88,6 +91,29 @@ public class PlanejamentoActivity extends AppCompatActivity {
                 showTurmaPopupMenu(view, R.menu.turma, turmas);
             }
         });
+
+        btnAdicionar = findViewById(R.id.btnAdicionar);
+        btnAdicionar.setOnClickListener(view -> {
+            adapter.addItem();
+            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1); // Rola até o novo item adicionado
+        });
+
+        btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setOnClickListener(view -> {
+            ArrayList<Planejamento> listaPlanejamentos = adapter.getListaPlanejamentos();
+
+            for (Planejamento planejamento : listaPlanejamentos) {
+                EditText edDescricao = findViewById(planejamento.getId());
+                if (edDescricao != null) {
+                    String descricao = edDescricao.getText().toString();
+                    planejamento.setDescricao(descricao);
+                    Log.d("PlanejamentoActivity", "Descrição capturada: " + descricao);
+                }
+            }
+            controller.salvarPlanejamentos(listaPlanejamentos);
+            Toast.makeText(PlanejamentoActivity.this, "Planejamentos salvos!", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     private void showDisciplinaPopupMenu(View view, int menuId, ArrayList<Disciplina> disciplinas) {
@@ -138,17 +164,11 @@ public class PlanejamentoActivity extends AppCompatActivity {
     }
 
     private void exibirPlanejamentos() {
-        Log.d("PlanejamentoActivity", "exibirPlanejamentos chamado");
-
         if (itemDisciplinaId > 0 && itemTurmaId > 0) {
-            Log.d("PlanejamentoActivity", "Disciplina e Turma válidas: Disciplina ID = " + itemDisciplinaId + ", Turma ID = " + itemTurmaId);
             ArrayList<Planejamento> planejamentos = controller.listPlanejamentosPorTumaEDisciplina(itemDisciplinaId, itemTurmaId);
-            Log.d("PlanejamentoActivity", "Número de planejamentos: " + planejamentos.size());
-            PlanejamentoAdapter adapter = new PlanejamentoAdapter(planejamentos);
+            adapter = new PlanejamentoAdapter(planejamentos);
             recyclerView.setAdapter(adapter);
-
         } else {
-            Log.d("PlanejamentoActivity", "Disciplina ou Turma não selecionados corretamente");
             Toast.makeText(this, "Selecione uma disciplina e uma turma", Toast.LENGTH_SHORT).show();
         }
     }

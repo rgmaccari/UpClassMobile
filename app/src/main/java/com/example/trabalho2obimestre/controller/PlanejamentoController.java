@@ -36,4 +36,10 @@ public class PlanejamentoController {
         listPlanejamentosPorTumaEDisciplina(int disciplinaId, int turmaId) {
         return PlanejamentoDao.getInstancia(context).buscaPlanejamentosPorTumaEDisciplina(disciplinaId, turmaId);
     }
+
+    public void salvarPlanejamentos(ArrayList<Planejamento> planejamentos) {
+        for (Planejamento planejamento : planejamentos) {
+            PlanejamentoDao.getInstancia(context).salvarPlanejamento(planejamento);
+        }
+    }
 }
