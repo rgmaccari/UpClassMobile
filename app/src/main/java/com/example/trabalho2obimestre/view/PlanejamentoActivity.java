@@ -149,6 +149,8 @@ public class PlanejamentoActivity extends AppCompatActivity {
                     exibirPlanejamentos();
                     btnSalvar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
                     btnAdicionar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
+                    btnAdicionar.setBackgroundColor(getResources().getColor(R.color.azulforte));
+                    btnSalvar.setBackgroundColor(getResources().getColor(R.color.azulforte));
                     return true;
                 }
                 return false;
@@ -157,16 +159,16 @@ public class PlanejamentoActivity extends AppCompatActivity {
         popupMenu.show();
     }
 
-    private void exibirPlanejamentos() {
+    private void exibirPlanejamentos(){
         if (itemDisciplinaId > 0 && itemTurmaId > 0) {
             ArrayList<Planejamento> planejamentos = controller.listPlanejamentosPorTumaEDisciplina(itemDisciplinaId, itemTurmaId);
 
-            if (planejamentos != null && !planejamentos.isEmpty()) {
+            if(planejamentos != null && !planejamentos.isEmpty()){
                 adapter.updatePlanejamentosAdapter(planejamentos);
-            } else {
+            }else{
                 Toast.makeText(this, "Nenhum planejamento encontrado para essa disciplina e turma", Toast.LENGTH_SHORT).show();
             }
-        } else {
+        }else{
             Toast.makeText(this, "Selecione uma disciplina e uma turma", Toast.LENGTH_SHORT).show();
         }
     }
