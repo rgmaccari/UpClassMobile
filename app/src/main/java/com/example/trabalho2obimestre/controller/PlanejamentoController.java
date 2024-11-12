@@ -3,6 +3,8 @@ package com.example.trabalho2obimestre.controller;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.trabalho2obimestre.dao.PlanejamentoDao;
 import com.example.trabalho2obimestre.model.Disciplina;
@@ -39,11 +41,16 @@ public class PlanejamentoController {
 
     public void salvarPlanejamentos(ArrayList<Planejamento> planejamentos) {
         for (Planejamento planejamento : planejamentos) {
-            if (planejamento.getId() == 0) {
-                int id = (int) PlanejamentoDao.getInstancia(context).insert(planejamento);
-                planejamento.setId(id);
-            } else {
-                PlanejamentoDao.getInstancia(context).update(planejamento);
+            if(planejamento.getDescricao() != null){
+                if (planejamento.getId() == 0) {
+                    int id = (int) PlanejamentoDao.getInstancia(context).insert(planejamento);
+                    planejamento.setId(id);
+                }else{
+                    PlanejamentoDao.getInstancia(context).update(planejamento);
+                    Toast.makeText(context, "Planejamento atualizado!", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(context, "Preencha a descrição do planejamento", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -100,13 +100,11 @@ public class PlanejamentoActivity extends AppCompatActivity {
             recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
         });
 
-
         btnSalvar = findViewById(R.id.btnSalvar);
         btnSalvar.setEnabled(false);
         btnSalvar.setOnClickListener(view -> {
             ArrayList<Planejamento> listaPlanejamentos = adapter.getListaPlanejamentos();
             controller.salvarPlanejamentos(listaPlanejamentos);
-            Toast.makeText(PlanejamentoActivity.this, "Planejamentos salvos!", Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -148,7 +146,7 @@ public class PlanejamentoActivity extends AppCompatActivity {
                 itemTurmaId = item.getItemId();
                 if (itemTurmaId != 0) {
                     btnTurma.setText(item.getTitle());
-                    exibirPlanejamentos();  // Exibe os planejamentos após seleção da turma
+                    exibirPlanejamentos();
                     btnSalvar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
                     btnAdicionar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
                     return true;
