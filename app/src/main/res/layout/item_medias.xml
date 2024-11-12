@@ -149,7 +149,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- 2° Bimestre -->
+                    <!--2° Bimestre-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- 3° Bimestre -->
+                    <!--3° Bimestre-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                             android:gravity="center"/>
                     </LinearLayout>
 
-                    <!-- 4° Bimestre -->
+                    <!--4° Bimestre-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

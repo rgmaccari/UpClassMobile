@@ -40,20 +40,20 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
 
     @Override
     public long insert(Planejamento planejamento) {
-        try {
-            ContentValues values = new ContentValues();
-            values.put(colunas[1], planejamento.getDescricao());
-            values.put(colunas[2], planejamento.isCompleto() ? 1 : 0);
-            values.put(colunas[3], planejamento.getDisciplinaId());
-            values.put(colunas[4], planejamento.getTurmaId());
-
-            return dataBase.insert(tabela,null, values);
-
-        }catch (SQLException ex){
-            Log.e("PlanejamentoDao", "Erro: PlanejamentoDao.insert()" + ex.getMessage());
+        if (getById(planejamento.getId()) != null) {
+            Log.d("PlanejamentoDao", "Item já existente, atualizando...");
+            return update(planejamento);
         }
-        return 0;
+
+        ContentValues values = new ContentValues();
+        values.put("descricao", planejamento.getDescricao());
+        values.put("feito", planejamento.isCompleto() ? 1 : 0);
+        values.put("disciplinaId", planejamento.getDisciplinaId());
+        values.put("turmaId", planejamento.getTurmaId());
+
+        return dataBase.insert("Planejamento", null, values);
     }
+
 
     @Override
     public long update(Planejamento planejamento) {
@@ -139,18 +139,15 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
         return planejamentos;
     }
 
-    public ArrayList<Planejamento>
-        buscaPlanejamentosPorTumaEDisciplina(int disciplinaId, int turmaId){
-
+    public ArrayList<Planejamento> buscaPlanejamentosPorTumaEDisciplina(int disciplinaId, int turmaId) {
         ArrayList<Planejamento> planejamentos = new ArrayList<>();
 
-        try {
+        try{
             String selection = "disciplinaId = ? AND turmaId = ?";
             String[] selectionArgs = {
                     String.valueOf(disciplinaId),
                     String.valueOf(turmaId)
             };
-
             Cursor cursor = dataBase.query(
                     tabela,
                     colunas,
@@ -160,25 +157,23 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
                     null,
                     null
             );
+            if(cursor != null && cursor.moveToFirst()){
+                do{
+                    Planejamento planejamento = new Planejamento();
 
-            if(cursor.moveToFirst()) {
-                Planejamento planejamento = new Planejamento();
-
-                planejamento.setId(cursor.getInt(0));
-                planejamento.setDescricao(cursor.getString(1));
-                planejamento.setCompleto(cursor.getInt(2) == 1);
-                planejamento.setDisciplinaId(cursor.getInt(3));
-                planejamento.setTurmaId(cursor.getInt(4));
-
-                planejamentos.add(planejamento);
+                    planejamento.setId(cursor.getInt(0));
+                    planejamento.setDescricao(cursor.getString(1));
+                    planejamento.setCompleto(cursor.getInt(2) == 1);
+                    planejamento.setDisciplinaId(cursor.getInt(3));
+                    planejamento.setTurmaId(cursor.getInt(4));
+                    planejamentos.add(planejamento);
+                } while (cursor.moveToNext());
             }
-
-            return planejamentos;
-        }catch (SQLException ex){
+            cursor.close();
+        }catch(SQLException ex){
             Log.e("PlanejamentoDao", "ERRO: PlanejamentoDao.buscaPlanejamentosPorTumaEDisciplina()" + ex.getMessage());
         }
-
-        return null;
+        return planejamentos;
     }
 
     public void salvarPlanejamento(Planejamento planejamento) {

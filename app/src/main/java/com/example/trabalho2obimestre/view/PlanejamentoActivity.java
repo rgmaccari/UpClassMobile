@@ -60,6 +60,8 @@ public class PlanejamentoActivity extends AppCompatActivity {
         Log.d("PlanejamentoActivity", "Adapter criado e setado no RecyclerView");
         recyclerView.setAdapter(adapter);
 
+        exibirPlanejamentos();
+
 
         btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -93,23 +95,22 @@ public class PlanejamentoActivity extends AppCompatActivity {
         });
 
         btnAdicionar = findViewById(R.id.btnAdicionar);
+        btnAdicionar.setEnabled(false);
         btnAdicionar.setOnClickListener(view -> {
-            adapter.addItem();
-            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1); // Rola até o novo item adicionado
+            Planejamento planejamento = adapter.addItem(itemDisciplinaId, itemTurmaId);
+            recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
         });
 
+
         btnSalvar = findViewById(R.id.btnSalvar);
+        btnSalvar.setEnabled(false);
         btnSalvar.setOnClickListener(view -> {
             ArrayList<Planejamento> listaPlanejamentos = adapter.getListaPlanejamentos();
-
-            for (Planejamento planejamento : listaPlanejamentos) {
-                EditText edDescricao = findViewById(planejamento.getId());
-                if (edDescricao != null) {
-                    String descricao = edDescricao.getText().toString();
-                    planejamento.setDescricao(descricao);
-                    Log.d("PlanejamentoActivity", "Descrição capturada: " + descricao);
-                }
-            }
+            Planejamento planejamento = new Planejamento();
+            EditText edDescricao = findViewById(R.id.edDescricao);
+            String descricao = edDescricao.getText().toString();
+            planejamento.setDescricao(descricao);
+            Log.d("PlanejamentoActivity", "Descrição capturada: " + descricao);
             controller.salvarPlanejamentos(listaPlanejamentos);
             Toast.makeText(PlanejamentoActivity.this, "Planejamentos salvos!", Toast.LENGTH_SHORT).show();
         });
@@ -131,7 +132,7 @@ public class PlanejamentoActivity extends AppCompatActivity {
                 itemDisciplinaId = item.getItemId();
                 if (itemDisciplinaId != 0) {
                     btnDisciplina.setText(item.getTitle());
-                    exibirPlanejamentos();
+                    exibirPlanejamentos();  // Exibe os planejamentos após seleção da disciplina
                 }
                 return true;
             }
@@ -154,7 +155,9 @@ public class PlanejamentoActivity extends AppCompatActivity {
                 itemTurmaId = item.getItemId();
                 if (itemTurmaId != 0) {
                     btnTurma.setText(item.getTitle());
-                    exibirPlanejamentos();
+                    exibirPlanejamentos();  // Exibe os planejamentos após seleção da turma
+                    btnSalvar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
+                    btnAdicionar.setEnabled(itemDisciplinaId > 0 && itemTurmaId > 0);
                     return true;
                 }
                 return false;
@@ -166,11 +169,17 @@ public class PlanejamentoActivity extends AppCompatActivity {
     private void exibirPlanejamentos() {
         if (itemDisciplinaId > 0 && itemTurmaId > 0) {
             ArrayList<Planejamento> planejamentos = controller.listPlanejamentosPorTumaEDisciplina(itemDisciplinaId, itemTurmaId);
-            adapter = new PlanejamentoAdapter(planejamentos);
-            recyclerView.setAdapter(adapter);
+
+            if (planejamentos != null && !planejamentos.isEmpty()) {
+                adapter.updatePlanejamentosAdapter(planejamentos);
+            } else {
+                Toast.makeText(this, "Nenhum planejamento encontrado para essa disciplina e turma", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(this, "Selecione uma disciplina e uma turma", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
 }

@@ -1,4 +1,6 @@
 package com.example.trabalho2obimestre.adapter;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.trabalho2obimestre.R;
@@ -26,6 +30,7 @@ import java.util.ArrayList;
 public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapter.PlanejamentoViewHolder> {
     private ArrayList<Planejamento> listaPlanejamentos;
 
+    // Construtor da classe
     public PlanejamentoAdapter(ArrayList<Planejamento> listaPlanejamentos) {
         this.listaPlanejamentos = listaPlanejamentos;
     }
@@ -52,6 +57,19 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
             listaPlanejamentos.remove(position);
             notifyItemRemoved(position);
         });
+
+        holder.edDescricao.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                planejamento.setDescricao(s.toString());
+            }
+        });
     }
 
     @Override
@@ -59,11 +77,17 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
         return listaPlanejamentos.size();
     }
 
-    public void addItem() {
-        listaPlanejamentos.add(new Planejamento());
+    public Planejamento addItem(int disciplinaId, int turmaId) {
+        Planejamento planejamento = new Planejamento();
+        planejamento.setDisciplinaId(disciplinaId);
+        planejamento.setTurmaId(turmaId);
+
+        listaPlanejamentos.add(planejamento);
         notifyItemInserted(listaPlanejamentos.size() - 1);
+        return planejamento;
     }
 
+    // Método para acessar a lista de planejamentos
     public ArrayList<Planejamento> getListaPlanejamentos() {
         return listaPlanejamentos;
     }
@@ -78,8 +102,11 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
             edDescricao = itemView.findViewById(R.id.edDescricao);
             checkboxFeito = itemView.findViewById(R.id.checkboxFeito);
             imgLixeira = itemView.findViewById(R.id.imgLixeira);
-
         }
     }
-}
 
+    public void updatePlanejamentosAdapter(ArrayList<Planejamento> novosPlanejamentos) {
+        this.listaPlanejamentos = novosPlanejamentos;
+        notifyDataSetChanged();
+    }
+}
