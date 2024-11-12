@@ -39,7 +39,6 @@ public class PlanejamentoController {
         return PlanejamentoDao.getInstancia(context).buscaPlanejamentosPorTumaEDisciplina(disciplinaId, turmaId);
     }
 
-
     public void salvarPlanejamentos(ArrayList<Planejamento> planejamentos) {
         for (Planejamento planejamento : planejamentos) {
             if (planejamento.getId() == 0) {
@@ -50,7 +49,6 @@ public class PlanejamentoController {
             }
         }
     }
-
 
     public void excluirPlanejamento(Planejamento planejamento) {
         PlanejamentoDao.getInstancia(context).delete(planejamento);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.trabalho2obimestre.R;
+import com.example.trabalho2obimestre.controller.PlanejamentoController;
 import com.example.trabalho2obimestre.model.Planejamento;
 import java.util.ArrayList;
 import android.view.LayoutInflater;
@@ -55,6 +56,8 @@ public class PlanejamentoAdapter extends RecyclerView.Adapter<PlanejamentoAdapte
 
         holder.imgLixeira.setOnClickListener(v -> {
             listaPlanejamentos.remove(position);
+            PlanejamentoController controller = new PlanejamentoController(v.getContext());
+            controller.excluirPlanejamento(planejamento);
             notifyItemRemoved(position);
         });
 
