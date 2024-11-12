@@ -43,8 +43,8 @@ public class PlanejamentoController {
     public void salvarPlanejamentos(ArrayList<Planejamento> planejamentos) {
         for (Planejamento planejamento : planejamentos) {
             if (planejamento.getId() == 0) {
-                PlanejamentoDao.getInstancia(context).salvarPlanejamento(planejamento);
-                planejamento.setId();
+                int id = (int) PlanejamentoDao.getInstancia(context).insert(planejamento);
+                planejamento.setId(id);
             } else {
                 PlanejamentoDao.getInstancia(context).update(planejamento);
             }

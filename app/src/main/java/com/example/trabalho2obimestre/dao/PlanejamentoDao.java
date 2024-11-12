@@ -40,18 +40,27 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
 
     @Override
     public long insert(Planejamento planejamento) {
-        if (getById(planejamento.getId()) != null) {
-            Log.d("PlanejamentoDao", "Item já existente, atualizando...");
-            return update(planejamento);
+//        if (getById(planejamento.getId()) != null) {
+//            Log.d("PlanejamentoDao", "Item já existente, atualizando...");
+//            return update(planejamento);
+//        }
+        try {
+            ContentValues values = new ContentValues();
+            values.put("descricao", planejamento.getDescricao());
+            values.put("feito", planejamento.isCompleto() ? 1 : 0);
+            values.put("disciplinaId", planejamento.getDisciplinaId());
+            values.put("turmaId", planejamento.getTurmaId());
+
+            return dataBase.insert("Planejamento", null, values);
+        }catch (SQLException ex) {
+            Log.e("PlanejamentoDao", "Erro: PlanejamentoDao.insert" + ex.getMessage());
         }
 
-        ContentValues values = new ContentValues();
-        values.put("descricao", planejamento.getDescricao());
-        values.put("feito", planejamento.isCompleto() ? 1 : 0);
-        values.put("disciplinaId", planejamento.getDisciplinaId());
-        values.put("turmaId", planejamento.getTurmaId());
+        return 0;
 
-        return dataBase.insert("Planejamento", null, values);
+
+
+
     }
 
 
