@@ -14,8 +14,6 @@ import java.util.ArrayList;
 
 public class PlanejamentoController {
     private Context context;
-    private SQLiteDatabase db;
-
     private TurmaController turmaController;
     private DisciplinaController disciplinaController;
 

@@ -40,29 +40,21 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
 
     @Override
     public long insert(Planejamento planejamento) {
-//        if (getById(planejamento.getId()) != null) {
-//            Log.d("PlanejamentoDao", "Item já existente, atualizando...");
-//            return update(planejamento);
-//        }
         try {
             ContentValues values = new ContentValues();
-            values.put("descricao", planejamento.getDescricao());
-            values.put("feito", planejamento.isCompleto() ? 1 : 0);
-            values.put("disciplinaId", planejamento.getDisciplinaId());
-            values.put("turmaId", planejamento.getTurmaId());
+            values.put(colunas[1], planejamento.getDescricao());
+            values.put(colunas[2], planejamento.isCompleto() ? 1 : 0);
+            values.put(colunas[3], planejamento.getDisciplinaId());
+            values.put(colunas[4], planejamento.getTurmaId());
 
-            return dataBase.insert("Planejamento", null, values);
+            return dataBase.insert(tabela, null, values);
         }catch (SQLException ex) {
             Log.e("PlanejamentoDao", "Erro: PlanejamentoDao.insert" + ex.getMessage());
         }
 
         return 0;
 
-
-
-
     }
-
 
     @Override
     public long update(Planejamento planejamento) {
@@ -183,18 +175,5 @@ public class PlanejamentoDao implements IGenericDao<Planejamento>{
             Log.e("PlanejamentoDao", "ERRO: PlanejamentoDao.buscaPlanejamentosPorTumaEDisciplina()" + ex.getMessage());
         }
         return planejamentos;
-    }
-
-    public void salvarPlanejamento(Planejamento planejamento) {
-        ContentValues values = new ContentValues();
-        values.put("descricao", planejamento.getDescricao());
-        values.put("feito", planejamento.isCompleto() ? 1 : 0);
-        values.put("disciplinaId", planejamento.getDisciplinaId());
-        values.put("turmaId", planejamento.getTurmaId());
-
-        long resultado = dataBase.insert("Planejamento", null, values);
-        if (resultado == -1) {
-            throw new RuntimeException("Erro ao salvar o planejamento.");
-        }
     }
 }
