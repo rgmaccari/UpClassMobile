@@ -26,6 +26,8 @@ import java.util.ArrayList;
 
 public class PlanejamentoActivity extends AppCompatActivity {
 
+    private RecyclerView recyclerView;
+
     private Button btnVoltar;
     private Button btnDisciplina;
     private Button btnTurma;
@@ -41,7 +43,7 @@ public class PlanejamentoActivity extends AppCompatActivity {
     private int itemDisciplinaId;
     private int itemTurmaId;
 
-    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,9 +61,6 @@ public class PlanejamentoActivity extends AppCompatActivity {
         adapter = new PlanejamentoAdapter(new ArrayList<>());
         Log.d("PlanejamentoActivity", "Adapter criado e setado no RecyclerView");
         recyclerView.setAdapter(adapter);
-
-        exibirPlanejamentos();
-
 
         btnVoltar = findViewById(R.id.btnVoltar);
         btnVoltar.setOnClickListener(new View.OnClickListener() {
@@ -106,11 +105,6 @@ public class PlanejamentoActivity extends AppCompatActivity {
         btnSalvar.setEnabled(false);
         btnSalvar.setOnClickListener(view -> {
             ArrayList<Planejamento> listaPlanejamentos = adapter.getListaPlanejamentos();
-            Planejamento planejamento = new Planejamento();
-            EditText edDescricao = findViewById(R.id.edDescricao);
-            String descricao = edDescricao.getText().toString();
-            planejamento.setDescricao(descricao);
-            Log.d("PlanejamentoActivity", "Descrição capturada: " + descricao);
             controller.salvarPlanejamentos(listaPlanejamentos);
             Toast.makeText(PlanejamentoActivity.this, "Planejamentos salvos!", Toast.LENGTH_SHORT).show();
         });
@@ -132,7 +126,6 @@ public class PlanejamentoActivity extends AppCompatActivity {
                 itemDisciplinaId = item.getItemId();
                 if (itemDisciplinaId != 0) {
                     btnDisciplina.setText(item.getTitle());
-                    exibirPlanejamentos();  // Exibe os planejamentos após seleção da disciplina
                 }
                 return true;
             }
