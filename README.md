@@ -1,20 +1,14 @@
-# UpClassMobile
-
-Aplicativo para gerenciamento de presenças, notas e planejamento de aulas.
-
-![Tela principal do UpClassMobile](image1)
+## 🚀 UpClassMobile
 
 ## Descrição
 
-UpClassMobile é um aplicativo Android pensado para facilitar o cotidiano acadêmico de professores e alunos. Com uma interface moderna, intuitiva e baseada em ícones, oferece acesso rápido às principais funcionalidades de gestão escolar.
+UpClassMobile é um aplicativo Android pensado para facilitar o cotidiano acadêmico de professores e alunos. Com uma interface moderna, intuitiva e baseada em ícones, oferece acesso rápido às principais funcionalidades de gestão escolar. Desenvolvido durante os estudos de "Desenvolvimento para Dispositivos Móveis", no 4° período do curso de Análise e Desenvolvimento de Sistemas.
 
 ## Funcionalidades
 
-**Chamada:** Registre a presença dos alunos de forma simples e rápida.
-**Notas:** Visualize, registre e acompanhe as notas das avaliações.
-**Planejamento:** Planeje suas aulas e mantenha o cronograma organizado.
-**Criar Avaliação:** Crie avaliações de forma prática (professores).
-**Corrigir Avaliações:** Corrija avaliações e registre feedbacks (professores).
+✅ **Chamada:** Registre a presença dos alunos.
+🧮 **Notas:** Visualize as notas das avaliações.
+📅 **Planejamento:** Planeje suas aulas.
 
 ## Interface
 
@@ -25,22 +19,16 @@ UpClassMobile é um aplicativo Android pensado para facilitar o cotidiano acadê
 ![Desktop](./images%20to%20read.md/Desktop.png)
 ## Tecnologias
 
+## 🛠️ Tecnologias utilizadas:
+Esse projeto foi desenvolvido com as seguintes ferramentas:
 - Java
 - Android Studio
 - SQL Database local
+- Git e GitHub
 
-## Como contribuir
+## ⌨️ Utilização:
+O projeto não possui parâmetros para a construção do APK/AAB. É necessária a clonagem do projeto para emulação através do Android Studio.
+Utilize o smartphone emulado para realizar lançamentos e conferências dos dados dos alunos.
 
-1. Faça um fork do projeto.
-2. Crie uma branch para sua feature ou correção (`git checkout -b minha-feature`).
-3. Faça commit das suas alterações (`git commit -m 'Minha nova feature'`).
-4. Faça push para a branch (`git push origin minha-feature`).
-5. Abra um Pull Request.
-
-## Licença
-
-Este projeto não possui uma licença definida no momento.
-
----
-
-Repositório: [rgmaccari/UpClassMobile](https://github.com/rgmaccari/UpClassMobile)
+## 🧍‍♂️Feito por:
+Rafael Gustavo Maccari em novembro de 2024.
