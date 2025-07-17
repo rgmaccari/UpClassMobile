@@ -19,7 +19,7 @@ UpClassMobile é um aplicativo Android pensado para facilitar o cotidiano acadê
 ## Interface
 
 ### Mobile (neste repositório)
-![Mobile](./images%20to%20read.md/mobile.png)
+![Mobile](./images%20to%20read.md/Mobile.png)
 
 ### Desktop (idealização da ferramenta)
 ![Desktop](./images%20to%20read.md/desktop.png)
