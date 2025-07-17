@@ -10,18 +10,19 @@ UpClassMobile é um aplicativo Android pensado para facilitar o cotidiano acadê
 
 ## Funcionalidades
 
-- <img src="https://img.icons8.com/ios-filled/24/000000/checkmark.png" alt="Chamada" width="20"/> **Chamada:** Registre a presença dos alunos de forma simples e rápida.
-- <img src="https://img.icons8.com/ios-filled/24/000000/calculator.png" alt="Notas" width="20"/> **Notas:** Visualize, registre e acompanhe as notas das avaliações.
-- <img src="https://img.icons8.com/ios-filled/24/000000/planner.png" alt="Planejamento" width="20"/> **Planejamento:** Planeje suas aulas e mantenha o cronograma organizado.
-- <img src="https://img.icons8.com/ios-filled/24/000000/add--v1.png" alt="Criar Avaliação" width="20"/> **Criar Avaliação:** Crie avaliações de forma prática (professores).
-- <img src="https://img.icons8.com/ios-filled/24/000000/read.png" alt="Corrigir" width="20"/> **Corrigir Avaliações:** Corrija avaliações e registre feedbacks (professores).
+**Chamada:** Registre a presença dos alunos de forma simples e rápida.
+**Notas:** Visualize, registre e acompanhe as notas das avaliações.
+**Planejamento:** Planeje suas aulas e mantenha o cronograma organizado.
+**Criar Avaliação:** Crie avaliações de forma prática (professores).
+**Corrigir Avaliações:** Corrija avaliações e registre feedbacks (professores).
 
 ## Interface
 
-A navegação do aplicativo é baseada em botões com ícones, facilitando o acesso às principais funções:
+### Mobile (neste repositório)
+![Mobile](./images%20to%20read.md/mobile.png)
 
-![Exemplo de telas do aplicativo](image2)
-
+### Desktop (idealização da ferramenta)
+![Desktop](./images%20to%20read.md/desktop.png)
 ## Tecnologias
 
 - Java
